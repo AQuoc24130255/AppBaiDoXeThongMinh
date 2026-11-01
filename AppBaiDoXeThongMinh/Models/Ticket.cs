@@ -1,6 +1,6 @@
 ﻿namespace AppBaiDoXeThongMinh.Models;
 /*24130216 Võ Thành Nhân
-lop quan li ve
+lop quan li ve*/
 
 public class Ticket
 {
