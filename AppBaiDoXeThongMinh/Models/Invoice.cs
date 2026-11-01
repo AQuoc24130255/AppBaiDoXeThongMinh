@@ -2,7 +2,7 @@
 
 public class Invoice
 {
-      public string InvoiceId  { get; set; } = Guid.NewGuid().ToString();
+    public string InvoiceId  { get; set; } = Guid.NewGuid().ToString();
     public string TicketId   { get; set; } 
     public string LicensePlate   { get; set; }
     public DateTime CheckInTime   { get; set; }
@@ -13,4 +13,4 @@ public class Invoice
     public string CreatedBy  { get; set; }
     public bool IsPaid { get; set; } = true;
 }
-}
+
