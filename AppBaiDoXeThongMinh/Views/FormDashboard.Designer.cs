@@ -32,39 +32,39 @@ partial class FormDashboard
     private void InitializeComponent()
     {
         groupBox1 = new System.Windows.Forms.GroupBox();
-        groupBox2 = new System.Windows.Forms.GroupBox();
         flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
         panel5 = new System.Windows.Forms.Panel();
         label17 = new System.Windows.Forms.Label();
         label18 = new System.Windows.Forms.Label();
         label19 = new System.Windows.Forms.Label();
         label20 = new System.Windows.Forms.Label();
+        panel2 = new System.Windows.Forms.Panel();
+        label5 = new System.Windows.Forms.Label();
+        label7 = new System.Windows.Forms.Label();
+        label8 = new System.Windows.Forms.Label();
         panel3 = new System.Windows.Forms.Panel();
         label9 = new System.Windows.Forms.Label();
         label10 = new System.Windows.Forms.Label();
         label11 = new System.Windows.Forms.Label();
         label12 = new System.Windows.Forms.Label();
-        panel2 = new System.Windows.Forms.Panel();
-        label5 = new System.Windows.Forms.Label();
-        label7 = new System.Windows.Forms.Label();
-        label8 = new System.Windows.Forms.Label();
-        panel1 = new System.Windows.Forms.Panel();
-        label4 = new System.Windows.Forms.Label();
-        label3 = new System.Windows.Forms.Label();
-        label2 = new System.Windows.Forms.Label();
-        label1 = new System.Windows.Forms.Label();
         panel4 = new System.Windows.Forms.Panel();
         label13 = new System.Windows.Forms.Label();
         label14 = new System.Windows.Forms.Label();
         label15 = new System.Windows.Forms.Label();
         label16 = new System.Windows.Forms.Label();
+        panel1 = new System.Windows.Forms.Panel();
+        label4 = new System.Windows.Forms.Label();
+        label3 = new System.Windows.Forms.Label();
+        label2 = new System.Windows.Forms.Label();
+        label1 = new System.Windows.Forms.Label();
+        groupBox2 = new System.Windows.Forms.GroupBox();
         groupBox1.SuspendLayout();
         flowLayoutPanel1.SuspendLayout();
         panel5.SuspendLayout();
-        panel3.SuspendLayout();
         panel2.SuspendLayout();
-        panel1.SuspendLayout();
+        panel3.SuspendLayout();
         panel4.SuspendLayout();
+        panel1.SuspendLayout();
         SuspendLayout();
         // 
         // groupBox1
@@ -79,17 +79,6 @@ partial class FormDashboard
         groupBox1.TabIndex = 0;
         groupBox1.TabStop = false;
         groupBox1.Text = "Current Parking";
-        // 
-        // groupBox2
-        // 
-        groupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-        groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-        groupBox2.Location = new System.Drawing.Point(0, 133);
-        groupBox2.Name = "groupBox2";
-        groupBox2.Size = new System.Drawing.Size(800, 317);
-        groupBox2.TabIndex = 1;
-        groupBox2.TabStop = false;
-        groupBox2.Text = "Revenue Report By Day/Night";
         // 
         // flowLayoutPanel1
         // 
@@ -154,6 +143,47 @@ partial class FormDashboard
         label20.Text = "Total States parked";
         label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
+        // panel2
+        // 
+        panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panel2.Controls.Add(label5);
+        panel2.Controls.Add(label7);
+        panel2.Controls.Add(label8);
+        panel2.Location = new System.Drawing.Point(150, 3);
+        panel2.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+        panel2.Name = "panel2";
+        panel2.Size = new System.Drawing.Size(140, 105);
+        panel2.TabIndex = 5;
+        // 
+        // label5
+        // 
+        label5.Location = new System.Drawing.Point(0, 75);
+        label5.Name = "label5";
+        label5.Size = new System.Drawing.Size(140, 30);
+        label5.TabIndex = 3;
+        label5.Text = "Avaliable Slot: 0";
+        label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label7
+        // 
+        label7.Font = new System.Drawing.Font("Segoe UI", 14F);
+        label7.Location = new System.Drawing.Point(0, 23);
+        label7.Name = "label7";
+        label7.Size = new System.Drawing.Size(140, 52);
+        label7.TabIndex = 1;
+        label7.Text = "0%";
+        label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // label8
+        // 
+        label8.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        label8.Location = new System.Drawing.Point(0, 0);
+        label8.Name = "label8";
+        label8.Size = new System.Drawing.Size(140, 23);
+        label8.TabIndex = 0;
+        label8.Text = "Occupancy Rate";
+        label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
         // panel3
         // 
         panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -204,98 +234,6 @@ partial class FormDashboard
         label12.TabIndex = 0;
         label12.Text = "Total Vehicles";
         label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // panel2
-        // 
-        panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-        panel2.Controls.Add(label5);
-        panel2.Controls.Add(label7);
-        panel2.Controls.Add(label8);
-        panel2.Location = new System.Drawing.Point(150, 3);
-        panel2.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-        panel2.Name = "panel2";
-        panel2.Size = new System.Drawing.Size(140, 105);
-        panel2.TabIndex = 5;
-        // 
-        // label5
-        // 
-        label5.Location = new System.Drawing.Point(0, 75);
-        label5.Name = "label5";
-        label5.Size = new System.Drawing.Size(140, 30);
-        label5.TabIndex = 3;
-        label5.Text = "Avaliable Slot: 0";
-        label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // label7
-        // 
-        label7.Font = new System.Drawing.Font("Segoe UI", 14F);
-        label7.Location = new System.Drawing.Point(0, 23);
-        label7.Name = "label7";
-        label7.Size = new System.Drawing.Size(140, 52);
-        label7.TabIndex = 1;
-        label7.Text = "0%";
-        label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
-        // label8
-        // 
-        label8.BackColor = System.Drawing.SystemColors.MenuHighlight;
-        label8.Location = new System.Drawing.Point(0, 0);
-        label8.Name = "label8";
-        label8.Size = new System.Drawing.Size(140, 23);
-        label8.TabIndex = 0;
-        label8.Text = "Occupancy Rate";
-        label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // panel1
-        // 
-        panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-        panel1.Controls.Add(label4);
-        panel1.Controls.Add(label3);
-        panel1.Controls.Add(label2);
-        panel1.Controls.Add(label1);
-        panel1.Location = new System.Drawing.Point(600, 3);
-        panel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-        panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(140, 105);
-        panel1.TabIndex = 2;
-        // 
-        // label4
-        // 
-        label4.Location = new System.Drawing.Point(0, 75);
-        label4.Name = "label4";
-        label4.Size = new System.Drawing.Size(140, 30);
-        label4.TabIndex = 3;
-        label4.Text = "Car: 0";
-        label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // label3
-        // 
-        label3.Location = new System.Drawing.Point(0, 59);
-        label3.Name = "label3";
-        label3.Size = new System.Drawing.Size(140, 16);
-        label3.TabIndex = 2;
-        label3.Text = "Motobike: 0";
-        label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // label2
-        // 
-        label2.Font = new System.Drawing.Font("Segoe UI", 14F);
-        label2.Location = new System.Drawing.Point(0, 23);
-        label2.Name = "label2";
-        label2.Size = new System.Drawing.Size(140, 36);
-        label2.TabIndex = 1;
-        label2.Text = "0";
-        label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
-        // label1
-        // 
-        label1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-        label1.Location = new System.Drawing.Point(0, 0);
-        label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(140, 23);
-        label1.TabIndex = 0;
-        label1.Text = "Total Vehicles parked";
-        label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // panel4
         // 
@@ -348,6 +286,68 @@ partial class FormDashboard
         label16.Text = "Total Foremerized";
         label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
+        // panel1
+        // 
+        panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panel1.Controls.Add(label4);
+        panel1.Controls.Add(label3);
+        panel1.Controls.Add(label2);
+        panel1.Controls.Add(label1);
+        panel1.Location = new System.Drawing.Point(600, 3);
+        panel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+        panel1.Name = "panel1";
+        panel1.Size = new System.Drawing.Size(140, 105);
+        panel1.TabIndex = 2;
+        // 
+        // label4
+        // 
+        label4.Location = new System.Drawing.Point(0, 75);
+        label4.Name = "label4";
+        label4.Size = new System.Drawing.Size(140, 30);
+        label4.TabIndex = 3;
+        label4.Text = "Car: 0";
+        label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label3
+        // 
+        label3.Location = new System.Drawing.Point(0, 59);
+        label3.Name = "label3";
+        label3.Size = new System.Drawing.Size(140, 16);
+        label3.TabIndex = 2;
+        label3.Text = "Motobike: 0";
+        label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label2
+        // 
+        label2.Font = new System.Drawing.Font("Segoe UI", 14F);
+        label2.Location = new System.Drawing.Point(0, 23);
+        label2.Name = "label2";
+        label2.Size = new System.Drawing.Size(140, 36);
+        label2.TabIndex = 1;
+        label2.Text = "0";
+        label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // label1
+        // 
+        label1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        label1.Location = new System.Drawing.Point(0, 0);
+        label1.Name = "label1";
+        label1.Size = new System.Drawing.Size(140, 23);
+        label1.TabIndex = 0;
+        label1.Text = "Total Vehicles parked";
+        label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // groupBox2
+        // 
+        groupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+        groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox2.Location = new System.Drawing.Point(0, 133);
+        groupBox2.Name = "groupBox2";
+        groupBox2.Size = new System.Drawing.Size(800, 317);
+        groupBox2.TabIndex = 1;
+        groupBox2.TabStop = false;
+        groupBox2.Text = "Revenue Report By Day/Night";
+        // 
         // FormDashboard
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -359,10 +359,10 @@ partial class FormDashboard
         groupBox1.ResumeLayout(false);
         flowLayoutPanel1.ResumeLayout(false);
         panel5.ResumeLayout(false);
-        panel3.ResumeLayout(false);
         panel2.ResumeLayout(false);
-        panel1.ResumeLayout(false);
+        panel3.ResumeLayout(false);
         panel4.ResumeLayout(false);
+        panel1.ResumeLayout(false);
         ResumeLayout(false);
     }
 
