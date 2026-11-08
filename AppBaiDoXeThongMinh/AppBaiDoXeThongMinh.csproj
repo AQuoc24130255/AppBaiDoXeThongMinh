@@ -30,13 +30,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="database\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="database\BAIDOXETHONGMINH.db">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" />
     </ItemGroup>
 
 </Project>
