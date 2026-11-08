@@ -58,6 +58,19 @@ partial class FormDashboard
         label2 = new System.Windows.Forms.Label();
         label1 = new System.Windows.Forms.Label();
         groupBox2 = new System.Windows.Forms.GroupBox();
+        flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+        flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+        button1 = new System.Windows.Forms.Button();
+        groupBox3 = new System.Windows.Forms.GroupBox();
+        label6 = new System.Windows.Forms.Label();
+        flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+        tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+        label21 = new System.Windows.Forms.Label();
+        dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+        groupBox4 = new System.Windows.Forms.GroupBox();
+        dataGridView1 = new System.Windows.Forms.DataGridView();
+        Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        Shift = new System.Windows.Forms.DataGridViewTextBoxColumn();
         groupBox1.SuspendLayout();
         flowLayoutPanel1.SuspendLayout();
         panel5.SuspendLayout();
@@ -65,6 +78,14 @@ partial class FormDashboard
         panel3.SuspendLayout();
         panel4.SuspendLayout();
         panel1.SuspendLayout();
+        groupBox2.SuspendLayout();
+        flowLayoutPanel2.SuspendLayout();
+        flowLayoutPanel3.SuspendLayout();
+        groupBox3.SuspendLayout();
+        flowLayoutPanel4.SuspendLayout();
+        tableLayoutPanel1.SuspendLayout();
+        groupBox4.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
         SuspendLayout();
         // 
         // groupBox1
@@ -340,6 +361,7 @@ partial class FormDashboard
         // groupBox2
         // 
         groupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+        groupBox2.Controls.Add(flowLayoutPanel2);
         groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
         groupBox2.Location = new System.Drawing.Point(0, 133);
         groupBox2.Name = "groupBox2";
@@ -347,6 +369,132 @@ partial class FormDashboard
         groupBox2.TabIndex = 1;
         groupBox2.TabStop = false;
         groupBox2.Text = "Revenue Report By Day/Night";
+        // 
+        // flowLayoutPanel2
+        // 
+        flowLayoutPanel2.Controls.Add(flowLayoutPanel3);
+        flowLayoutPanel2.Controls.Add(flowLayoutPanel4);
+        flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+        flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+        flowLayoutPanel2.Location = new System.Drawing.Point(3, 19);
+        flowLayoutPanel2.Name = "flowLayoutPanel2";
+        flowLayoutPanel2.Size = new System.Drawing.Size(794, 295);
+        flowLayoutPanel2.TabIndex = 0;
+        // 
+        // flowLayoutPanel3
+        // 
+        flowLayoutPanel3.Controls.Add(button1);
+        flowLayoutPanel3.Controls.Add(groupBox3);
+        flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+        flowLayoutPanel3.Location = new System.Drawing.Point(591, 3);
+        flowLayoutPanel3.Name = "flowLayoutPanel3";
+        flowLayoutPanel3.Size = new System.Drawing.Size(200, 292);
+        flowLayoutPanel3.TabIndex = 0;
+        // 
+        // button1
+        // 
+        button1.Location = new System.Drawing.Point(3, 3);
+        button1.Name = "button1";
+        button1.Size = new System.Drawing.Size(197, 23);
+        button1.TabIndex = 0;
+        button1.Text = "button1";
+        button1.UseVisualStyleBackColor = true;
+        // 
+        // groupBox3
+        // 
+        groupBox3.Controls.Add(label6);
+        groupBox3.Location = new System.Drawing.Point(3, 32);
+        groupBox3.Name = "groupBox3";
+        groupBox3.Size = new System.Drawing.Size(200, 257);
+        groupBox3.TabIndex = 1;
+        groupBox3.TabStop = false;
+        groupBox3.Text = "groupBox3";
+        // 
+        // label6
+        // 
+        label6.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        label6.Location = new System.Drawing.Point(28, 19);
+        label6.Name = "label6";
+        label6.Size = new System.Drawing.Size(141, 23);
+        label6.TabIndex = 0;
+        label6.Text = "Total Revenue Collected";
+        label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // flowLayoutPanel4
+        // 
+        flowLayoutPanel4.Controls.Add(tableLayoutPanel1);
+        flowLayoutPanel4.Controls.Add(groupBox4);
+        flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+        flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+        flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+        flowLayoutPanel4.Name = "flowLayoutPanel4";
+        flowLayoutPanel4.Size = new System.Drawing.Size(582, 292);
+        flowLayoutPanel4.TabIndex = 1;
+        // 
+        // tableLayoutPanel1
+        // 
+        tableLayoutPanel1.ColumnCount = 4;
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.22222F));
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.77778F));
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
+        tableLayoutPanel1.Controls.Add(label21, 0, 0);
+        tableLayoutPanel1.Controls.Add(dateTimePicker1, 0, 1);
+        tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+        tableLayoutPanel1.Name = "tableLayoutPanel1";
+        tableLayoutPanel1.RowCount = 2;
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.295776F));
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.704224F));
+        tableLayoutPanel1.Size = new System.Drawing.Size(579, 57);
+        tableLayoutPanel1.TabIndex = 0;
+        // 
+        // label21
+        // 
+        label21.Location = new System.Drawing.Point(3, 0);
+        label21.Name = "label21";
+        label21.Size = new System.Drawing.Size(130, 23);
+        label21.TabIndex = 0;
+        label21.Text = "Start Date";
+        label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // dateTimePicker1
+        // 
+        dateTimePicker1.Location = new System.Drawing.Point(3, 31);
+        dateTimePicker1.Name = "dateTimePicker1";
+        dateTimePicker1.Size = new System.Drawing.Size(130, 23);
+        dateTimePicker1.TabIndex = 1;
+        // 
+        // groupBox4
+        // 
+        groupBox4.Controls.Add(dataGridView1);
+        groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox4.Location = new System.Drawing.Point(3, 66);
+        groupBox4.Name = "groupBox4";
+        groupBox4.Size = new System.Drawing.Size(579, 223);
+        groupBox4.TabIndex = 1;
+        groupBox4.TabStop = false;
+        groupBox4.Text = "Revenue Detail Grid";
+        // 
+        // dataGridView1
+        // 
+        dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Date, Shift });
+        dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+        dataGridView1.Location = new System.Drawing.Point(3, 19);
+        dataGridView1.Name = "dataGridView1";
+        dataGridView1.Size = new System.Drawing.Size(573, 201);
+        dataGridView1.TabIndex = 0;
+        dataGridView1.Text = "dataGridView1";
+        // 
+        // Date
+        // 
+        Date.HeaderText = "Date";
+        Date.Name = "Date";
+        // 
+        // Shift
+        // 
+        Shift.HeaderText = "Shift";
+        Shift.Name = "Shift";
         // 
         // FormDashboard
         // 
@@ -363,8 +511,41 @@ partial class FormDashboard
         panel3.ResumeLayout(false);
         panel4.ResumeLayout(false);
         panel1.ResumeLayout(false);
+        groupBox2.ResumeLayout(false);
+        flowLayoutPanel2.ResumeLayout(false);
+        flowLayoutPanel3.ResumeLayout(false);
+        groupBox3.ResumeLayout(false);
+        flowLayoutPanel4.ResumeLayout(false);
+        tableLayoutPanel1.ResumeLayout(false);
+        groupBox4.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Shift;
+
+    private System.Windows.Forms.DataGridView dataGridView1;
+
+    private System.Windows.Forms.GroupBox groupBox4;
+
+    private System.Windows.Forms.DateTimePicker dateTimePicker1;
+
+    private System.Windows.Forms.Label label21;
+
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+
+    private System.Windows.Forms.Label label6;
+
+    private System.Windows.Forms.GroupBox groupBox3;
+
+    private System.Windows.Forms.Button button1;
+
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
 
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 

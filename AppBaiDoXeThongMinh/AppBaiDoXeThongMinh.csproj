@@ -29,4 +29,14 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="database\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="database\BAIDOXETHONGMINH.db">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
