@@ -1,14 +1,11 @@
-﻿namespace AppBaiDoXeThongMinh.Views;
-
-
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace AppBaiDoXeThongMinh.Views;
 
-public partial class LoginForm : Form
+public partial class FormLogin : Form
 {
-    public LoginForm()
+    public FormLogin()
     {
         InitializeComponent();
     }
