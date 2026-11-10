@@ -19,14 +19,14 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured) return;
+        if (optionsBuilder.IsConfigured) return;
         
         // File DB nằm cạnh file .exe, trong thư mục "database"
         var folder = Path.Combine(AppContext.BaseDirectory, "database");
         Directory.CreateDirectory(folder);
-        var dbPath = Path.Combine(folder, "AppBaiDoXeThongMinh");
+        var dbPath = Path.Combine(folder, "BAIDOXETHONGMINH.db");
         
-        optionsBuilder.UseSqlite($"Filename={dbPath}");
+        optionsBuilder.UseSqlite($"Data Source={dbPath}");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,9 +67,9 @@ public class AppDbContext : DbContext
             e.Property(x => x.VehicleType).HasConversion<string>();
             e.Property(x => x.DayPrice).HasPrecision(18, 2);
             e.Property(x => x.NightPrice).HasPrecision(18, 2);
-            e.Property(x => x.TimeUnit).HasConversion<string>();
-            e.Property(x => x.NightStart).HasPrecision(18, 2);
-            e.Property(x => x.NightEnd).HasPrecision(18, 2);
+            e.Property(x => x.TimeUnit);
+            e.Property(x => x.NightStart);
+            e.Property(x => x.NightEnd);
             e.Property(x => x.LostTicketFee).HasPrecision(18, 2);
         });
         
@@ -125,6 +125,6 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Restrict);
         });
         
-        // ---------------- Dữ liệu mẫu: Cấu hình giá theo đề -----------
+        // ---------------- Dữ liệu mẫu -----------
     }
 }
