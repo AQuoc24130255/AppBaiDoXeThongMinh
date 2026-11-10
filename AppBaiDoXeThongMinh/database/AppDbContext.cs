@@ -40,7 +40,19 @@ public class AppDbContext : DbContext
             e.HasIndex(x => x.UserName).IsUnique();
             e.Property(x => x.UserName).IsRequired().HasMaxLength(50);
             e.Property(x => x.PasswordHash).IsRequired();
+            e.Property(x => x.FullName).IsRequired().HasMaxLength(50);
             e.Property(x => x.Role).HasConversion<string>();
+        });
+        
+        // ---------------- Shift -----------
+        modelBuilder.Entity<Shift>(e =>
+        {
+            e.HasKey(x => x.ShiftId);
+            e.HasIndex(x => x.StartDate);
+            e.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
         
         // ---------------- Vehicle -----------
@@ -57,7 +69,12 @@ public class AppDbContext : DbContext
         {
             e.HasKey(x => x.SlotId);
             e.Property(x => x.SlotName).IsRequired().HasMaxLength(20);
+            e.Property(x => x.Zone).IsRequired().HasMaxLength(20);
             e.Property(x => x.AllowedVehicleType).HasConversion<string>();
+            e.HasOne<Vehicle>()
+                .WithMany()
+                .HasForeignKey(x => x.CurrentVehicleID)
+                .OnDelete(DeleteBehavior.SetNull);
         });
         
         // ---------------- PriceConfig -----------
@@ -79,6 +96,8 @@ public class AppDbContext : DbContext
             e.HasKey(x => x.SubcriberId);
             e.HasIndex(x => x.LicensePlate);
             e.Property(x => x.LicensePlate).IsRequired().HasMaxLength(20);
+            e.Property(x => x.FullName).IsRequired().HasMaxLength(100);
+            e.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(20);
             e.Property(x => x.VehicleType).HasConversion<string>();
             e.Property(x => x.MonthlyFee).HasPrecision(18, 2);
         });
@@ -91,7 +110,7 @@ public class AppDbContext : DbContext
             e.HasIndex(x => x.VehicleId);
             e.HasIndex(x => x.Status);
             e.Property(x => x.TicketCode).IsRequired().HasMaxLength(30);
-            e.Property(x => x.VehicleId).HasConversion<string>();
+            e.Property(x => x.VehicleId).HasMaxLength(30);
             e.Property(x => x.Status).HasConversion<string>();
             e.Property(x => x.TotalAmount).HasPrecision(18, 2);
             e.HasOne(x => x.Vehicle)
@@ -113,6 +132,8 @@ public class AppDbContext : DbContext
         {
             e.HasKey(x => x.InvoiceId);
             e.HasIndex(x => x.PaymantDate);
+            e.Property(x => x.InvoiceId).HasMaxLength(30);
+            e.Property(x => x.LicensePlate).IsRequired().HasMaxLength(20);
             e.Property(x => x.PaymantMethod).HasConversion<string>();
             e.Property(x => x.TotalAmounnt).HasPrecision(18, 2);
             e.HasOne<Ticket>()
@@ -122,6 +143,10 @@ public class AppDbContext : DbContext
             e.HasOne<User>()
                 .WithMany()
                 .HasForeignKey(x => x.CreatedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+            e.HasOne<Shift>()
+                .WithMany()
+                .HasForeignKey(x => x.ShiftId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
         
