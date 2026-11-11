@@ -11,6 +11,7 @@ public partial class TestDatabase : Form
         InitializeComponent();
         var db = new AppDbContext();
         dataGridView1.DataSource = db.Users.ToList();
+        //loadData();
 
     }
 

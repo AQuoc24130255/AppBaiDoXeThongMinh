@@ -31,12 +31,7 @@
         <SubType>Form</SubType>
       </Compile>
     </ItemGroup>
-
-    <ItemGroup>
-      <None Update="database\BAIDOXETHONGMINH.db">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+    
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">

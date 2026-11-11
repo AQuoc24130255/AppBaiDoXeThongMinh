@@ -22,10 +22,17 @@ public class AppDbContext : DbContext
         if (optionsBuilder.IsConfigured) return;
         
         // File DB nằm cạnh file .exe, trong thư mục "database"
-        var folder = Path.Combine(AppContext.BaseDirectory, "database");
-        Directory.CreateDirectory(folder);
-        var dbPath = Path.Combine(folder, "BAIDOXETHONGMINH.db");
+        // var folder = Path.Combine(AppContext.BaseDirectory, "database");
+        // Directory.CreateDirectory(folder);
+        // var dbPath = Path.Combine(folder, "BAIDOXETHONGMINH.db");
+
+        var projectDir = Path.GetFullPath(
+            Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         
+        var folder = Path.Combine(projectDir, "database");
+        Directory.CreateDirectory(folder);
+        
+        var dbPath = Path.Combine(folder, "BAIDOXETHONGMINH.db");
         optionsBuilder.UseSqlite($"Data Source={dbPath}");
     }
 
