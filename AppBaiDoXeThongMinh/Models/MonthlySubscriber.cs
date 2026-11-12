@@ -68,4 +68,61 @@ public class MonthlySubscriber
                $"Biển số: {LicensePlate} ({VehicleType}) | Hạn: {StartDate:dd/MM/yyyy} - {EndDate:dd/NN/yyyy} | " +
                $"Trạng thái: {status} ({GetRemainingDays()} ngày còn lại)";
     }
+    /// gỉa lập cở sở dữ liệu 
+    private static readonly List<MonthlySubscriber> Subcribers = new();
+   
+
+    ///Đăng ký vé tháng mới
+    public bool Regsister(MonthlySubscriber subscriber)
+    {
+        if (subscriber== null || string.IsNullOrEmpty(subscriber.LicensePlate)) return  false;
+        
+        var existing = Subcribers.FirstOrDefault(s => s.LicensePlate.Equals(subscriber.LicensePlate, StringComparison.OrdinalIgnoreCase) && s.IsActive);
+        if (existing != null)
+        {
+            return false;
+        }
+        Subcribers.Add(subscriber);
+        return  true;
+    }
+
+    ///gia hạn vé tháng và tự động tạo hóa dơn
+    public Invoice? Renew(string subcriberId, int months, string paymentMethod, string staffName)
+    {
+        var subscriber = Subcribers.FirstOrDefault(s => s.SubcriberId.Equals(subcriberId, StringComparison.OrdinalIgnoreCase));
+        if (subscriber == null || months <=0) return null;
+        
+        subscriber.ExtendSubscription(months);
+        decimal totalFee = subscriber.MonthlyFee * months;
+        return Invoice.CreateAndSaveInvoice(ticketId: $"SUB-{subscriber.SubcriberId}",
+            licensePlate: subscriber.LicensePlate, checkIn: DateTime.Now, checkOut: DateTime.Now, amount: totalFee,
+            paymentMethod: paymentMethod, createdBy: staffName);
+
+    }
+
+    /// kiểm tra biển số xem có vé tháng hợp lệ
+    public MonthlySubscriber? GetValidByLicensePlate(string licensePlate)
+    {
+        return Subcribers.FirstOrDefault(s  => s.LicensePlate.Equals(licensePlate, StringComparison.OrdinalIgnoreCase) && s.IsVaid());
+    }
+
+    ///lấy danh sách vé tháng còn hiệu lực
+    public List<MonthlySubscriber> GeActive()
+    {
+        return Subcribers.Where(s => s.IsVaid()).ToList();
+    }
+
+    ///tìm kiếm vé tháng theo tên khách hàng mã vé hoặc biển số xe
+    public List<MonthlySubscriber> Search(string keyword)
+    {
+        if (string.IsNullOrWhiteSpace(keyword)) return Subcribers;
+
+        return Subcribers.Where(s => s.SubcriberId.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                                     s.FullName.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                                     s.LicensePlate.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                                     s.PhoneNumber.Contains(keyword)).ToList();
+
+
+    }
+    
 }

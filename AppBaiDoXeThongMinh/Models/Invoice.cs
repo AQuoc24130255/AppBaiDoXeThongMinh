@@ -20,7 +20,7 @@ public class Invoice
 
     public Invoice(string ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, string createdBy, bool isPaid)
     {
-        TicketId = ticketId;
+        TicketId = Guid.NewGuid().ToString();
         LicensePlate = licensePlate;
         CheckInTime = checkInTime;
         CheckOutTime = checkOutTime;
@@ -28,7 +28,7 @@ public class Invoice
         PaymentMethod = paymentMethod;
         PaymentDate = paymentDate;
         CreatedBy = createdBy;
-        IsPaid = isPaid;
+        IsPaid = true;
     }
     //tính tổng thời gian xe gửi
     public TimeSpan CulculateParkingDuration()
@@ -56,6 +56,54 @@ public class Invoice
                $"Thời gian: {duration.Hours}h {duration.Minutes}m | Tổng tiền: {TotalAmount:N0} VNĐ | " +
                $"HTTT: {PaymentMethod} | Người lập: {CreatedBy}";
     }
+    
+
+
+    #region --- QUẢN LÝ HÓA ĐƠN ---
+    /// tính tiền gửi xe theo thời gian
+    public static decimal CalculateParkingFee(DateTime checkInTime, DateTime checkOutTime, PriceConfig config)
+    {
+        if (checkOutTime <= checkInTime || config == null) return 0;
+        TimeSpan duration = checkOutTime - checkInTime;
+        double totalHours = Math.Ceiling(duration.TotalHours);
+        decimal totalAmount = config.Price;
+        if (totalHours > 1)
+        {
+            decimal extraHours = (decimal)(totalHours - 1);
+            totalAmount += extraHours * config.OverTimePricePerHour;
+        }
+        return totalAmount;
+    }
+
+    private static readonly List<Invoice> Invoices = new();
+
+    /// tọa và lưu hóa đơn
+    public static Invoice CreateAndSaveInvoice(string ticketId, string licensePlate, DateTime checkIn,
+        DateTime checkOut, decimal amount, string paymentMethod, string createdBy)
+    {
+        var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, true);
+        Invoices.Add(invoice);
+        return invoice;
+    }
+    
+
+    /// tra cứu hóa đơn theo mã
+    public Invoice? GetById(string invoiceId)
+    {
+        return  Invoices.FirstOrDefault(i => i.InvoiceId.Equals(invoiceId, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// lấy danh sách hóa đơn theo khoảng thời gian 
+    public List<Invoice> GetByDateRange(DateTime formDate, DateTime toDate)
+    {
+        return Invoices.Where(i => i.PaymentDate >= formDate && i.PaymentDate <= toDate).ToList();
+    }
+    /// lấy toàn bộ hóa đơn
+    public List<Invoice> GetAllInvoices() => Invoices;
+    #endregion
+
+    
+  
    
 }
 
