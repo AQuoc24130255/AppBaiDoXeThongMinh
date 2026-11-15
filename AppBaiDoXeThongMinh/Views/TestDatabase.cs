@@ -10,8 +10,8 @@ public partial class TestDatabase : Form
     {
         InitializeComponent();
         var db = new AppDbContext();
-        dataGridView1.DataSource = db.Users.ToList();
-        //loadData();
+        //dataGridView1.DataSource = db.Tickets.Include(t => t.Vehicle).ToList();
+        loadData();
 
     }
 
@@ -26,6 +26,13 @@ public partial class TestDatabase : Form
                 .ToList();
 
             dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Add("colStt", "stt");
+            dataGridView1.Columns.Add("colLicensePlate", "LicensePlate");
+            dataGridView1.Columns.Add("colTicketCode", "TicketCode");
+            dataGridView1.Columns.Add("colEntryTime", "EntryTime");
+            dataGridView1.Columns.Add("colDuration", "Duration");
+            dataGridView1.Columns.Add("colVehicleType", "VehicleType");
+            
             int stt = 1;
             foreach (var t in list)
             {

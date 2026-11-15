@@ -161,7 +161,7 @@ partial class FormDashboard
         label20.Name = "label20";
         label20.Size = new System.Drawing.Size(140, 23);
         label20.TabIndex = 0;
-        label20.Text = "Total States parked";
+        label20.Text = "Total Vehicles parked";
         label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // panel2
@@ -178,19 +178,18 @@ partial class FormDashboard
         // 
         // label5
         // 
-        label5.Location = new System.Drawing.Point(0, 75);
+        label5.Location = new System.Drawing.Point(0, 59);
         label5.Name = "label5";
-        label5.Size = new System.Drawing.Size(140, 30);
+        label5.Size = new System.Drawing.Size(140, 46);
         label5.TabIndex = 3;
         label5.Text = "Avaliable Slot: 0";
-        label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // label7
         // 
         label7.Font = new System.Drawing.Font("Segoe UI", 14F);
         label7.Location = new System.Drawing.Point(0, 23);
         label7.Name = "label7";
-        label7.Size = new System.Drawing.Size(140, 52);
+        label7.Size = new System.Drawing.Size(140, 36);
         label7.TabIndex = 1;
         label7.Text = "0%";
         label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -355,7 +354,7 @@ partial class FormDashboard
         label1.Name = "label1";
         label1.Size = new System.Drawing.Size(140, 23);
         label1.TabIndex = 0;
-        label1.Text = "Total Vehicles parked";
+        label1.Text = "Total States parked";
         label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // groupBox2
