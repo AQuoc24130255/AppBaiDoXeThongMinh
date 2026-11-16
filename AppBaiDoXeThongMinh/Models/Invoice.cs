@@ -11,7 +11,7 @@ public class Invoice
     public decimal TotalAmount { get; set; } // tổng tiền thanh toán 
     public string PaymentMethod  { get; set; } // tiền mặt / chuyẻn khoản
     public DateTime PaymentDate  { get; set; } // thời điểm thành toán 
-    public string CreatedBy  { get; set; } //nhân viên/Admin thực hiện
+    public int CreatedBy  { get; set; } //nhân viên/Admin thực hiện
     public bool IsPaid { get; set; } = true; //trạng thái thanh toán
 
     public bool IsMonthlyFree { get; set; } = false; // có phải là vé tháng không
@@ -23,7 +23,7 @@ public class Invoice
         PaymentDate = DateTime.Now;
     }
 
-    public Invoice(int ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, string createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
+    public Invoice(int ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, int createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
         TicketId = ticketId;
         LicensePlate = licensePlate;
@@ -46,7 +46,7 @@ public class Invoice
     }
     
     //xử lý cập nhật trạng thái thanh toán 
-    public void ProcessPayment(string paymentMethod, string createdBy, decimal amount)
+    public void ProcessPayment(string paymentMethod, int createdBy, decimal amount)
     {
         PaymentMethod = paymentMethod;
         CreatedBy = createdBy;
@@ -87,7 +87,7 @@ public class Invoice
 
     /// tọa và lưu hóa đơn
     public static Invoice CreateAndSaveInvoice(int ticketId, string licensePlate, DateTime checkIn,
-        DateTime checkOut, decimal amount, string paymentMethod, string createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
+        DateTime checkOut, decimal amount, string paymentMethod, int createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
         var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, isPaid, isMonthlyFree, shiftId);
         Invoices.Add(invoice);
