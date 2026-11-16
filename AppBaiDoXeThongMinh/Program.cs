@@ -19,6 +19,7 @@ static class Program
             db.Database.EnsureCreated();
         }
         
-        Application.Run(new Views.TestDatabase());
+        //Application.Run(new Views.TestDatabase());
+        Application.Run(new Views.FormDashboard());
     }
 }
