@@ -12,16 +12,20 @@ public class Invoice
     public string PaymentMethod  { get; set; } // tiền mặt / chuyẻn khoản
     public DateTime PaymentDate  { get; set; } // thời điểm thành toán 
     public string CreatedBy  { get; set; } //nhân viên/Admin thực hiện
-    public bool IsPaid { get; set; } = true; //trạng thái thanh toán 
+    public bool IsPaid { get; set; } = true; //trạng thái thanh toán
+
+    public bool IsMonthlyFree { get; set; } = false; // có phải là vé tháng không
+    
+    public int ShiftId  { get; set; } // ma ca trực
 
     public Invoice()
     {
         PaymentDate = DateTime.Now;
     }
 
-    public Invoice(string ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, string createdBy, bool isPaid)
+    public Invoice(int ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, string createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
-        TicketId = Guid.NewGuid().ToString();
+        TicketId = ticketId;
         LicensePlate = licensePlate;
         CheckInTime = checkInTime;
         CheckOutTime = checkOutTime;
@@ -29,7 +33,9 @@ public class Invoice
         PaymentMethod = paymentMethod;
         PaymentDate = paymentDate;
         CreatedBy = createdBy;
-        IsPaid = true;
+        IsPaid = isPaid;
+        IsMonthlyFree = isMonthlyFree;
+        ShiftId = shiftId;
     }
     //tính tổng thời gian xe gửi
     public TimeSpan CulculateParkingDuration()
@@ -67,22 +73,23 @@ public class Invoice
         if (checkOutTime <= checkInTime || config == null) return 0;
         TimeSpan duration = checkOutTime - checkInTime;
         double totalHours = Math.Ceiling(duration.TotalHours);
-        decimal totalAmount = config.Price;
+        //decimal totalAmount = config.Price;
         if (totalHours > 1)
         {
             decimal extraHours = (decimal)(totalHours - 1);
-            totalAmount += extraHours * config.OverTimePricePerHour;
+            //totalAmount += extraHours * config.OverTimePricePerHour;
         }
-        return totalAmount;
+        //return totalAmount;
+        return 0;
     }
 
     private static readonly List<Invoice> Invoices = new();
 
     /// tọa và lưu hóa đơn
-    public static Invoice CreateAndSaveInvoice(string ticketId, string licensePlate, DateTime checkIn,
-        DateTime checkOut, decimal amount, string paymentMethod, string createdBy)
+    public static Invoice CreateAndSaveInvoice(int ticketId, string licensePlate, DateTime checkIn,
+        DateTime checkOut, decimal amount, string paymentMethod, string createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
-        var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, true);
+        var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, isPaid, isMonthlyFree, shiftId);
         Invoices.Add(invoice);
         return invoice;
     }
