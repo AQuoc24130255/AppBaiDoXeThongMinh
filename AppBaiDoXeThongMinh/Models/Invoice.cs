@@ -71,16 +71,31 @@ public class Invoice
     public static decimal CalculateParkingFee(DateTime checkInTime, DateTime checkOutTime, PriceConfig config)
     {
         if (checkOutTime <= checkInTime || config == null) return 0;
-        TimeSpan duration = checkOutTime - checkInTime;
-        double totalHours = Math.Ceiling(duration.TotalHours);
-        //decimal totalAmount = config.Price;
-        if (totalHours > 1)
+        
+        // cấu hình thơ gian của 1 block
+        int blockMinutes = config.TimeUnit > 0 ? config.TimeUnit : 60;
+        TimeSpan block = TimeSpan.FromMinutes(blockMinutes);
+
+        decimal total = 0;
+        DateTime current = checkInTime;
+
+        while (current<checkOutTime)
         {
-            decimal extraHours = (decimal)(totalHours - 1);
-            //totalAmount += extraHours * config.OverTimePricePerHour;
+            total += IsNightTime(current.TimeOfDay, config.NightStart, config.NightEnd)
+                ? config.NightPrice
+                : config.DayPrice;
+            current += block;
         }
-        //return totalAmount;
-        return 0;
+        return total;
+    }
+
+    private static bool IsNightTime(TimeSpan currentTimeOfDay, TimeSpan configNightStart, TimeSpan configNightEnd)
+    {
+        if (configNightStart<= configNightEnd)
+        {
+            return currentTimeOfDay>=configNightStart && currentTimeOfDay<configNightEnd;
+        }
+        return currentTimeOfDay>=configNightStart || currentTimeOfDay<configNightEnd;
     }
 
     private static readonly List<Invoice> Invoices = new();
