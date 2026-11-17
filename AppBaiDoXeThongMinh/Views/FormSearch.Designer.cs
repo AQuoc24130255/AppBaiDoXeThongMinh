@@ -52,6 +52,10 @@ partial class FormSearch
         Action = new System.Windows.Forms.DataGridViewButtonColumn();
         flowLayoutPanelDetail = new System.Windows.Forms.FlowLayoutPanel();
         grbDetail = new System.Windows.Forms.GroupBox();
+        lbFeeInfo = new System.Windows.Forms.Label();
+        lbDurationInfo = new System.Windows.Forms.Label();
+        lbOwnerInfo = new System.Windows.Forms.Label();
+        lbVehicleInfo = new System.Windows.Forms.Label();
         lbStatusTicket = new System.Windows.Forms.Label();
         lbTimeIn = new System.Windows.Forms.Label();
         lbLicensePlate = new System.Windows.Forms.Label();
@@ -59,10 +63,6 @@ partial class FormSearch
         flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
         buttonLockTicket = new System.Windows.Forms.Button();
         buttonCalculate = new System.Windows.Forms.Button();
-        lbVehicleInfo = new System.Windows.Forms.Label();
-        lbOwnerInfo = new System.Windows.Forms.Label();
-        lbDurationInfo = new System.Windows.Forms.Label();
-        lbFeeInfo = new System.Windows.Forms.Label();
         flowLayoutPanelFilter.SuspendLayout();
         tableLayoutPanelSummary.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridViewSummary).BeginInit();
@@ -91,7 +91,7 @@ partial class FormSearch
         flowLayoutPanelFilter.Controls.Add(comboBoxStatusSearch);
         flowLayoutPanelFilter.Location = new System.Drawing.Point(12, 37);
         flowLayoutPanelFilter.Name = "flowLayoutPanelFilter";
-        flowLayoutPanelFilter.Size = new System.Drawing.Size(776, 39);
+        flowLayoutPanelFilter.Size = new System.Drawing.Size(755, 39);
         flowLayoutPanelFilter.TabIndex = 6;
         // 
         // textBoxSearch
@@ -102,12 +102,12 @@ partial class FormSearch
         textBoxSearch.Multiline = true;
         textBoxSearch.Name = "textBoxSearch";
         textBoxSearch.PlaceholderText = "Biển số hoặc mã thẻ";
-        textBoxSearch.Size = new System.Drawing.Size(199, 23);
+        textBoxSearch.Size = new System.Drawing.Size(180, 23);
         textBoxSearch.TabIndex = 0;
         // 
         // btSearch
         // 
-        btSearch.Location = new System.Drawing.Point(212, 3);
+        btSearch.Location = new System.Drawing.Point(193, 3);
         btSearch.Name = "btSearch";
         btSearch.Size = new System.Drawing.Size(67, 30);
         btSearch.TabIndex = 1;
@@ -117,11 +117,12 @@ partial class FormSearch
         // lbDateSearch
         // 
         lbDateSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        lbDateSearch.Location = new System.Drawing.Point(285, 6);
+        lbDateSearch.Location = new System.Drawing.Point(266, 6);
         lbDateSearch.Margin = new System.Windows.Forms.Padding(3);
         lbDateSearch.Name = "lbDateSearch";
         lbDateSearch.Padding = new System.Windows.Forms.Padding(3);
-        lbDateSearch.Size = new System.Drawing.Size(53, 23);
+        lbDateSearch.Size = new System.Drawing.Size(41, 23);
+        lbDateSearch.AutoSize = true;
         lbDateSearch.TabIndex = 2;
         lbDateSearch.Text = "Ngày";
         lbDateSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -131,7 +132,7 @@ partial class FormSearch
         dateTimePickerSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
         dateTimePickerSearch.Checked = false;
         dateTimePickerSearch.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-        dateTimePickerSearch.Location = new System.Drawing.Point(344, 6);
+        dateTimePickerSearch.Location = new System.Drawing.Point(313, 6);
         dateTimePickerSearch.Name = "dateTimePickerSearch";
         dateTimePickerSearch.ShowCheckBox = true;
         dateTimePickerSearch.Size = new System.Drawing.Size(218, 23);
@@ -141,9 +142,10 @@ partial class FormSearch
         // lbStatusSearch
         // 
         lbStatusSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        lbStatusSearch.Location = new System.Drawing.Point(568, 6);
+        lbStatusSearch.Location = new System.Drawing.Point(537, 6);
         lbStatusSearch.Name = "lbStatusSearch";
-        lbStatusSearch.Size = new System.Drawing.Size(68, 23);
+        lbStatusSearch.Size = new System.Drawing.Size(64, 23);
+        lbStatusSearch.AutoSize = true;
         lbStatusSearch.TabIndex = 4;
         lbStatusSearch.Text = "Trạng Thái";
         lbStatusSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -155,7 +157,7 @@ partial class FormSearch
         comboBoxStatusSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         comboBoxStatusSearch.FormattingEnabled = true;
         comboBoxStatusSearch.Items.AddRange(new object[] { "Tất cả", "Đang trong bãi", "Đã ra khỏi bãi" });
-        comboBoxStatusSearch.Location = new System.Drawing.Point(642, 6);
+        comboBoxStatusSearch.Location = new System.Drawing.Point(607, 6);
         comboBoxStatusSearch.Name = "comboBoxStatusSearch";
         comboBoxStatusSearch.Size = new System.Drawing.Size(121, 23);
         comboBoxStatusSearch.TabIndex = 5;
@@ -171,7 +173,7 @@ partial class FormSearch
         tableLayoutPanelSummary.Name = "tableLayoutPanelSummary";
         tableLayoutPanelSummary.RowCount = 1;
         tableLayoutPanelSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-        tableLayoutPanelSummary.Size = new System.Drawing.Size(776, 356);
+        tableLayoutPanelSummary.Size = new System.Drawing.Size(755, 356);
         tableLayoutPanelSummary.TabIndex = 7;
         // 
         // dataGridViewSummary
@@ -188,7 +190,7 @@ partial class FormSearch
         dataGridViewSummary.ReadOnly = true;
         dataGridViewSummary.RowHeadersVisible = false;
         dataGridViewSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        dataGridViewSummary.Size = new System.Drawing.Size(537, 350);
+        dataGridViewSummary.Size = new System.Drawing.Size(522, 350);
         dataGridViewSummary.TabIndex = 0;
         dataGridViewSummary.Text = "dataGridView1";
         // 
@@ -247,9 +249,9 @@ partial class FormSearch
         flowLayoutPanelDetail.Controls.Add(flowLayoutPanel3);
         flowLayoutPanelDetail.Dock = System.Windows.Forms.DockStyle.Fill;
         flowLayoutPanelDetail.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-        flowLayoutPanelDetail.Location = new System.Drawing.Point(546, 3);
+        flowLayoutPanelDetail.Location = new System.Drawing.Point(531, 3);
         flowLayoutPanelDetail.Name = "flowLayoutPanelDetail";
-        flowLayoutPanelDetail.Size = new System.Drawing.Size(227, 350);
+        flowLayoutPanelDetail.Size = new System.Drawing.Size(221, 350);
         flowLayoutPanelDetail.TabIndex = 1;
         // 
         // grbDetail
@@ -270,59 +272,16 @@ partial class FormSearch
         grbDetail.TabStop = false;
         grbDetail.Text = "Thông Tin Vé Xe";
         // 
-        // lbStatusTicket
+        // lbFeeInfo
         // 
-        lbStatusTicket.Location = new System.Drawing.Point(6, 88);
-        lbStatusTicket.Name = "lbStatusTicket";
-        lbStatusTicket.Size = new System.Drawing.Size(208, 23);
-        lbStatusTicket.TabIndex = 3;
-        lbStatusTicket.Text = "Trạng Thái";
-        lbStatusTicket.TextAlign = ContentAlignment.MiddleLeft;
-        // 
-        // lbTimeIn
-        // 
-        lbTimeIn.Location = new System.Drawing.Point(6, 65);
-        lbTimeIn.Name = "lbTimeIn";
-        lbTimeIn.Size = new System.Drawing.Size(208, 23);
-        lbTimeIn.TabIndex = 2;
-        lbTimeIn.Text = "Thời gian vào";
-        lbTimeIn.TextAlign = ContentAlignment.MiddleLeft;
-        // 
-        // lbLicensePlate
-        // 
-        lbLicensePlate.Location = new System.Drawing.Point(6, 42);
-        lbLicensePlate.Name = "lbLicensePlate";
-        lbLicensePlate.Size = new System.Drawing.Size(208, 23);
-        lbLicensePlate.TabIndex = 1;
-        lbLicensePlate.Text = "Biển Số";
-        lbLicensePlate.TextAlign = ContentAlignment.MiddleLeft;
-        // 
-        // lbName
-        // 
-        lbName.Location = new System.Drawing.Point(6, 19);
-        lbName.Name = "lbName";
-        lbName.Size = new System.Drawing.Size(208, 23);
-        lbName.TabIndex = 0;
-        lbName.Text = "Vé Xe:";
-        lbName.TextAlign = ContentAlignment.MiddleLeft;
-        // 
-        // lbVehicleInfo
-        // 
-        lbVehicleInfo.Location = new System.Drawing.Point(6, 111);
-        lbVehicleInfo.Name = "lbVehicleInfo";
-        lbVehicleInfo.Size = new System.Drawing.Size(208, 23);
-        lbVehicleInfo.TabIndex = 4;
-        lbVehicleInfo.Text = "Loại xe";
-        lbVehicleInfo.TextAlign = ContentAlignment.MiddleLeft;
-        // 
-        // lbOwnerInfo
-        // 
-        lbOwnerInfo.Location = new System.Drawing.Point(6, 134);
-        lbOwnerInfo.Name = "lbOwnerInfo";
-        lbOwnerInfo.Size = new System.Drawing.Size(208, 23);
-        lbOwnerInfo.TabIndex = 5;
-        lbOwnerInfo.Text = "Chủ xe";
-        lbOwnerInfo.TextAlign = ContentAlignment.MiddleLeft;
+        lbFeeInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        lbFeeInfo.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)40)), ((int)((byte)120)), ((int)((byte)60)));
+        lbFeeInfo.Location = new System.Drawing.Point(6, 180);
+        lbFeeInfo.Name = "lbFeeInfo";
+        lbFeeInfo.Size = new System.Drawing.Size(208, 23);
+        lbFeeInfo.TabIndex = 7;
+        lbFeeInfo.Text = "Phí tạm tính";
+        lbFeeInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // lbDurationInfo
         // 
@@ -331,18 +290,61 @@ partial class FormSearch
         lbDurationInfo.Size = new System.Drawing.Size(208, 23);
         lbDurationInfo.TabIndex = 6;
         lbDurationInfo.Text = "Đã gửi";
-        lbDurationInfo.TextAlign = ContentAlignment.MiddleLeft;
+        lbDurationInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // lbFeeInfo
+        // lbOwnerInfo
         // 
-        lbFeeInfo.Location = new System.Drawing.Point(6, 180);
-        lbFeeInfo.Name = "lbFeeInfo";
-        lbFeeInfo.Size = new System.Drawing.Size(208, 23);
-        lbFeeInfo.TabIndex = 7;
-        lbFeeInfo.Text = "Phí tạm tính";
-        lbFeeInfo.TextAlign = ContentAlignment.MiddleLeft;
-        lbFeeInfo.Font = new Font(Font, FontStyle.Bold);
-        lbFeeInfo.ForeColor = Color.FromArgb(40, 120, 60);
+        lbOwnerInfo.Location = new System.Drawing.Point(6, 134);
+        lbOwnerInfo.Name = "lbOwnerInfo";
+        lbOwnerInfo.Size = new System.Drawing.Size(208, 23);
+        lbOwnerInfo.TabIndex = 5;
+        lbOwnerInfo.Text = "Chủ xe";
+        lbOwnerInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbVehicleInfo
+        // 
+        lbVehicleInfo.Location = new System.Drawing.Point(6, 111);
+        lbVehicleInfo.Name = "lbVehicleInfo";
+        lbVehicleInfo.Size = new System.Drawing.Size(208, 23);
+        lbVehicleInfo.TabIndex = 4;
+        lbVehicleInfo.Text = "Loại xe";
+        lbVehicleInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbStatusTicket
+        // 
+        lbStatusTicket.Location = new System.Drawing.Point(6, 88);
+        lbStatusTicket.Name = "lbStatusTicket";
+        lbStatusTicket.Size = new System.Drawing.Size(208, 23);
+        lbStatusTicket.TabIndex = 3;
+        lbStatusTicket.Text = "Trạng Thái";
+        lbStatusTicket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbTimeIn
+        // 
+        lbTimeIn.Location = new System.Drawing.Point(6, 65);
+        lbTimeIn.Name = "lbTimeIn";
+        lbTimeIn.Size = new System.Drawing.Size(208, 23);
+        lbTimeIn.TabIndex = 2;
+        lbTimeIn.Text = "Thời gian vào";
+        lbTimeIn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbLicensePlate
+        // 
+        lbLicensePlate.Location = new System.Drawing.Point(6, 42);
+        lbLicensePlate.Name = "lbLicensePlate";
+        lbLicensePlate.Size = new System.Drawing.Size(208, 23);
+        lbLicensePlate.TabIndex = 1;
+        lbLicensePlate.Text = "Biển Số";
+        lbLicensePlate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbName
+        // 
+        lbName.Location = new System.Drawing.Point(6, 19);
+        lbName.Name = "lbName";
+        lbName.Size = new System.Drawing.Size(208, 23);
+        lbName.TabIndex = 0;
+        lbName.Text = "Vé Xe:";
+        lbName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // flowLayoutPanel3
         // 

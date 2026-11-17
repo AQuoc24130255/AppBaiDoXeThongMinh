@@ -1,4 +1,6 @@
 using AppBaiDoXeThongMinh.database;
+using AppBaiDoXeThongMinh.Models;
+using AppBaiDoXeThongMinh.Views;
 
 namespace AppBaiDoXeThongMinh;
 
@@ -14,11 +16,16 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
 
+        User u;
+        
         using (var db = new AppDbContext())
         {
             db.Database.EnsureCreated();
+            u = db.Users.FirstOrDefault();
         }
+
         
-        Application.Run(new Views.FormSearch());
+        Application.Run(new FormMain(u));
+        //Application.Run(new FormDashboard());
     }
 }

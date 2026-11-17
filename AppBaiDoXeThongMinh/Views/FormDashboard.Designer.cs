@@ -58,12 +58,11 @@ partial class FormDashboard
         lbTotalSlots = new System.Windows.Forms.Label();
         lbSlots = new System.Windows.Forms.Label();
         grbRevenue = new System.Windows.Forms.GroupBox();
-        flowLayoutPanelRevenue = new System.Windows.Forms.FlowLayoutPanel();
         flowLayoutPanelSummary = new System.Windows.Forms.FlowLayoutPanel();
         btRevenue = new System.Windows.Forms.Button();
         grbSummary = new System.Windows.Forms.GroupBox();
         lbTitleSummary = new System.Windows.Forms.Label();
-        flowLayoutPanelFilter = new System.Windows.Forms.FlowLayoutPanel();
+        flowLayoutPanelFilter = new System.Windows.Forms.Panel();
         tableLayoutPanelFilter = new System.Windows.Forms.TableLayoutPanel();
         cbVehicleType = new System.Windows.Forms.ComboBox();
         lbShift = new System.Windows.Forms.Label();
@@ -95,7 +94,6 @@ partial class FormDashboard
         panelMonthly.SuspendLayout();
         panelSlots.SuspendLayout();
         grbRevenue.SuspendLayout();
-        flowLayoutPanelRevenue.SuspendLayout();
         flowLayoutPanelSummary.SuspendLayout();
         grbSummary.SuspendLayout();
         flowLayoutPanelFilter.SuspendLayout();
@@ -376,7 +374,8 @@ partial class FormDashboard
         // grbRevenue
         // 
         grbRevenue.BackColor = System.Drawing.SystemColors.ActiveCaption;
-        grbRevenue.Controls.Add(flowLayoutPanelRevenue);
+        grbRevenue.Controls.Add(flowLayoutPanelFilter);
+        grbRevenue.Controls.Add(flowLayoutPanelSummary);
         grbRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
         grbRevenue.Location = new System.Drawing.Point(0, 133);
         grbRevenue.Name = "grbRevenue";
@@ -385,17 +384,6 @@ partial class FormDashboard
         grbRevenue.TabStop = false;
         grbRevenue.Text = "Báo cáo doanh thu theo Ngày/Đêm";
         // 
-        // flowLayoutPanelRevenue
-        // 
-        flowLayoutPanelRevenue.Controls.Add(flowLayoutPanelSummary);
-        flowLayoutPanelRevenue.Controls.Add(flowLayoutPanelFilter);
-        flowLayoutPanelRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
-        flowLayoutPanelRevenue.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-        flowLayoutPanelRevenue.Location = new System.Drawing.Point(3, 19);
-        flowLayoutPanelRevenue.Name = "flowLayoutPanelRevenue";
-        flowLayoutPanelRevenue.Size = new System.Drawing.Size(794, 295);
-        flowLayoutPanelRevenue.TabIndex = 0;
-        // 
         // flowLayoutPanelSummary
         // 
         flowLayoutPanelSummary.Controls.Add(btRevenue);
@@ -403,7 +391,8 @@ partial class FormDashboard
         flowLayoutPanelSummary.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
         flowLayoutPanelSummary.Location = new System.Drawing.Point(591, 3);
         flowLayoutPanelSummary.Name = "flowLayoutPanelSummary";
-        flowLayoutPanelSummary.Size = new System.Drawing.Size(200, 292);
+        flowLayoutPanelSummary.Size = new System.Drawing.Size(210, 292);
+        flowLayoutPanelSummary.Dock = System.Windows.Forms.DockStyle.Right;
         flowLayoutPanelSummary.TabIndex = 0;
         // 
         // btRevenue
@@ -444,10 +433,9 @@ partial class FormDashboard
         // 
         // flowLayoutPanelFilter
         // 
-        flowLayoutPanelFilter.Controls.Add(tableLayoutPanelFilter);
         flowLayoutPanelFilter.Controls.Add(grbFilter);
+        flowLayoutPanelFilter.Controls.Add(tableLayoutPanelFilter);
         flowLayoutPanelFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-        flowLayoutPanelFilter.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
         flowLayoutPanelFilter.Location = new System.Drawing.Point(3, 3);
         flowLayoutPanelFilter.Name = "flowLayoutPanelFilter";
         flowLayoutPanelFilter.Size = new System.Drawing.Size(582, 292);
@@ -475,6 +463,7 @@ partial class FormDashboard
         tableLayoutPanelFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.704224F));
         tableLayoutPanelFilter.Size = new System.Drawing.Size(579, 57);
         tableLayoutPanelFilter.TabIndex = 0;
+        tableLayoutPanelFilter.Dock = System.Windows.Forms.DockStyle.Top;
         // 
         // cbVehicleType
         // 
@@ -684,7 +673,6 @@ partial class FormDashboard
         panelMonthly.ResumeLayout(false);
         panelSlots.ResumeLayout(false);
         grbRevenue.ResumeLayout(false);
-        flowLayoutPanelRevenue.ResumeLayout(false);
         flowLayoutPanelSummary.ResumeLayout(false);
         grbSummary.ResumeLayout(false);
         flowLayoutPanelFilter.ResumeLayout(false);
@@ -733,7 +721,7 @@ partial class FormDashboard
 
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFilter;
 
-    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFilter;
+    private System.Windows.Forms.Panel flowLayoutPanelFilter;
 
     private System.Windows.Forms.Label lbTitleSummary;
 
@@ -742,8 +730,6 @@ partial class FormDashboard
     private System.Windows.Forms.Button btRevenue;
 
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSummary;
-
-    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRevenue;
 
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCurrentParking;
 

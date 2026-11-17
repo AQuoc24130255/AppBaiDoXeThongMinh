@@ -11,13 +11,14 @@ public partial class FormMain : Form
     private readonly User _currentUser;
     private readonly Panel _contentPanel = new();
     private readonly Label _lblPageTitle = new();
+    private Form _currentChildForm;
 
     public FormMain(User user)
     {
         _currentUser = user ?? throw new ArgumentNullException(nameof(user));
         InitializeComponent();
         BuildInterface();
-        OpenChildForm(new FormDashboard(), "TỔNG QUAN");
+        //OpenChildForm(new FormDashboard(), "TỔNG QUAN");
     }
 
     private void BuildInterface()
@@ -31,7 +32,7 @@ public partial class FormMain : Form
         var sidebar = new Panel
         {
             Dock = DockStyle.Left,
-            Width = 245,
+            Width = 230,
             BackColor = Color.FromArgb(22, 48, 75)
         };
         Controls.Add(sidebar);
@@ -53,7 +54,7 @@ public partial class FormMain : Form
             FlowDirection = FlowDirection.TopDown,
             WrapContents = false,
             AutoScroll = true,
-            Padding = new Padding(12, 12, 12, 0),
+            Padding = new Padding(8, 12, 8, 0),
             BackColor = sidebar.BackColor
         };
         sidebar.Controls.Add(menu);
@@ -65,8 +66,8 @@ public partial class FormMain : Form
 
         if (_currentUser.Role == Role.Admin)
         {
-            AddMenuButton(menu, "Kiểm tra dữ liệu", () =>
-                OpenChildForm(new TestDatabase(), "KIỂM TRA DỮ LIỆU"));
+            AddMenuButton(menu, "Thống Kê Doanh Thu", () =>
+                OpenChildForm(new FormDashboard(), "THỐNG KÊ DOANH THU"));
         }
 
         var logout = new Button
@@ -145,9 +146,9 @@ public partial class FormMain : Form
         _contentPanel.Padding = new Padding(18);
         _contentPanel.BackColor = Color.FromArgb(243, 246, 250);
         Controls.Add(_contentPanel);
-        _contentPanel.BringToFront();
-        topBar.BringToFront();
         sidebar.BringToFront();
+        topBar.BringToFront();
+        _contentPanel.BringToFront();
     }
 
     private static void AddMenuButton(Control parent, string text, Action action)
@@ -173,6 +174,7 @@ public partial class FormMain : Form
 
     private void OpenChildForm(Form child, string title)
     {
+        /*
         // Các form chức năng hiện có đang được xây dựng theo dạng Form độc lập.
         // Hiển thị dạng hộp thoại để tránh chồng nhiều cửa sổ con.
         _lblPageTitle.Text = title;
@@ -180,6 +182,29 @@ public partial class FormMain : Form
         {
             child.StartPosition = FormStartPosition.CenterParent;
             child.ShowDialog(this);
+        }*/
+        // 1. Cập nhật tiêu đề trên thanh TopBar
+        _lblPageTitle.Text = title;
+
+        // 2. Đóng và giải phóng RAM của Form con cũ (nếu đang mở)
+        if (_currentChildForm != null)
+        {
+            _currentChildForm.Close();
+            _currentChildForm.Dispose();
         }
+
+        // 3. Cấu hình Form con mới để nhúng vào _contentPanel
+        _currentChildForm = child;
+        child.TopLevel = false;
+        child.AutoScroll = true;
+        child.FormBorderStyle = FormBorderStyle.None;
+        child.Dock = DockStyle.Fill;
+
+        // 4. Đưa Form con vào khoảng trống _contentPanel và hiển thị
+        _contentPanel.Controls.Clear();
+        _contentPanel.Controls.Add(child);
+        _contentPanel.Tag = child;
+        child.BringToFront();
+        child.Show();
     }
 }
