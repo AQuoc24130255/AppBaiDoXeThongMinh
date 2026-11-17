@@ -20,7 +20,19 @@ public partial class FormDashboard : Form
     public FormDashboard()
     {
         InitializeComponent();
+        SetupUi();
+        
         Load +=  (_, _) => RefreshDashboard();
+    }
+
+    private void SetupUi()
+    {
+        btRevenue.Click += (_, _) => RefreshDashboard();
+        
+        panelThongke.Paint += PanelThongke_Paint;
+        panelThongke.Resize += (_, _) => panelThongke.Invalidate();
+        
+        btRevenue.Click += (_, _) => RefreshDashboard();
     }
 
     private void RefreshDashboard()

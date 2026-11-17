@@ -414,7 +414,7 @@ partial class FormDashboard
         btRevenue.TabIndex = 0;
         btRevenue.Text = "Thống Kê";
         btRevenue.UseVisualStyleBackColor = true;
-        btRevenue.Click += (_, _) => RefreshDashboard();
+        
         // 
         // grbSummary
         // 
@@ -650,7 +650,6 @@ partial class FormDashboard
         lbDayTotalAmount.Text = "0 VND";
         lbDayTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         lbDayTotalAmount.SetBounds(62, 86, 132, 23);
-        lbDayTotalAmount.TextAlign = ContentAlignment.MiddleRight;
         // 
         // lbNightTotalAmount
         // 
@@ -661,7 +660,6 @@ partial class FormDashboard
         lbNightTotalAmount.Text = "0 VND";
         lbNightTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         lbNightTotalAmount.SetBounds(62, 109, 132, 23);
-        lbNightTotalAmount.TextAlign = ContentAlignment.MiddleRight;
         // 
         // panelThongke
         // 
@@ -669,8 +667,6 @@ partial class FormDashboard
         panelThongke.Name = "panelThongke";
         panelThongke.Size = new System.Drawing.Size(151, 100);
         panelThongke.TabIndex = 7;
-        panelThongke.Paint += PanelThongke_Paint;
-        panelThongke.Resize += (_, _) => panelThongke.Invalidate();
         // 
         // FormDashboard
         // 

@@ -61,7 +61,7 @@ public partial class FormMain : Form
         AddMenuButton(menu, "Tổng quan", () => OpenChildForm(new FormDashboard(), "TỔNG QUAN"));
         AddMenuButton(menu, "Xe vào bãi", () => OpenChildForm(new FormCheckIn(), "TIẾP NHẬN XE VÀO"));
         AddMenuButton(menu, "Xe ra bãi", () => OpenChildForm(new FormCheckOut(), "XỬ LÝ XE RA"));
-        AddMenuButton(menu, "Tra cứu", () => OpenChildForm(new FormSearch(), "TRA CỨU THÔNG TIN"));
+        AddMenuButton(menu, "Tra cứu", () => OpenChildForm(new FormSearch(_currentUser), "TRA CỨU THÔNG TIN"));
 
         if (_currentUser.Role == Role.Admin)
         {
