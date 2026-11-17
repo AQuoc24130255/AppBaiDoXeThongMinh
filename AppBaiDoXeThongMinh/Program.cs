@@ -25,7 +25,7 @@ static class Program
         }
 
         
-        Application.Run(new FormMain(u));
-        //Application.Run(new FormDashboard());
+        //Application.Run(new FormMain(u));
+        Application.Run(new FormEditSlot());
     }
 }

@@ -68,6 +68,10 @@ public partial class FormMain : Form
         {
             AddMenuButton(menu, "Thống Kê Doanh Thu", () =>
                 OpenChildForm(new FormDashboard(), "THỐNG KÊ DOANH THU"));
+            AddMenuButton(menu,"Quản lý tài khoản", () =>
+                OpenChildForm(new FormEditUser(), "QUẢN LÝ TÀI KHOẢN"));
+            AddMenuButton(menu,"Quản lý chỗ đỗ", () =>
+                OpenChildForm(new FormEditSlot(), "QUẢN LÝ CHỖ ĐỖ"));
         }
 
         var logout = new Button

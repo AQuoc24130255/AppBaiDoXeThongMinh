@@ -30,6 +30,15 @@
       <Compile Update="Views\TestDatabase.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\FormEditUser.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\FormEditSlot.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\FormTicket.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
     
 
