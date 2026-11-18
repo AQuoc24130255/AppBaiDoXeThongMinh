@@ -36,7 +36,7 @@
       <Compile Update="Views\FormEditSlot.cs">
         <SubType>Form</SubType>
       </Compile>
-      <Compile Update="Views\FormTicket.cs">
+      <Compile Update="Views\FormManageTicket.cs">
         <SubType>Form</SubType>
       </Compile>
     </ItemGroup>

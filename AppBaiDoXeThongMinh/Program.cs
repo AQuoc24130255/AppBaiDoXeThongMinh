@@ -25,7 +25,7 @@ static class Program
         }
 
         
-        //Application.Run(new FormMain(u));
-        Application.Run(new FormEditSlot());
+        //Application.Run(new FormLogin());
+        Application.Run(new FormManageTicket());
     }
 }

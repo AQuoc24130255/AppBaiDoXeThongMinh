@@ -47,52 +47,7 @@ public partial class FormMain : Form
             Font = new Font("Segoe UI", 16F, FontStyle.Bold)
         };
         sidebar.Controls.Add(brand);
-
-        var menu = new FlowLayoutPanel
-        {
-            Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.TopDown,
-            WrapContents = false,
-            AutoScroll = true,
-            Padding = new Padding(8, 12, 8, 0),
-            BackColor = sidebar.BackColor
-        };
-        sidebar.Controls.Add(menu);
-
-        AddMenuButton(menu, "Tổng quan", () => OpenChildForm(new FormDashboard(), "TỔNG QUAN"));
-        AddMenuButton(menu, "Xe vào bãi", () => OpenChildForm(new FormCheckIn(), "TIẾP NHẬN XE VÀO"));
-        AddMenuButton(menu, "Xe ra bãi", () => OpenChildForm(new FormCheckOut(), "XỬ LÝ XE RA"));
-        AddMenuButton(menu, "Tra cứu", () => OpenChildForm(new FormSearch(_currentUser), "TRA CỨU THÔNG TIN"));
-
-        if (_currentUser.Role == Role.Admin)
-        {
-            AddMenuButton(menu, "Thống Kê Doanh Thu", () =>
-                OpenChildForm(new FormDashboard(), "THỐNG KÊ DOANH THU"));
-            AddMenuButton(menu,"Quản lý tài khoản", () =>
-                OpenChildForm(new FormEditUser(), "QUẢN LÝ TÀI KHOẢN"));
-            AddMenuButton(menu,"Quản lý chỗ đỗ", () =>
-                OpenChildForm(new FormEditSlot(), "QUẢN LÝ CHỖ ĐỖ"));
-        }
-
-        var logout = new Button
-        {
-            Text = "Đăng xuất",
-            Dock = DockStyle.Bottom,
-            Height = 48,
-            FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(160, 55, 55),
-            ForeColor = Color.White,
-            Font = new Font("Segoe UI", 10F, FontStyle.Bold)
-        };
-        logout.FlatAppearance.BorderSize = 0;
-        logout.Click += (_, _) =>
-        {
-            var answer = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
-                "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (answer == DialogResult.Yes) Close();
-        };
-        sidebar.Controls.Add(logout);
-
+        
         var userPanel = new Panel
         {
             Dock = DockStyle.Bottom,
@@ -118,7 +73,58 @@ public partial class FormMain : Form
             Padding = new Padding(15, 3, 5, 0),
             ForeColor = Color.LightSkyBlue
         });
+        
+        var logout = new Button
+        {
+            Text = "Đăng xuất",
+            Dock = DockStyle.Bottom,
+            Height = 48,
+            FlatStyle = FlatStyle.Flat,
+            BackColor = Color.FromArgb(160, 55, 55),
+            ForeColor = Color.White,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold)
+        };
+        logout.FlatAppearance.BorderSize = 0;
+        logout.Click += (_, _) =>
+        {
+            var answer = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes) Close();
+        };
+        sidebar.Controls.Add(logout);
+        
+        var menu = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents = false,
+            AutoScroll = true,
+            Padding = new Padding(8, 12, 8, 0),
+            BackColor = sidebar.BackColor
+        };
+        sidebar.Controls.Add(menu);
+        
 
+        if (_currentUser.Role == Role.Admin)
+        {
+            AddMenuButton(menu,"Quản lý tài khoản", () =>
+                OpenChildForm(new FormEditUser(), "QUẢN LÝ TÀI KHOẢN"));
+            AddMenuButton(menu,"Quản lý chỗ đỗ", () =>
+                OpenChildForm(new FormEditSlot(), "QUẢN LÝ CHỖ ĐỖ"));
+            AddMenuButton(menu,"Quản lý vé tháng", () =>
+                OpenChildForm(new FormManageTicket(), "QUẢN LÝ VÉ THÁNG"));
+            AddMenuButton(menu, "Thống Kê Doanh Thu", () =>
+                OpenChildForm(new FormDashboard(), "THỐNG KÊ DOANH THU"));
+        }
+        else
+        {
+            AddMenuButton(menu, "Tổng quan", () => OpenChildForm(new FormDashboard(), "TỔNG QUAN"));
+            AddMenuButton(menu, "Xe vào bãi", () => OpenChildForm(new FormCheckIn(), "TIẾP NHẬN XE VÀO"));
+            AddMenuButton(menu, "Xe ra bãi", () => OpenChildForm(new FormCheckOut(), "XỬ LÝ XE RA"));
+            AddMenuButton(menu, "Tra cứu", () => OpenChildForm(new FormSearch(_currentUser), "TRA CỨU THÔNG TIN"));
+        }
+        menu.BringToFront();
+        
         var topBar = new Panel
         {
             Dock = DockStyle.Top,
