@@ -224,7 +224,7 @@ public partial class FormEditSlot : Form
     private static string VehicleTypeName(VehicleType type) =>
         type == VehicleType.Motorbike ? "Xe Máy" : "Xe Ô Tô";
 
-    private static void Warn(string message, Control focus)
+    private static void Warn(string message, System.Windows.Forms.Control focus)
     {
         MessageBox.Show(message, "Dữ liệu chưa hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         focus.Focus();

@@ -39,6 +39,12 @@
       <Compile Update="Views\FormManageTicket.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Control\usercontrolGrbAddRegularMode.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Control\usercontrolGrbAddMonthlyMode.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
     </ItemGroup>
     
 

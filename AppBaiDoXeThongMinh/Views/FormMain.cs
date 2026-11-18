@@ -161,7 +161,7 @@ public partial class FormMain : Form
         _contentPanel.BringToFront();
     }
 
-    private static void AddMenuButton(Control parent, string text, Action action)
+    private static void AddMenuButton(System.Windows.Forms.Control parent, string text, Action action)
     {
         var button = new Button
         {
