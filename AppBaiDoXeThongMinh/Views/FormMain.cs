@@ -206,6 +206,7 @@ public partial class FormMain : Form
         // 3. Cấu hình Form con mới để nhúng vào _contentPanel
         _currentChildForm = child;
         child.TopLevel = false;
+        child.MinimumSize = Size.Empty;
         child.AutoScroll = true;
         child.FormBorderStyle = FormBorderStyle.None;
         child.Dock = DockStyle.Fill;
