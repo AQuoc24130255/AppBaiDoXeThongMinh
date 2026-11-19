@@ -4,12 +4,12 @@ using AppBaiDoXeThongMinh.Models;
 
 namespace AppBaiDoXeThongMinh.ControlUser;
 
-public partial class usercontrolGrbAddMonthlyMode : UserControl
+public partial class UcGrbAddMonthlyMode : UserControl
 {
     public event EventHandler? TicketAdded;
     public event EventHandler? RefreshClicked;
     
-    public usercontrolGrbAddMonthlyMode()
+    public UcGrbAddMonthlyMode()
     {
         InitializeComponent();
         cbVehicleType.SelectedIndex = 0;

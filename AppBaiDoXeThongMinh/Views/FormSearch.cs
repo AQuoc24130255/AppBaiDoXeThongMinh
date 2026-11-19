@@ -1,5 +1,6 @@
 ﻿using AppBaiDoXeThongMinh.database;
 using AppBaiDoXeThongMinh.Models;
+using AppBaiDoXeThongMinh.ControlUser;
 using Microsoft.EntityFrameworkCore;
 using VType = AppBaiDoXeThongMinh.Models.VehicleType;
 
@@ -8,6 +9,8 @@ namespace AppBaiDoXeThongMinh.Views;
 public partial class FormSearch : Form
 {
     private readonly User? _currentUser;
+
+    private readonly UcTicketFullDetail _ucFullDetail = new UcTicketFullDetail();
     
     public FormSearch()
     {
@@ -27,8 +30,16 @@ public partial class FormSearch : Form
     {
         AcceptButton = btSearch;
         
+        _ucFullDetail.Dock = DockStyle.None;
+        _ucFullDetail.Visible = false;
+        Controls.Add(_ucFullDetail);
+        _ucFullDetail.CloseRequested += (_, _) => _ucFullDetail.Visible = false;
+        
         // Su kien
-        btSearch.Click += (_, _) => SearchTickets();
+        btSearch.Click += (_, _) =>
+        {
+            SearchTickets();
+        };
         dataGridViewSummary.SelectionChanged += (_, _) => ShowSelectedDetails();
         dataGridViewSummary.CellContentClick += DataGridViewSummary_CellContentClick;
         buttonLockTicket.Click += BtLockCard_Click;
@@ -109,7 +120,63 @@ public partial class FormSearch : Form
         if (e.RowIndex < 0 || e.ColumnIndex != Action.Index) return;
         dataGridViewSummary.ClearSelection();
         dataGridViewSummary.Rows[e.RowIndex].Selected = true;
+        dataGridViewSummary.CurrentCell = dataGridViewSummary.Rows[e.RowIndex].Cells[0];
         ShowSelectedDetails();
+        
+        if (dataGridViewSummary.Rows[e.RowIndex].Tag is int ticketId)
+        {
+            OpenFullDetailUserControl(ticketId);
+        }
+    }
+
+    private void OpenFullDetailUserControl(int ticketId)
+    {
+        try
+        {
+            using var db = new AppDbContext();
+            var ticket = db.Tickets.AsNoTracking()
+                .Include(t => t.Vehicle)
+                .Include(t => t.ParkingSlot)
+                .Include(t => t.PriceConfig)
+                .FirstOrDefault(t => t.TicketId == ticketId);
+
+            if (ticket == null) return;
+
+            Invoice? invoice = null;
+            User? creator = null;
+
+            if (!string.IsNullOrEmpty(ticket.InvoiceId))
+            {
+                invoice = db.Invoices.AsNoTracking()
+                    .FirstOrDefault(i => i.InvoiceId == ticket.InvoiceId);
+            }
+            else
+            {
+                invoice = db.Invoices.AsNoTracking()
+                    .FirstOrDefault(i => i.TicketId == ticket.TicketId);
+            }
+
+            if (invoice != null)
+            {
+                creator = db.Users.AsNoTracking()
+                    .FirstOrDefault(u => u.UserId == invoice.CreatedBy);
+            }
+
+            _ucFullDetail.LoadData(ticket, invoice, creator);
+            
+            Point gridPosOnForm = PointToClient(dataGridViewSummary.Parent!.PointToScreen(dataGridViewSummary.Location));
+            _ucFullDetail.Location = gridPosOnForm;
+            _ucFullDetail.Size = dataGridViewSummary.Size;
+            _ucFullDetail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
+            
+            _ucFullDetail.Visible = true;
+            _ucFullDetail.BringToFront();
+        }
+        catch (Exception ex)
+        {
+            ShowError("Không thể mở thông tin chi tiết", ex);
+        }
     }
 
     private int? GetSelectedTicketId()
@@ -227,6 +294,11 @@ public partial class FormSearch : Form
 
             SearchTickets();
             SelectTicket(id.Value);
+
+            if (_ucFullDetail.Visible)
+            {
+                OpenFullDetailUserControl(id.Value);
+            }
         }
         catch (Exception ex)
         {
@@ -326,6 +398,11 @@ public partial class FormSearch : Form
 
             SearchTickets();
             SelectTicket(id.Value);
+
+            if (_ucFullDetail.Visible)
+            {
+                OpenFullDetailUserControl(id.Value);
+            }
         }
         catch (Exception ex)
         {

@@ -12,8 +12,8 @@ public partial class FormManageTicket : Form
     private bool _isMonthlyMode = false;
     private bool _switching = false;
 
-    private readonly usercontrolGrbAddRegularMode _ucRegular = new() { Dock = DockStyle.Fill };
-    private readonly usercontrolGrbAddMonthlyMode _ucMonthly = new() { Dock = DockStyle.Fill };
+    private readonly UcGrbAddRegularMode _ucRegular = new() { Dock = DockStyle.Fill };
+    private readonly UcGrbAddMonthlyMode _ucMonthly = new() { Dock = DockStyle.Fill };
     
     public FormManageTicket()
     {

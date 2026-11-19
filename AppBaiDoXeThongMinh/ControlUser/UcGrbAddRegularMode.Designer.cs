@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace AppBaiDoXeThongMinh.ControlUser;
 
-partial class usercontrolGrbAddRegularMode
+partial class UcGrbAddRegularMode
 {
     /// <summary> 
     /// Required designer variable.
@@ -92,7 +92,7 @@ partial class usercontrolGrbAddRegularMode
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.Color.FromArgb(243, 246, 250);
         Controls.Add(grbAdd);
-        Name = "usercontrolGrbAddRegularMode";
+        Name = "UcGrbAddRegularMode";
         Size = new System.Drawing.Size(398, 570);
 
         grbAdd.ResumeLayout(false);

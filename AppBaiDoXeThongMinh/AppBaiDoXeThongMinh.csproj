@@ -45,6 +45,9 @@
       <Compile Update="Control\usercontrolGrbAddMonthlyMode.cs">
         <SubType>UserControl</SubType>
       </Compile>
+      <Compile Update="ControlUser\UcTicketFullDetail.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
     </ItemGroup>
     
 

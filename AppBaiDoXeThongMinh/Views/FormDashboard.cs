@@ -32,7 +32,6 @@ public partial class FormDashboard : Form
         panelThongke.Paint += PanelThongke_Paint;
         panelThongke.Resize += (_, _) => panelThongke.Invalidate();
         
-        btRevenue.Click += (_, _) => RefreshDashboard();
     }
 
     private void RefreshDashboard()

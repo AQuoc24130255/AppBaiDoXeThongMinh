@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace AppBaiDoXeThongMinh.ControlUser;
 
-partial class usercontrolGrbAddMonthlyMode
+partial class UcGrbAddMonthlyMode
 {
     /// <summary> 
     /// Required designer variable.
@@ -234,7 +234,7 @@ partial class usercontrolGrbAddMonthlyMode
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.Color.FromArgb(243, 246, 250);
         Controls.Add(grbAdd);
-        Name = "usercontrolGrbAddMonthlyMode";
+        Name = "UcGrbAddMonthlyMode";
         Size = new System.Drawing.Size(398, 570);
         grbAdd.ResumeLayout(false);
         grbAdd.PerformLayout();
