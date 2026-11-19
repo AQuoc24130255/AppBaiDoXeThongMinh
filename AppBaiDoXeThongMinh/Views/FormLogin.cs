@@ -110,7 +110,7 @@ public partial class FormLogin : Form
         };
     }
 
-    private static void AddLabel(System.Windows.Forms.Control parent, string text, int x, int y)
+    private static void AddLabel(Control parent, string text, int x, int y)
     {
         parent.Controls.Add(new Label
         {

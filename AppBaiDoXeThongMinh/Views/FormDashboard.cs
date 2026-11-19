@@ -89,7 +89,7 @@ public partial class FormDashboard : Form
                 .Where(s => s.IsActive && s.EndDate >= today)
                 .Select(s => s.VehicleType)
                 .ToList();
-            int subCar = subscribers.Count(IsCarText);
+            int subCar = subscribers.Count(v => v == VType.Car);
 
             lbTotalMonthly.Text = subscribers.Count.ToString("N0");
             lbMotobikeMonthly.Text = $"Xe Máy: {subscribers.Count - subCar}";
@@ -226,13 +226,6 @@ public partial class FormDashboard : Form
         if (nightStart <= nightEnd)
             return time >= nightStart && time < nightEnd;
         return time >= nightStart || time < nightEnd;   // khung vắt qua nửa đêm
-    }
-
-    private static bool IsCarText(string? vehicleType)
-    {
-        if (string.IsNullOrWhiteSpace(vehicleType)) return false;
-        string v = vehicleType.Trim().ToLowerInvariant();
-        return v == "car" || v == "ô tô" || v == "xe ô tô" || v == "oto" || v == "xe hơi";
     }
 
     private static void ShowError(string message, Exception ex)

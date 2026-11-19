@@ -252,7 +252,7 @@ partial class FormManageTicket
         
         txtSearch.Location = new System.Drawing.Point(0, 10);
         txtSearch.Name = "txtSearch";
-        txtSearch.PlaceholderText = "Biển số, mã vé hoặc tên chủ xe";
+        txtSearch.PlaceholderText = "Biển số, mã vé";
         txtSearch.Size = new System.Drawing.Size(220, 24);
         txtSearch.TabIndex = 0;
         

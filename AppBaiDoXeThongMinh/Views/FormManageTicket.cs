@@ -1,4 +1,4 @@
-using AppBaiDoXeThongMinh.Control;
+using AppBaiDoXeThongMinh.ControlUser;
 using AppBaiDoXeThongMinh.database;
 using AppBaiDoXeThongMinh.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +10,7 @@ namespace AppBaiDoXeThongMinh.Views;
 public partial class FormManageTicket : Form
 {
     private bool _isMonthlyMode = false;
+    private bool _switching = false;
 
     private readonly usercontrolGrbAddRegularMode _ucRegular = new() { Dock = DockStyle.Fill };
     private readonly usercontrolGrbAddMonthlyMode _ucMonthly = new() { Dock = DockStyle.Fill };
@@ -45,7 +46,11 @@ public partial class FormManageTicket : Form
 
         // Tìm kiếm & lọc
         btSearch.Click += (_, _) => LoadCurrentList();
-        cbFilter.SelectedIndexChanged += (_, _) => LoadCurrentList();
+        cbFilter.SelectedIndexChanged += (_, _) =>
+        {
+            if (_switching) return;
+            LoadCurrentList();
+        };
         txtSearch.KeyDown += (_, e) =>
         {
             if (e.KeyCode != Keys.Enter) return;
@@ -56,38 +61,48 @@ public partial class FormManageTicket : Form
 
     private void SwitchMode(bool isMonthly)
     {
-        _isMonthlyMode = isMonthly;
-
-        // Đổi màu nút nhận biết chế độ đang chọn
-        btRegularMode.BackColor = !isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
-        btRegularMode.ForeColor = !isMonthly ? Color.White : Color.Black;
-
-        btMonthlyMode.BackColor = isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
-        btMonthlyMode.ForeColor = isMonthly ? Color.White : Color.Black;
-
-        // Cập nhật bộ lọc tìm kiếm theo chế độ
-        cbFilter.Items.Clear();
-        if (!isMonthly)
+        _switching = true;
+        try
         {
-            cbFilter.Items.AddRange(new object[] { "Tất cả", "Đang sử dụng", "Đã ra khỏi bãi", "Bị khóa", "Vé tháng" });
-            grbList.Text = "Danh sách vé";
+            _isMonthlyMode = isMonthly;
+
+            // Đổi màu nút nhận biết chế độ đang chọn
+            btRegularMode.BackColor = !isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
+            btRegularMode.ForeColor = !isMonthly ? Color.White : Color.Black;
+
+            btMonthlyMode.BackColor = isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
+            btMonthlyMode.ForeColor = isMonthly ? Color.White : Color.Black;
+
+            // Cập nhật bộ lọc tìm kiếm theo chế độ
+            cbFilter.Items.Clear();
+            if (!isMonthly)
+            {
+                cbFilter.Items.AddRange(new object[]
+                    { "Tất cả", "Đang sử dụng", "Đã ra khỏi bãi", "Bị khóa", "Vé tháng" });
+                grbList.Text = "Danh sách vé";
+            }
+            else
+            {
+                cbFilter.Items.AddRange(new object[] { "Tất cả", "Còn hiệu lực", "Hết hạn / Ngừng" });
+                grbList.Text = "Danh sách vé tháng";
+            }
+
+            cbFilter.SelectedIndex = 0;
+
+            // Chuyển hiển thị User Control bên phải
+            _ucRegular.Visible = !isMonthly;
+            _ucMonthly.Visible = isMonthly;
+
+            // Cấu hình cột DataGridView
+            ConfigureGridColumns(isMonthly);
+
+            LoadStats();
+            LoadCurrentList();
         }
-        else
+        finally
         {
-            cbFilter.Items.AddRange(new object[] { "Tất cả", "Còn hiệu lực", "Hết hạn / Ngừng" });
-            grbList.Text = "Danh sách vé tháng";
+            _switching = false;
         }
-        cbFilter.SelectedIndex = 0;
-
-        // Chuyển hiển thị User Control bên phải
-        _ucRegular.Visible = !isMonthly;
-        _ucMonthly.Visible = isMonthly;
-
-        // Cấu hình cột DataGridView
-        ConfigureGridColumns(isMonthly);
-
-        LoadStats();
-        LoadCurrentList();
     }
 
     private void ConfigureGridColumns(bool isMonthly)
@@ -258,14 +273,13 @@ public partial class FormManageTicket : Form
             foreach (var s in list)
             {
                 bool valid = s.IsActive && s.EndDate >= today;
-                string vTypeDisplay = s.VehicleType.Equals("Car", StringComparison.OrdinalIgnoreCase) ? "Ô tô" : "Xe máy";
                 
                 int index = dgvTickets.Rows.Add(
                     s.SubcriberId,
                     s.FullName,
                     s.PhoneNumber,
                     s.LicensePlate,
-                    vTypeDisplay,
+                    s.VehicleType,
                     s.StartDate.ToString("dd/MM/yyyy"),
                     s.EndDate.ToString("dd/MM/yyyy"),
                     s.MonthlyFee.ToString("N0") + " đ",

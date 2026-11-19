@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using AppBaiDoXeThongMinh.database;
 using AppBaiDoXeThongMinh.Models;
 
-namespace AppBaiDoXeThongMinh.Control;
+namespace AppBaiDoXeThongMinh.ControlUser;
 
 public partial class usercontrolGrbAddMonthlyMode : UserControl
 {
@@ -95,7 +95,7 @@ public partial class usercontrolGrbAddMonthlyMode : UserControl
                 FullName = ownerName,
                 PhoneNumber = phone,
                 LicensePlate = plate,
-                VehicleType = type.ToString(),
+                VehicleType = type,
                 StartDate = DateTime.Today,
                 EndDate = DateTime.Today.AddMonths((int)nudMonths.Value),
                 IsActive = true,

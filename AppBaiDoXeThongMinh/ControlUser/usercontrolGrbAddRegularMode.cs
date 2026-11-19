@@ -1,4 +1,4 @@
-namespace AppBaiDoXeThongMinh.Control;
+namespace AppBaiDoXeThongMinh.ControlUser;
 
 public partial class usercontrolGrbAddRegularMode : UserControl
 {

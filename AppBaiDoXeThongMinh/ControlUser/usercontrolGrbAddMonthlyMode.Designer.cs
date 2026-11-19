@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace AppBaiDoXeThongMinh.Control;
+namespace AppBaiDoXeThongMinh.ControlUser;
 
 partial class usercontrolGrbAddMonthlyMode
 {

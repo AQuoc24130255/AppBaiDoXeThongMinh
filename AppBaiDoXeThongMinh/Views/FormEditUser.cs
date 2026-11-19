@@ -306,7 +306,7 @@ public partial class FormEditUser : Form
     private static string RoleName(Role role) =>
         role == Role.Admin ? "Quản trị viên" : "Nhân viên bảo vệ";
 
-    private static void Warn(string message, System.Windows.Forms.Control focus)
+    private static void Warn(string message, Control focus)
     {
         MessageBox.Show(message, "Dữ liệu chưa hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         focus.Focus();

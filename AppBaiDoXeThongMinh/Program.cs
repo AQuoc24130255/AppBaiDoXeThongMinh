@@ -25,7 +25,7 @@ static class Program
         }
 
         
-        //Application.Run(new FormLogin());
-        Application.Run(new FormManageTicket());
+        Application.Run(new FormLogin());
+        //Application.Run(new FormManageTicket());
     }
 }
