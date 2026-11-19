@@ -272,7 +272,8 @@ partial class FormManageTicket
         
         dgvTickets.AllowUserToAddRows = false;
         dgvTickets.AllowUserToDeleteRows = false;
-        dgvTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+        dgvTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+        dgvTickets.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         dgvTickets.BackgroundColor = System.Drawing.Color.White;
         dgvTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvTickets.Dock = System.Windows.Forms.DockStyle.Fill;
