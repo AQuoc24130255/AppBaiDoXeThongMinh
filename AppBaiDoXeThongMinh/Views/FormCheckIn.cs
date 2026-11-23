@@ -194,7 +194,7 @@ namespace AppBaiDoXeThongMinh.Views
         {
             int parkedCount = _db.Tickets.Count(t => t.Status == "InParking");
             decimal todayRevenue = _db.Invoices
-                .Where(i => i.CreatedAt.Date == DateTime.Today)
+                .Where(i => i.PaymentDate.Date == DateTime.Today)
                 .Sum(i => (decimal?)i.TotalAmount) ?? 0m;
 
             lblStats.Text = string.Format(_viCulture, "Đang gửi: {0} xe | Doanh thu: {1:N0} đ", parkedCount, todayRevenue);
