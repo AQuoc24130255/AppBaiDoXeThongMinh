@@ -14,7 +14,7 @@ public class Ticket
     public int VehicleId { get; set; }
 
     // Mã ví trí đỗ xe
-    public int ParkingSlotId { get; set; }
+    public int? ParkingSlotId { get; set; }
 
     // Mã cấu hình giá
     public int PriceConfigId { get; set; }
@@ -45,5 +45,5 @@ public class Ticket
 
     // Liên kết đến vị trí đỗ xe 
     public virtual ParkingSlot ParkingSlot { get; set; }
-    
+    public string LicensePlate { get; set; }
 }
