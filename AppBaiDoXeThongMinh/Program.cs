@@ -1,3 +1,7 @@
+using AppBaiDoXeThongMinh.database;
+using AppBaiDoXeThongMinh.Models;
+using AppBaiDoXeThongMinh.Views;
+
 namespace AppBaiDoXeThongMinh;
 
 static class Program
@@ -11,6 +15,17 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new Views.FormSearch());
+
+        User u;
+        
+        using (var db = new AppDbContext())
+        {
+            db.Database.EnsureCreated();
+            u = db.Users.FirstOrDefault();
+        }
+
+        
+        Application.Run(new FormLogin());
+        //Application.Run(new FormSearch());
     }
 }

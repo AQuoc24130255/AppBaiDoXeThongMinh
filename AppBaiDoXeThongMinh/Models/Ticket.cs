@@ -1,7 +1,7 @@
 ﻿namespace AppBaiDoXeThongMinh.Models;
 /*24130216 Võ Thành Nhân
 lop quan li ve*/
-
+public enum TicketStatus { Inparking, CheckedOut, Lost}
 public class Ticket
 {
     // Mã vé gửi xe
@@ -23,14 +23,20 @@ public class Ticket
     public DateTime EntryTime { get; set; }
 
     // Thời gian xe ra bãi 
-    public DateTime ExitTime {get; set; }
+    public DateTime? ExitTime {get; set; }
 
     // Tổng tiền gửi xe
-    public decimal TotalAmount { get; set; }
+    public decimal? TotalAmount { get; set; }
 
     // Trạng thái vé
-    public string Status { get; set; }
-
+    public TicketStatus Status { get; set; }
+    
+    // Là vé xe tháng?
+    public bool IsMonthly { get; set; }
+    
+    // Mã hóa đơn
+    public string? InvoiceId { get; set; }
+    
     // Liên kết đến phương tiện
     public virtual Vehicle Vehicle { get; set; }
 

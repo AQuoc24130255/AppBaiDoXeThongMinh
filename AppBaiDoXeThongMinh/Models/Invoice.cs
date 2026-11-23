@@ -1,26 +1,31 @@
 ﻿namespace AppBaiDoXeThongMinh.Models;
 /*24130288 Phan Tiền Thành*/
+public enum PaymantMethodType  { Cash, CreditCard }
 public class Invoice
 {
     public string InvoiceId { get; set; } = Guid.NewGuid().ToString(); //mã hóa đơn 
-    public string TicketId   { get; set; }  //mã vé liên quan (Nếu có)
+    public int TicketId   { get; set; }  //mã vé liên quan (Nếu có)
     public string LicensePlate   { get; set; } //biển số xe 
     public DateTime CheckInTime   { get; set; } // thời gian vào 
     public DateTime CheckOutTime  { get; set; } // thời gian ra 
     public decimal TotalAmount { get; set; } // tổng tiền thanh toán 
     public string PaymentMethod  { get; set; } // tiền mặt / chuyẻn khoản
     public DateTime PaymentDate  { get; set; } // thời điểm thành toán 
-    public string CreatedBy  { get; set; } //nhân viên/Admin thực hiện
-    public bool IsPaid { get; set; } = true; //trạng thái thanh toán 
+    public int CreatedBy  { get; set; } //nhân viên/Admin thực hiện
+    public bool IsPaid { get; set; } = true; //trạng thái thanh toán
+
+    public bool IsMonthlyFree { get; set; } = false; // có phải là vé tháng không
+    
+    public int ShiftId  { get; set; } // ma ca trực
 
     public Invoice()
     {
         PaymentDate = DateTime.Now;
     }
 
-    public Invoice(string ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, string createdBy, bool isPaid)
+    public Invoice(int ticketId, string licensePlate, DateTime checkInTime, DateTime checkOutTime, decimal totalAmount, string paymentMethod, DateTime paymentDate, int createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
-        TicketId = Guid.NewGuid().ToString();
+        TicketId = ticketId;
         LicensePlate = licensePlate;
         CheckInTime = checkInTime;
         CheckOutTime = checkOutTime;
@@ -28,7 +33,9 @@ public class Invoice
         PaymentMethod = paymentMethod;
         PaymentDate = paymentDate;
         CreatedBy = createdBy;
-        IsPaid = true;
+        IsPaid = isPaid;
+        IsMonthlyFree = isMonthlyFree;
+        ShiftId = shiftId;
     }
     //tính tổng thời gian xe gửi
     public TimeSpan CulculateParkingDuration()
@@ -39,7 +46,7 @@ public class Invoice
     }
     
     //xử lý cập nhật trạng thái thanh toán 
-    public void ProcessPayment(string paymentMethod, string createdBy, decimal amount)
+    public void ProcessPayment(string paymentMethod, int createdBy, decimal amount)
     {
         PaymentMethod = paymentMethod;
         CreatedBy = createdBy;
@@ -64,24 +71,40 @@ public class Invoice
     public static decimal CalculateParkingFee(DateTime checkInTime, DateTime checkOutTime, PriceConfig config)
     {
         if (checkOutTime <= checkInTime || config == null) return 0;
-        TimeSpan duration = checkOutTime - checkInTime;
-        double totalHours = Math.Ceiling(duration.TotalHours);
-        decimal totalAmount = config.Price;
-        if (totalHours > 1)
+        
+        // cấu hình thơ gian của 1 block
+        int blockMinutes = config.TimeUnit > 0 ? config.TimeUnit : 60;
+        TimeSpan block = TimeSpan.FromMinutes(blockMinutes);
+
+        decimal total = 0;
+        DateTime current = checkInTime;
+
+        while (current<checkOutTime)
         {
-            decimal extraHours = (decimal)(totalHours - 1);
-            totalAmount += extraHours * config.OverTimePricePerHour;
+            total += IsNightTime(current.TimeOfDay, config.NightStart, config.NightEnd)
+                ? config.NightPrice
+                : config.DayPrice;
+            current += block;
         }
-        return totalAmount;
+        return total;
+    }
+
+    private static bool IsNightTime(TimeSpan currentTimeOfDay, TimeSpan configNightStart, TimeSpan configNightEnd)
+    {
+        if (configNightStart<= configNightEnd)
+        {
+            return currentTimeOfDay>=configNightStart && currentTimeOfDay<configNightEnd;
+        }
+        return currentTimeOfDay>=configNightStart || currentTimeOfDay<configNightEnd;
     }
 
     private static readonly List<Invoice> Invoices = new();
 
     /// tọa và lưu hóa đơn
-    public static Invoice CreateAndSaveInvoice(string ticketId, string licensePlate, DateTime checkIn,
-        DateTime checkOut, decimal amount, string paymentMethod, string createdBy)
+    public static Invoice CreateAndSaveInvoice(int ticketId, string licensePlate, DateTime checkIn,
+        DateTime checkOut, decimal amount, string paymentMethod, int createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
-        var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, true);
+        var invoice = new Invoice(ticketId,  licensePlate, checkIn, checkOut, amount,  paymentMethod, DateTime.Now, createdBy, isPaid, isMonthlyFree, shiftId);
         Invoices.Add(invoice);
         return invoice;
     }
