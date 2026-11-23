@@ -31,16 +31,18 @@ partial class FormSearch
     /// </summary>
     private void InitializeComponent()
     {
-        label1 = new System.Windows.Forms.Label();
-        flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-        textBox1 = new System.Windows.Forms.TextBox();
-        button1 = new System.Windows.Forms.Button();
-        label2 = new System.Windows.Forms.Label();
-        dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-        label3 = new System.Windows.Forms.Label();
-        comboBox1 = new System.Windows.Forms.ComboBox();
-        tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-        dataGridView1 = new System.Windows.Forms.DataGridView();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        lbtitle = new System.Windows.Forms.Label();
+        flowLayoutPanelFilter = new System.Windows.Forms.FlowLayoutPanel();
+        textBoxSearch = new System.Windows.Forms.TextBox();
+        btSearch = new System.Windows.Forms.Button();
+        lbDateSearch = new System.Windows.Forms.Label();
+        dateTimePickerSearch = new System.Windows.Forms.DateTimePicker();
+        lbStatusSearch = new System.Windows.Forms.Label();
+        comboBoxStatusSearch = new System.Windows.Forms.ComboBox();
+        tableLayoutPanelSummary = new System.Windows.Forms.TableLayoutPanel();
+        dataGridViewSummary = new System.Windows.Forms.DataGridView();
         STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
         IDVehicle = new System.Windows.Forms.DataGridViewTextBoxColumn();
         IDTicket = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,207 +50,331 @@ partial class FormSearch
         Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
         VehicleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
         Action = new System.Windows.Forms.DataGridViewButtonColumn();
-        flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-        pictureBox1 = new System.Windows.Forms.PictureBox();
+        flowLayoutPanelDetail = new System.Windows.Forms.FlowLayoutPanel();
+        grbDetail = new System.Windows.Forms.GroupBox();
+        lbFeeInfo = new System.Windows.Forms.Label();
+        lbDurationInfo = new System.Windows.Forms.Label();
+        lbOwnerInfo = new System.Windows.Forms.Label();
+        lbVehicleInfo = new System.Windows.Forms.Label();
+        lbStatusTicket = new System.Windows.Forms.Label();
+        lbTimeIn = new System.Windows.Forms.Label();
+        lbLicensePlate = new System.Windows.Forms.Label();
+        lbName = new System.Windows.Forms.Label();
         flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-        button2 = new System.Windows.Forms.Button();
-        button3 = new System.Windows.Forms.Button();
-        flowLayoutPanel1.SuspendLayout();
-        tableLayoutPanel1.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-        flowLayoutPanel2.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+        buttonLockTicket = new System.Windows.Forms.Button();
+        buttonCalculate = new System.Windows.Forms.Button();
+        flowLayoutPanelFilter.SuspendLayout();
+        tableLayoutPanelSummary.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dataGridViewSummary).BeginInit();
+        flowLayoutPanelDetail.SuspendLayout();
+        grbDetail.SuspendLayout();
         flowLayoutPanel3.SuspendLayout();
         SuspendLayout();
         // 
-        // label1
+        // lbtitle
         // 
-        label1.Location = new System.Drawing.Point(66, 11);
-        label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(86, 23);
-        label1.TabIndex = 4;
-        label1.Text = "Search Vehicle Ticket";
+        lbtitle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        lbtitle.Location = new System.Drawing.Point(12, 11);
+        lbtitle.Name = "lbtitle";
+        lbtitle.Size = new System.Drawing.Size(200, 23);
+        lbtitle.TabIndex = 4;
+        lbtitle.Text = "Tìm Kiếm Vé Xe";
         // 
-        // flowLayoutPanel1
+        // flowLayoutPanelFilter
         // 
-        flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-        flowLayoutPanel1.Controls.Add(textBox1);
-        flowLayoutPanel1.Controls.Add(button1);
-        flowLayoutPanel1.Controls.Add(label2);
-        flowLayoutPanel1.Controls.Add(dateTimePicker1);
-        flowLayoutPanel1.Controls.Add(label3);
-        flowLayoutPanel1.Controls.Add(comboBox1);
-        flowLayoutPanel1.Location = new System.Drawing.Point(12, 37);
-        flowLayoutPanel1.Name = "flowLayoutPanel1";
-        flowLayoutPanel1.Size = new System.Drawing.Size(776, 39);
-        flowLayoutPanel1.TabIndex = 6;
+        flowLayoutPanelFilter.BackColor = System.Drawing.SystemColors.ActiveCaption;
+        flowLayoutPanelFilter.Controls.Add(textBoxSearch);
+        flowLayoutPanelFilter.Controls.Add(btSearch);
+        flowLayoutPanelFilter.Controls.Add(lbDateSearch);
+        flowLayoutPanelFilter.Controls.Add(dateTimePickerSearch);
+        flowLayoutPanelFilter.Controls.Add(lbStatusSearch);
+        flowLayoutPanelFilter.Controls.Add(comboBoxStatusSearch);
+        flowLayoutPanelFilter.Location = new System.Drawing.Point(12, 37);
+        flowLayoutPanelFilter.Name = "flowLayoutPanelFilter";
+        flowLayoutPanelFilter.Size = new System.Drawing.Size(755, 39);
+        flowLayoutPanelFilter.TabIndex = 6;
         // 
-        // textBox1
+        // textBoxSearch
         // 
-        textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        textBox1.Location = new System.Drawing.Point(5, 6);
-        textBox1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-        textBox1.Multiline = true;
-        textBox1.Name = "textBox1";
-        textBox1.Size = new System.Drawing.Size(124, 23);
-        textBox1.TabIndex = 0;
+        textBoxSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+        textBoxSearch.Location = new System.Drawing.Point(5, 6);
+        textBoxSearch.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+        textBoxSearch.Multiline = true;
+        textBoxSearch.Name = "textBoxSearch";
+        textBoxSearch.PlaceholderText = "Biển số hoặc mã thẻ";
+        textBoxSearch.Size = new System.Drawing.Size(180, 23);
+        textBoxSearch.TabIndex = 0;
         // 
-        // button1
+        // btSearch
         // 
-        button1.Location = new System.Drawing.Point(137, 3);
-        button1.Name = "button1";
-        button1.Size = new System.Drawing.Size(54, 30);
-        button1.TabIndex = 1;
-        button1.Text = "Search";
-        button1.UseVisualStyleBackColor = true;
+        btSearch.Location = new System.Drawing.Point(193, 3);
+        btSearch.Name = "btSearch";
+        btSearch.Size = new System.Drawing.Size(67, 30);
+        btSearch.TabIndex = 1;
+        btSearch.Text = "Tìm Kiếm";
+        btSearch.UseVisualStyleBackColor = true;
         // 
-        // label2
+        // lbDateSearch
         // 
-        label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        label2.Location = new System.Drawing.Point(197, 6);
-        label2.Margin = new System.Windows.Forms.Padding(3);
-        label2.Name = "label2";
-        label2.Padding = new System.Windows.Forms.Padding(3);
-        label2.Size = new System.Drawing.Size(80, 23);
-        label2.TabIndex = 2;
-        label2.Text = "Date Range";
+        lbDateSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        lbDateSearch.Location = new System.Drawing.Point(266, 6);
+        lbDateSearch.Margin = new System.Windows.Forms.Padding(3);
+        lbDateSearch.Name = "lbDateSearch";
+        lbDateSearch.Padding = new System.Windows.Forms.Padding(3);
+        lbDateSearch.Size = new System.Drawing.Size(41, 23);
+        lbDateSearch.AutoSize = true;
+        lbDateSearch.TabIndex = 2;
+        lbDateSearch.Text = "Ngày";
+        lbDateSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
-        // dateTimePicker1
+        // dateTimePickerSearch
         // 
-        dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        dateTimePicker1.Location = new System.Drawing.Point(283, 6);
-        dateTimePicker1.Name = "dateTimePicker1";
-        dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-        dateTimePicker1.TabIndex = 3;
+        dateTimePickerSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        dateTimePickerSearch.Checked = false;
+        dateTimePickerSearch.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+        dateTimePickerSearch.Location = new System.Drawing.Point(313, 6);
+        dateTimePickerSearch.Name = "dateTimePickerSearch";
+        dateTimePickerSearch.ShowCheckBox = true;
+        dateTimePickerSearch.Size = new System.Drawing.Size(218, 23);
+        dateTimePickerSearch.TabIndex = 3;
+        dateTimePickerSearch.Value = new System.DateTime(2026, 11, 17, 0, 0, 0, 0);
         // 
-        // label3
+        // lbStatusSearch
         // 
-        label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        label3.Location = new System.Drawing.Point(489, 6);
-        label3.Name = "label3";
-        label3.Size = new System.Drawing.Size(43, 23);
-        label3.TabIndex = 4;
-        label3.Text = "Status";
-        label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        lbStatusSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        lbStatusSearch.Location = new System.Drawing.Point(537, 6);
+        lbStatusSearch.Name = "lbStatusSearch";
+        lbStatusSearch.Size = new System.Drawing.Size(64, 23);
+        lbStatusSearch.AutoSize = true;
+        lbStatusSearch.TabIndex = 4;
+        lbStatusSearch.Text = "Trạng Thái";
+        lbStatusSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // comboBox1
+        // comboBoxStatusSearch
         // 
-        comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        comboBox1.FormattingEnabled = true;
-        comboBox1.Items.AddRange(new object[] { "All", "In The Parking", "Out The Parking" });
-        comboBox1.Location = new System.Drawing.Point(538, 6);
-        comboBox1.Name = "comboBox1";
-        comboBox1.Size = new System.Drawing.Size(121, 23);
-        comboBox1.TabIndex = 5;
+        comboBoxStatusSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        comboBoxStatusSearch.DisplayMember = "0";
+        comboBoxStatusSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        comboBoxStatusSearch.FormattingEnabled = true;
+        comboBoxStatusSearch.Items.AddRange(new object[] { "Tất cả", "Đang trong bãi", "Đã ra khỏi bãi" });
+        comboBoxStatusSearch.Location = new System.Drawing.Point(607, 6);
+        comboBoxStatusSearch.Name = "comboBoxStatusSearch";
+        comboBoxStatusSearch.Size = new System.Drawing.Size(121, 23);
+        comboBoxStatusSearch.TabIndex = 5;
         // 
-        // tableLayoutPanel1
+        // tableLayoutPanelSummary
         // 
-        tableLayoutPanel1.ColumnCount = 2;
-        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-        tableLayoutPanel1.Controls.Add(dataGridView1, 0, 0);
-        tableLayoutPanel1.Controls.Add(flowLayoutPanel2, 1, 0);
-        tableLayoutPanel1.Location = new System.Drawing.Point(12, 82);
-        tableLayoutPanel1.Name = "tableLayoutPanel1";
-        tableLayoutPanel1.RowCount = 1;
-        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-        tableLayoutPanel1.Size = new System.Drawing.Size(776, 356);
-        tableLayoutPanel1.TabIndex = 7;
+        tableLayoutPanelSummary.ColumnCount = 2;
+        tableLayoutPanelSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+        tableLayoutPanelSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+        tableLayoutPanelSummary.Controls.Add(dataGridViewSummary, 0, 0);
+        tableLayoutPanelSummary.Controls.Add(flowLayoutPanelDetail, 1, 0);
+        tableLayoutPanelSummary.Location = new System.Drawing.Point(12, 82);
+        tableLayoutPanelSummary.Name = "tableLayoutPanelSummary";
+        tableLayoutPanelSummary.RowCount = 1;
+        tableLayoutPanelSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        tableLayoutPanelSummary.Size = new System.Drawing.Size(755, 356);
+        tableLayoutPanelSummary.TabIndex = 7;
         // 
-        // dataGridView1
+        // dataGridViewSummary
         // 
-        dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { STT, IDVehicle, IDTicket, EntryTime, Duration, VehicleType, Action });
-        dataGridView1.Location = new System.Drawing.Point(3, 3);
-        dataGridView1.Name = "dataGridView1";
-        dataGridView1.Size = new System.Drawing.Size(382, 350);
-        dataGridView1.TabIndex = 0;
-        dataGridView1.Text = "dataGridView1";
+        dataGridViewSummary.AllowUserToAddRows = false;
+        dataGridViewSummary.AllowUserToDeleteRows = false;
+        dataGridViewSummary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+        dataGridViewSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridViewSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { STT, IDVehicle, IDTicket, EntryTime, Duration, VehicleType, Action });
+        dataGridViewSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+        dataGridViewSummary.Location = new System.Drawing.Point(3, 3);
+        dataGridViewSummary.MultiSelect = false;
+        dataGridViewSummary.Name = "dataGridViewSummary";
+        dataGridViewSummary.ReadOnly = true;
+        dataGridViewSummary.RowHeadersVisible = false;
+        dataGridViewSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        dataGridViewSummary.Size = new System.Drawing.Size(522, 350);
+        dataGridViewSummary.TabIndex = 0;
+        dataGridViewSummary.Text = "dataGridView1";
         // 
         // STT
         // 
+        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+        STT.DefaultCellStyle = dataGridViewCellStyle1;
+        STT.FillWeight = 40F;
         STT.HeaderText = "STT";
         STT.Name = "STT";
+        STT.ReadOnly = true;
         // 
         // IDVehicle
         // 
-        IDVehicle.HeaderText = "License Plate";
+        IDVehicle.HeaderText = "Biển số";
         IDVehicle.Name = "IDVehicle";
+        IDVehicle.ReadOnly = true;
         // 
         // IDTicket
         // 
-        IDTicket.HeaderText = "CardID";
+        IDTicket.HeaderText = "Mã thẻ";
         IDTicket.Name = "IDTicket";
+        IDTicket.ReadOnly = true;
         // 
         // EntryTime
         // 
-        EntryTime.HeaderText = "EntryTime";
+        EntryTime.HeaderText = "Giờ vào";
         EntryTime.Name = "EntryTime";
+        EntryTime.ReadOnly = true;
         // 
         // Duration
         // 
-        Duration.HeaderText = "Duration";
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+        Duration.DefaultCellStyle = dataGridViewCellStyle2;
+        Duration.HeaderText = "Thời gian gửi";
         Duration.Name = "Duration";
+        Duration.ReadOnly = true;
         // 
         // VehicleType
         // 
-        VehicleType.HeaderText = "Vehicle Type";
+        VehicleType.HeaderText = "Loại xe";
         VehicleType.Name = "VehicleType";
+        VehicleType.ReadOnly = true;
         // 
         // Action
         // 
-        Action.HeaderText = "ActionGetHistoryVehicle";
+        Action.HeaderText = "Thao tác";
         Action.Name = "Action";
+        Action.ReadOnly = true;
+        Action.Text = "Chi tiết";
+        Action.UseColumnTextForButtonValue = true;
         // 
-        // flowLayoutPanel2
+        // flowLayoutPanelDetail
         // 
-        flowLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        flowLayoutPanel2.Controls.Add(pictureBox1);
-        flowLayoutPanel2.Controls.Add(flowLayoutPanel3);
-        flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-        flowLayoutPanel2.Location = new System.Drawing.Point(391, 3);
-        flowLayoutPanel2.Name = "flowLayoutPanel2";
-        flowLayoutPanel2.Size = new System.Drawing.Size(382, 350);
-        flowLayoutPanel2.TabIndex = 1;
+        flowLayoutPanelDetail.Controls.Add(grbDetail);
+        flowLayoutPanelDetail.Controls.Add(flowLayoutPanel3);
+        flowLayoutPanelDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+        flowLayoutPanelDetail.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+        flowLayoutPanelDetail.Location = new System.Drawing.Point(531, 3);
+        flowLayoutPanelDetail.Name = "flowLayoutPanelDetail";
+        flowLayoutPanelDetail.Size = new System.Drawing.Size(221, 350);
+        flowLayoutPanelDetail.TabIndex = 1;
         // 
-        // pictureBox1
+        // grbDetail
         // 
-        pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
-        pictureBox1.Location = new System.Drawing.Point(3, 3);
-        pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new System.Drawing.Size(186, 157);
-        pictureBox1.TabIndex = 0;
-        pictureBox1.TabStop = false;
+        grbDetail.Controls.Add(lbFeeInfo);
+        grbDetail.Controls.Add(lbDurationInfo);
+        grbDetail.Controls.Add(lbOwnerInfo);
+        grbDetail.Controls.Add(lbVehicleInfo);
+        grbDetail.Controls.Add(lbStatusTicket);
+        grbDetail.Controls.Add(lbTimeIn);
+        grbDetail.Controls.Add(lbLicensePlate);
+        grbDetail.Controls.Add(lbName);
+        grbDetail.Location = new System.Drawing.Point(3, 3);
+        grbDetail.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+        grbDetail.Name = "grbDetail";
+        grbDetail.Size = new System.Drawing.Size(219, 268);
+        grbDetail.TabIndex = 2;
+        grbDetail.TabStop = false;
+        grbDetail.Text = "Thông Tin Vé Xe";
+        // 
+        // lbFeeInfo
+        // 
+        lbFeeInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        lbFeeInfo.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)40)), ((int)((byte)120)), ((int)((byte)60)));
+        lbFeeInfo.Location = new System.Drawing.Point(6, 180);
+        lbFeeInfo.Name = "lbFeeInfo";
+        lbFeeInfo.Size = new System.Drawing.Size(208, 23);
+        lbFeeInfo.TabIndex = 7;
+        lbFeeInfo.Text = "Phí tạm tính";
+        lbFeeInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbDurationInfo
+        // 
+        lbDurationInfo.Location = new System.Drawing.Point(6, 157);
+        lbDurationInfo.Name = "lbDurationInfo";
+        lbDurationInfo.Size = new System.Drawing.Size(208, 23);
+        lbDurationInfo.TabIndex = 6;
+        lbDurationInfo.Text = "Đã gửi";
+        lbDurationInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbOwnerInfo
+        // 
+        lbOwnerInfo.Location = new System.Drawing.Point(6, 134);
+        lbOwnerInfo.Name = "lbOwnerInfo";
+        lbOwnerInfo.Size = new System.Drawing.Size(208, 23);
+        lbOwnerInfo.TabIndex = 5;
+        lbOwnerInfo.Text = "Chủ xe";
+        lbOwnerInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbVehicleInfo
+        // 
+        lbVehicleInfo.Location = new System.Drawing.Point(6, 111);
+        lbVehicleInfo.Name = "lbVehicleInfo";
+        lbVehicleInfo.Size = new System.Drawing.Size(208, 23);
+        lbVehicleInfo.TabIndex = 4;
+        lbVehicleInfo.Text = "Loại xe";
+        lbVehicleInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbStatusTicket
+        // 
+        lbStatusTicket.Location = new System.Drawing.Point(6, 88);
+        lbStatusTicket.Name = "lbStatusTicket";
+        lbStatusTicket.Size = new System.Drawing.Size(208, 23);
+        lbStatusTicket.TabIndex = 3;
+        lbStatusTicket.Text = "Trạng Thái";
+        lbStatusTicket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbTimeIn
+        // 
+        lbTimeIn.Location = new System.Drawing.Point(6, 65);
+        lbTimeIn.Name = "lbTimeIn";
+        lbTimeIn.Size = new System.Drawing.Size(208, 23);
+        lbTimeIn.TabIndex = 2;
+        lbTimeIn.Text = "Thời gian vào";
+        lbTimeIn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbLicensePlate
+        // 
+        lbLicensePlate.Location = new System.Drawing.Point(6, 42);
+        lbLicensePlate.Name = "lbLicensePlate";
+        lbLicensePlate.Size = new System.Drawing.Size(208, 23);
+        lbLicensePlate.TabIndex = 1;
+        lbLicensePlate.Text = "Biển Số";
+        lbLicensePlate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // lbName
+        // 
+        lbName.Location = new System.Drawing.Point(6, 19);
+        lbName.Name = "lbName";
+        lbName.Size = new System.Drawing.Size(208, 23);
+        lbName.TabIndex = 0;
+        lbName.Text = "Vé Xe:";
+        lbName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // flowLayoutPanel3
         // 
-        flowLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        flowLayoutPanel3.Controls.Add(button2);
-        flowLayoutPanel3.Controls.Add(button3);
-        flowLayoutPanel3.Location = new System.Drawing.Point(3, 166);
+        flowLayoutPanel3.Controls.Add(buttonLockTicket);
+        flowLayoutPanel3.Controls.Add(buttonCalculate);
+        flowLayoutPanel3.Location = new System.Drawing.Point(3, 284);
         flowLayoutPanel3.Name = "flowLayoutPanel3";
-        flowLayoutPanel3.Size = new System.Drawing.Size(379, 32);
+        flowLayoutPanel3.Size = new System.Drawing.Size(219, 45);
         flowLayoutPanel3.TabIndex = 1;
         // 
-        // button2
+        // buttonLockTicket
         // 
-        button2.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom));
-        button2.Location = new System.Drawing.Point(3, 3);
-        button2.Name = "button2";
-        button2.Size = new System.Drawing.Size(75, 23);
-        button2.TabIndex = 0;
-        button2.Text = "Lock Card";
-        button2.UseVisualStyleBackColor = true;
+        buttonLockTicket.Anchor = System.Windows.Forms.AnchorStyles.Top;
+        buttonLockTicket.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        buttonLockTicket.Location = new System.Drawing.Point(3, 3);
+        buttonLockTicket.Name = "buttonLockTicket";
+        buttonLockTicket.Size = new System.Drawing.Size(97, 42);
+        buttonLockTicket.TabIndex = 0;
+        buttonLockTicket.Text = "Khóa Thẻ";
+        buttonLockTicket.UseVisualStyleBackColor = true;
         // 
-        // button3
+        // buttonCalculate
         // 
-        button3.Location = new System.Drawing.Point(84, 3);
-        button3.Name = "button3";
-        button3.Size = new System.Drawing.Size(75, 23);
-        button3.TabIndex = 1;
-        button3.Text = "Calculate";
-        button3.UseVisualStyleBackColor = true;
+        buttonCalculate.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+        buttonCalculate.Location = new System.Drawing.Point(106, 3);
+        buttonCalculate.Name = "buttonCalculate";
+        buttonCalculate.Size = new System.Drawing.Size(98, 42);
+        buttonCalculate.TabIndex = 1;
+        buttonCalculate.Text = "Thanh Toán";
+        buttonCalculate.UseVisualStyleBackColor = true;
         // 
         // FormSearch
         // 
@@ -256,31 +382,43 @@ partial class FormSearch
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.SystemColors.Control;
         ClientSize = new System.Drawing.Size(800, 450);
-        Controls.Add(tableLayoutPanel1);
-        Controls.Add(flowLayoutPanel1);
-        Controls.Add(label1);
-        Cursor = System.Windows.Forms.Cursors.AppStarting;
+        Controls.Add(tableLayoutPanelSummary);
+        Controls.Add(flowLayoutPanelFilter);
+        Controls.Add(lbtitle);
+        Cursor = System.Windows.Forms.Cursors.Default;
         Location = new System.Drawing.Point(15, 15);
         Text = "Form Search";
-        flowLayoutPanel1.ResumeLayout(false);
-        flowLayoutPanel1.PerformLayout();
-        tableLayoutPanel1.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-        flowLayoutPanel2.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+        flowLayoutPanelFilter.ResumeLayout(false);
+        flowLayoutPanelFilter.PerformLayout();
+        tableLayoutPanelSummary.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dataGridViewSummary).EndInit();
+        flowLayoutPanelDetail.ResumeLayout(false);
+        grbDetail.ResumeLayout(false);
         flowLayoutPanel3.ResumeLayout(false);
         ResumeLayout(false);
     }
 
-    private System.Windows.Forms.Button button3;
+    private System.Windows.Forms.Label lbOwnerInfo;
+    private System.Windows.Forms.Label lbDurationInfo;
+    private System.Windows.Forms.Label lbFeeInfo;
 
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.Label lbVehicleInfo;
+
+    private System.Windows.Forms.Label lbTimeIn;
+    private System.Windows.Forms.Label lbStatusTicket;
+
+    private System.Windows.Forms.Label lbName;
+    private System.Windows.Forms.Label lbLicensePlate;
+
+    private System.Windows.Forms.GroupBox grbDetail;
+
+    private System.Windows.Forms.Button buttonCalculate;
+
+    private System.Windows.Forms.Button buttonLockTicket;
 
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
 
-    private System.Windows.Forms.PictureBox pictureBox1;
-
-    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDetail;
 
     private System.Windows.Forms.DataGridViewTextBoxColumn STT;
     private System.Windows.Forms.DataGridViewTextBoxColumn IDVehicle;
@@ -290,20 +428,20 @@ partial class FormSearch
     private System.Windows.Forms.DataGridViewTextBoxColumn VehicleType;
     private System.Windows.Forms.DataGridViewButtonColumn Action;
 
-    private System.Windows.Forms.DataGridView dataGridView1;
+    private System.Windows.Forms.DataGridView dataGridViewSummary;
 
-    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSummary;
 
-    private System.Windows.Forms.ComboBox comboBox1;
+    private System.Windows.Forms.ComboBox comboBoxStatusSearch;
 
-    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label lbStatusSearch;
 
-    private System.Windows.Forms.DateTimePicker dateTimePicker1;
+    private System.Windows.Forms.DateTimePicker dateTimePickerSearch;
 
-    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-    private System.Windows.Forms.TextBox textBox1;
-    private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFilter;
+    private System.Windows.Forms.TextBox textBoxSearch;
+    private System.Windows.Forms.Button btSearch;
+    private System.Windows.Forms.Label lbDateSearch;
+    private System.Windows.Forms.Label lbtitle;
     #endregion
 }

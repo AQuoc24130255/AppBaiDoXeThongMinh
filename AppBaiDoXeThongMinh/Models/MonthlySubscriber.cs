@@ -1,6 +1,5 @@
 ﻿namespace AppBaiDoXeThongMinh.Models;
 /* 24130288 Phan Tiến Thành */
-
 public class MonthlySubscriber
 {
     public int SubcriberId { get; set; }  //mã vé tháng

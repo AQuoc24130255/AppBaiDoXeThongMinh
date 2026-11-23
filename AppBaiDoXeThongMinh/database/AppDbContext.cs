@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<PriceConfig>  PriceConfigs => Set<PriceConfig>();
     public DbSet<MonthlySubscriber>  MonthlySubscribers => Set<MonthlySubscriber>();
     public DbSet<Invoice>  Invoices => Set<Invoice>();
+    public DbSet<Shift>  Shifts => Set<Shift>();
     
     public AppDbContext() { }
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -138,11 +139,11 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Invoice>(e =>
         {
             e.HasKey(x => x.InvoiceId);
-            e.HasIndex(x => x.PaymantDate);
+            e.HasIndex(x => x.PaymentDate);
             e.Property(x => x.InvoiceId).HasMaxLength(30);
             e.Property(x => x.LicensePlate).IsRequired().HasMaxLength(20);
-            e.Property(x => x.PaymantMethod).HasConversion<string>();
-            e.Property(x => x.TotalAmounnt).HasPrecision(18, 2);
+            e.Property(x => x.PaymentMethod).HasConversion<string>();
+            e.Property(x => x.TotalAmount).HasPrecision(18, 2);
             e.HasOne<Ticket>()
                 .WithMany()
                 .HasForeignKey(x => x.TicketId)
