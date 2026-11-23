@@ -34,81 +34,67 @@ partial class FormCheckIn
         components = new System.ComponentModel.Container();
         bindingSource1 = new System.Windows.Forms.BindingSource(components);
         backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-        panel1 = new System.Windows.Forms.Panel();
-        panel2 = new System.Windows.Forms.Panel();
-        panel3 = new System.Windows.Forms.Panel();
-        panel4 = new System.Windows.Forms.Panel();
-        panel5 = new System.Windows.Forms.Panel();
-        panel6 = new System.Windows.Forms.Panel();
+        button1 = new System.Windows.Forms.Button();
+        textBox1 = new System.Windows.Forms.TextBox();
+        textBox2 = new System.Windows.Forms.TextBox();
+        comboBox1 = new System.Windows.Forms.ComboBox();
         ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
         SuspendLayout();
         // 
-        // panel1
+        // button1
         // 
-        panel1.Location = new System.Drawing.Point(27, 12);
-        panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(118, 200);
-        panel1.TabIndex = 0;
+        button1.Location = new System.Drawing.Point(150, 228);
+        button1.Name = "button1";
+        button1.Size = new System.Drawing.Size(487, 178);
+        button1.TabIndex = 0;
+        button1.Text = "button1";
+        button1.UseVisualStyleBackColor = true;
         // 
-        // panel2
+        // textBox1
         // 
-        panel2.Location = new System.Drawing.Point(173, 12);
-        panel2.Name = "panel2";
-        panel2.Size = new System.Drawing.Size(118, 200);
-        panel2.TabIndex = 1;
+        textBox1.Location = new System.Drawing.Point(35, 69);
+        textBox1.Name = "textBox1";
+        textBox1.Size = new System.Drawing.Size(266, 27);
+        textBox1.TabIndex = 1;
         // 
-        // panel3
+        // textBox2
         // 
-        panel3.Location = new System.Drawing.Point(318, 12);
-        panel3.Name = "panel3";
-        panel3.Size = new System.Drawing.Size(118, 200);
-        panel3.TabIndex = 1;
+        textBox2.Location = new System.Drawing.Point(435, 62);
+        textBox2.Name = "textBox2";
+        textBox2.Size = new System.Drawing.Size(271, 27);
+        textBox2.TabIndex = 2;
         // 
-        // panel4
+        // comboBox1
         // 
-        panel4.Location = new System.Drawing.Point(467, 12);
-        panel4.Name = "panel4";
-        panel4.Size = new System.Drawing.Size(119, 200);
-        panel4.TabIndex = 2;
-        // 
-        // panel5
-        // 
-        panel5.Location = new System.Drawing.Point(632, 12);
-        panel5.Name = "panel5";
-        panel5.Size = new System.Drawing.Size(110, 200);
-        panel5.TabIndex = 3;
-        // 
-        // panel6
-        // 
-        panel6.Location = new System.Drawing.Point(27, 238);
-        panel6.Name = "panel6";
-        panel6.Size = new System.Drawing.Size(118, 200);
-        panel6.TabIndex = 4;
+        comboBox1.FormattingEnabled = true;
+        comboBox1.Location = new System.Drawing.Point(323, 170);
+        comboBox1.Name = "comboBox1";
+        comboBox1.Size = new System.Drawing.Size(262, 28);
+        comboBox1.TabIndex = 3;
         // 
         // FormCheckIn
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(800, 450);
-        Controls.Add(panel6);
-        Controls.Add(panel5);
-        Controls.Add(panel4);
-        Controls.Add(panel3);
-        Controls.Add(panel2);
-        Controls.Add(panel1);
+        Controls.Add(comboBox1);
+        Controls.Add(textBox2);
+        Controls.Add(textBox1);
+        Controls.Add(button1);
         Text = "FormCheckIn";
+        Load += FormCheckIn_Load;
         ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
         ResumeLayout(false);
+        PerformLayout();
     }
+
+    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.TextBox textBox2;
+    private System.Windows.Forms.ComboBox comboBox1;
 
     private System.Windows.Forms.BindingSource bindingSource1;
     private System.ComponentModel.BackgroundWorker backgroundWorker1;
-    private System.Windows.Forms.Panel panel1;
-    private System.Windows.Forms.Panel panel2;
-    private System.Windows.Forms.Panel panel3;
-    private System.Windows.Forms.Panel panel4;
-    private System.Windows.Forms.Panel panel5;
-    private System.Windows.Forms.Panel panel6;
 
     #endregion
 }
