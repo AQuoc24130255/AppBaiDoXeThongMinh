@@ -10,5 +10,5 @@ public class Shift
     // thoi gian bat dau
     public DateTime StartDate { get; set; }
     // thoi gian ket thuc
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
 }

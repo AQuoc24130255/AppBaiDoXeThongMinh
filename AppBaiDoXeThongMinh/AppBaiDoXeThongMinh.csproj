@@ -48,6 +48,9 @@
       <Compile Update="ControlUser\UcTicketFullDetail.cs">
         <SubType>UserControl</SubType>
       </Compile>
+      <Compile Update="Views\FormProfile.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
     
 
