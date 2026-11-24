@@ -19,15 +19,25 @@ namespace AppBaiDoXeThongMinh.Views
         private Ticket _activeTicket;
         private bool _isLostCardMode;
 
-        public FormCheckOut(int userId = 1, int shiftId = 1)
+        public FormCheckOut(int userId)
         {
             InitializeComponent();
             _db = new AppDbContext();
             _currentUserId = userId;
-            _currentShiftId = shiftId;
+            _currentShiftId = FindShiftId();
 
             InitializeData();
             RegisterEvents();
+        }
+
+        private int FindShiftId()
+        {
+            var activeShift = _db.Shifts
+                .Where(s => s.UserId == _currentUserId && (s.EndDate == null || s.EndDate == DateTime.MinValue))
+                .OrderByDescending(s => s.StartDate)
+                .FirstOrDefault();
+
+            return activeShift != null ? activeShift.ShiftId : -1;
         }
 
         private void InitializeData()
@@ -115,8 +125,14 @@ namespace AppBaiDoXeThongMinh.Views
                 MessageBox.Show("Vui lòng chọn một xe trong danh sách bên dưới!", "Chưa chọn xe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            int ticketId = Convert.ToInt32(dgvParkedVehicles.CurrentRow.Cells["colId"].Value);
+            
+            var cellValue = dgvParkedVehicles.CurrentRow.Cells["colId"].Value;
+            if (cellValue == null || cellValue == DBNull.Value || !int.TryParse(cellValue.ToString(), out int ticketId))
+            {
+                MessageBox.Show("Dòng được chọn không hợp lệ!", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
             var ticket = _db.Tickets
                 .Include(t => t.Vehicle)
                 .Include(t => t.PriceConfig)
@@ -229,8 +245,13 @@ namespace AppBaiDoXeThongMinh.Views
             if (_activeTicket.ParkingSlot != null)
             {
                 _activeTicket.ParkingSlot.IsOccupied = false;
+                _activeTicket.ParkingSlot.CurrentVehicleID = null;
             }
-
+            if (_currentShiftId == -1) 
+            {
+                MessageBox.Show("Đang ở ngoài ca trực!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             var invoice = new Invoice
             {
                 TicketId = _activeTicket.TicketId,
@@ -292,10 +313,10 @@ namespace AppBaiDoXeThongMinh.Views
             .AsEnumerable()
             .Select(t => new
             {
-                t.TicketId,
-                t.TicketCode,
+                Id = t.TicketId,
+                CardCode = t.TicketCode,
                 t.LicensePlate,
-                VehicleName = VehicleName(t.VehicleType),
+                VehicleType = VehicleName(t.VehicleType),
                 CheckInTime = t.EntryTime.ToString("dd/MM/yyyy HH:mm")
             })
             .ToList();

@@ -254,7 +254,7 @@
             colId.MinimumWidth = 6;
             colId.Name = "colId";
             colId.ReadOnly = true;
-            colId.Visible = false;
+            colId.Visible = true;
             // 
             // colCardCode
             // 

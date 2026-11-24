@@ -136,7 +136,7 @@ public partial class FormMain : Form
                 "Xe ra bãi",
                 "↑",
                 () => OpenChildForm(
-                    new FormCheckOut(),
+                    new FormCheckOut(_currentUser.UserId),
                     "XỬ LÝ XE RA"));
 
             AddMenuButton(

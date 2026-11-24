@@ -220,6 +220,11 @@ public partial class FormDashboard : Form
         TextRenderer.DrawText(g, "Xe ô tô", Font, new Point(lx + 14, ly + 24), Color.Black);
     }
     
+    private void BtDetail_Click(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+    
     // ham ho tro
     private static bool IsNightTime(TimeSpan time, TimeSpan nightStart, TimeSpan nightEnd)
     {
