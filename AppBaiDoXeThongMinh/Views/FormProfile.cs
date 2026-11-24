@@ -178,7 +178,7 @@ namespace AppBaiDoXeThongMinh.Views
         private void RefreshShiftState()
         {
             _activeShift = _db.Shifts
-                .Where(s => s.UserId == _currentUserId && s.EndDate == null)
+                .Where(s => s.UserId == _currentUserId && s.EndDate == DateTime.MinValue)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefault();
 
@@ -208,7 +208,7 @@ namespace AppBaiDoXeThongMinh.Views
                 {
                     UserId = _currentUserId,
                     StartDate = DateTime.Now,
-                    EndDate = null
+                    EndDate = DateTime.MinValue
                 };
 
                 _db.Shifts.Add(newShift);
@@ -267,11 +267,13 @@ namespace AppBaiDoXeThongMinh.Views
                 };
             }).ToList();
         }
+        
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             _db.Dispose();
             base.OnFormClosed(e);
         }
+        
     }
 }
