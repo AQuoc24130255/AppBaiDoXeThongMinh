@@ -14,11 +14,11 @@ namespace AppBaiDoXeThongMinh.Views
         private User _currentUser;
         private Shift _activeShift;
 
-        public FormProfile(int currentUserId = 1)
+        public FormProfile(User currentUser)
         {
             InitializeComponent();
             _db = new AppDbContext();
-            _currentUserId = currentUserId;
+            _currentUserId = currentUser.UserId;
 
             LoadUserProfile();
             RegisterEvents();

@@ -104,7 +104,7 @@ public partial class FormMain : Form
         };
         sidebar.Controls.Add(menu);
         
-        AddMenuButton(menu, "Cá Nhân", () => OpenChildForm(new FormProfile(), "CÁ NHÂN"));
+        AddMenuButton(menu, "Cá Nhân", () => OpenChildForm(new FormProfile(_currentUser), "CÁ NHÂN"));
         if (_currentUser.Role == Role.Admin)
         {
             AddMenuButton(menu,"Quản lý tài khoản", () =>
