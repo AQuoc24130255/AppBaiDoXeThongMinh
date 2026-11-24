@@ -23,9 +23,9 @@ static class Program
             db.Database.EnsureCreated();
             u = db.Users.FirstOrDefault();
         }
-
         
-        Application.Run(new FormLogin());
+        //Application.Run(new FormLogin());
         //Application.Run(new FormSearch());
+        
     }
 }
