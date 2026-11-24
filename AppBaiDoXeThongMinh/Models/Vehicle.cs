@@ -1,22 +1,26 @@
 ﻿namespace AppBaiDoXeThongMinh.Models;
-/*24130216 Võ Thành Nhân
-lop quan li phuong tien*/
-public enum VehicleType { Motorbike, Car }
+
+public enum VehicleType
+{
+    Motorbike,
+    Car
+}
+
 public class Vehicle
 {
-    // Mã Phương Tiện
+    // Mã phương tiện
     public int VehicleId { get; set; }
 
     // Biển số xe
-    public string LicensePlate { get; set; }
+    public string LicensePlate { get; set; } = string.Empty;
 
     // Loại phương tiện
     public VehicleType VehicleType { get; set; }
 
-    // hãng xe
+    // Hãng xe
     public string? Brand { get; set; }
 
-    // màu xe
+    // Màu xe
     public string? Color { get; set; }
 
     // Tên chủ xe
@@ -27,6 +31,5 @@ public class Vehicle
 
     // Danh sách vé gửi xe của phương tiện
     public virtual ICollection<Ticket> Ticket { get; set; }
-    
-    
+        = new List<Ticket>();
 }
