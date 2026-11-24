@@ -108,6 +108,13 @@ public partial class FormMain : Form
                 () => OpenChildForm(
                     new FormManageTicket(),
                     "QUẢN LÝ VÉ THÁNG"));
+            
+            AddMenuButton(
+                "Quản lý giá",
+                "▤",
+                () => OpenChildForm(
+                    new FormManagePriceConfig(),
+                    "QUẢN LÝ GIÁ"));
 
             AddMenuButton(
                 "Thống kê doanh thu",
@@ -129,7 +136,7 @@ public partial class FormMain : Form
                 "Xe ra bãi",
                 "↑",
                 () => OpenChildForm(
-                    new FormCheckOut(),
+                    new FormCheckOut(_currentUser.UserId),
                     "XỬ LÝ XE RA"));
 
             AddMenuButton(
@@ -199,6 +206,7 @@ public partial class FormMain : Form
                 "Quản lý tài khoản" => "♙",
                 "Quản lý chỗ đỗ" => "▦",
                 "Quản lý vé tháng" => "▤",
+                "Quản lý vé giá" => "▤",
                 "Thống kê doanh thu" => "▥",
                 "Xe vào bãi" => "↓",
                 "Xe ra bãi" => "↑",

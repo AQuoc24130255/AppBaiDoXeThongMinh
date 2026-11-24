@@ -33,9 +33,9 @@ static class Program
         using var db = new AppDbContext();
         var guardUser = db.Users.First(u => u.UserName == "guard1");
 
-        Application.Run(new FormProfile(guardUser));
-        Application.Run(new FormCheckIn());
-        Application.Run(new FormCheckOut());
+        /*Application.Run(new FormProfile(guardUser));
+        Application.Run(new FormCheckIn());*/
+        Application.Run(new FormCheckOut(guardUser.UserId));
 
 
     }

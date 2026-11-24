@@ -196,10 +196,10 @@ namespace AppBaiDoXeThongMinh.Views
             .AsEnumerable()
             .Select(t => new
             {
-                t.TicketId,
-                t.TicketCode,
+                Id = t.TicketId,
+                CardCode = t.TicketCode,
                 t.LicensePlate,
-                VehicleName = VehicleName(t.VehicleType),
+                VehicleType = VehicleName(t.VehicleType),
                 CheckInTime = t.EntryTime.ToString("dd/MM/yyyy HH:mm")
             })
             .ToList();
