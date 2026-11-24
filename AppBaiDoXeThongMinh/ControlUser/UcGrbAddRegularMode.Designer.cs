@@ -25,8 +25,8 @@ partial class UcGrbAddRegularMode
 
     #region Component Designer generated code
 
-    /// <summary> 
-    /// Required method for Designer support - do not modify 
+    /// <summary>
+    /// Required method for Designer support - do not modify
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent()
@@ -35,11 +35,11 @@ partial class UcGrbAddRegularMode
         btLock = new System.Windows.Forms.Button();
         btDelete = new System.Windows.Forms.Button();
         btRefresh = new System.Windows.Forms.Button();
-
         grbAdd.SuspendLayout();
         SuspendLayout();
-
+        // 
         // grbAdd
+        // 
         grbAdd.Controls.Add(btLock);
         grbAdd.Controls.Add(btDelete);
         grbAdd.Controls.Add(btRefresh);
@@ -51,9 +51,10 @@ partial class UcGrbAddRegularMode
         grbAdd.TabIndex = 0;
         grbAdd.TabStop = false;
         grbAdd.Text = "Thao tác vé thường";
-
+        // 
         // btLock
-        btLock.BackColor = System.Drawing.Color.FromArgb(230, 150, 40);
+        // 
+        btLock.BackColor = System.Drawing.Color.FromArgb(((int)((byte)230)), ((int)((byte)150)), ((int)((byte)40)));
         btLock.FlatAppearance.BorderSize = 0;
         btLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
         btLock.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -64,9 +65,10 @@ partial class UcGrbAddRegularMode
         btLock.TabIndex = 0;
         btLock.Text = "Khóa vé";
         btLock.UseVisualStyleBackColor = false;
-
+        // 
         // btDelete
-        btDelete.BackColor = System.Drawing.Color.FromArgb(200, 60, 55);
+        // 
+        btDelete.BackColor = System.Drawing.Color.FromArgb(((int)((byte)200)), ((int)((byte)60)), ((int)((byte)55)));
         btDelete.FlatAppearance.BorderSize = 0;
         btDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
         btDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -77,24 +79,24 @@ partial class UcGrbAddRegularMode
         btDelete.TabIndex = 1;
         btDelete.Text = "Xóa vé";
         btDelete.UseVisualStyleBackColor = false;
-
+        // 
         // btRefresh
+        // 
         btRefresh.Font = new System.Drawing.Font("Segoe UI", 10F);
-        btRefresh.Location = new System.Drawing.Point(266, 36);
+        btRefresh.Location = new System.Drawing.Point(16, 103);
         btRefresh.Name = "btRefresh";
         btRefresh.Size = new System.Drawing.Size(115, 38);
         btRefresh.TabIndex = 2;
         btRefresh.Text = "Làm mới";
         btRefresh.UseVisualStyleBackColor = true;
-
-        // usercontrolGrbAddRegularMode
+        // 
+        // UcGrbAddRegularMode
+        // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        BackColor = System.Drawing.Color.FromArgb(243, 246, 250);
+        BackColor = System.Drawing.Color.FromArgb(((int)((byte)243)), ((int)((byte)246)), ((int)((byte)250)));
         Controls.Add(grbAdd);
-        Name = "UcGrbAddRegularMode";
         Size = new System.Drawing.Size(398, 570);
-
         grbAdd.ResumeLayout(false);
         ResumeLayout(false);
     }

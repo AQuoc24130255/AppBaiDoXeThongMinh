@@ -25,6 +25,10 @@ partial class FormManageTicket
 
     #region Windows Form Designer generated code
 
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
     private void InitializeComponent()
     {
         grbStats = new System.Windows.Forms.GroupBox();
@@ -41,9 +45,7 @@ partial class FormManageTicket
         pnlStatLocked = new System.Windows.Forms.Panel();
         lbLockedValue = new System.Windows.Forms.Label();
         lbLockedHeader = new System.Windows.Forms.Label();
-
         tlpMain = new System.Windows.Forms.TableLayoutPanel();
-
         grbList = new System.Windows.Forms.GroupBox();
         dgvTickets = new System.Windows.Forms.DataGridView();
         pnlGridButtons = new System.Windows.Forms.Panel();
@@ -53,9 +55,7 @@ partial class FormManageTicket
         txtSearch = new System.Windows.Forms.TextBox();
         cbFilter = new System.Windows.Forms.ComboBox();
         btSearch = new System.Windows.Forms.Button();
-
         pnlRightHost = new System.Windows.Forms.Panel();
-
         grbStats.SuspendLayout();
         tlpStats.SuspendLayout();
         pnlStatTotal.SuspendLayout();
@@ -68,21 +68,22 @@ partial class FormManageTicket
         pnlGridButtons.SuspendLayout();
         pnlSearch.SuspendLayout();
         SuspendLayout();
-
-        // =====================================================
-        //  THỐNG KÊ (phía trên)
-        // =====================================================
+        // 
+        // grbStats
+        // 
         grbStats.Controls.Add(tlpStats);
         grbStats.Dock = System.Windows.Forms.DockStyle.Top;
         grbStats.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
         grbStats.Location = new System.Drawing.Point(0, 0);
         grbStats.Name = "grbStats";
         grbStats.Padding = new System.Windows.Forms.Padding(6, 4, 6, 6);
-        grbStats.Size = new System.Drawing.Size(1100, 112);
+        grbStats.Size = new System.Drawing.Size(1028, 112);
         grbStats.TabIndex = 1;
         grbStats.TabStop = false;
         grbStats.Text = "Thống kê vé";
-
+        // 
+        // tlpStats
+        // 
         tlpStats.ColumnCount = 4;
         tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
         tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -93,125 +94,167 @@ partial class FormManageTicket
         tlpStats.Controls.Add(pnlStatMonthly, 2, 0);
         tlpStats.Controls.Add(pnlStatLocked, 3, 0);
         tlpStats.Dock = System.Windows.Forms.DockStyle.Fill;
-        tlpStats.Location = new System.Drawing.Point(6, 24);
+        tlpStats.Location = new System.Drawing.Point(6, 22);
         tlpStats.Name = "tlpStats";
         tlpStats.RowCount = 1;
         tlpStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-        tlpStats.Size = new System.Drawing.Size(1088, 82);
+        tlpStats.Size = new System.Drawing.Size(1016, 84);
         tlpStats.TabIndex = 0;
-
+        // 
+        // pnlStatTotal
+        // 
         pnlStatTotal.BackColor = System.Drawing.Color.White;
         pnlStatTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         pnlStatTotal.Controls.Add(lbTotalValue);
         pnlStatTotal.Controls.Add(lbTotalHeader);
         pnlStatTotal.Dock = System.Windows.Forms.DockStyle.Fill;
+        pnlStatTotal.Location = new System.Drawing.Point(5, 3);
         pnlStatTotal.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
         pnlStatTotal.Name = "pnlStatTotal";
+        pnlStatTotal.Size = new System.Drawing.Size(244, 78);
         pnlStatTotal.TabIndex = 0;
-
-        lbTotalHeader.BackColor = System.Drawing.Color.FromArgb(173, 216, 250);
-        lbTotalHeader.Dock = System.Windows.Forms.DockStyle.Top;
-        lbTotalHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-        lbTotalHeader.Name = "lbTotalHeader";
-        lbTotalHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-        lbTotalHeader.Size = new System.Drawing.Size(100, 26);
-        lbTotalHeader.TabIndex = 0;
-        lbTotalHeader.Text = "Tổng số vé";
-        lbTotalHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+        // 
+        // lbTotalValue
+        // 
         lbTotalValue.Dock = System.Windows.Forms.DockStyle.Fill;
         lbTotalValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-        lbTotalValue.ForeColor = System.Drawing.Color.FromArgb(70, 130, 190);
+        lbTotalValue.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)70)), ((int)((byte)130)), ((int)((byte)190)));
+        lbTotalValue.Location = new System.Drawing.Point(0, 26);
         lbTotalValue.Name = "lbTotalValue";
+        lbTotalValue.Size = new System.Drawing.Size(242, 50);
         lbTotalValue.TabIndex = 1;
         lbTotalValue.Text = "0";
         lbTotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+        // 
+        // lbTotalHeader
+        // 
+        lbTotalHeader.BackColor = System.Drawing.Color.FromArgb(((int)((byte)173)), ((int)((byte)216)), ((int)((byte)250)));
+        lbTotalHeader.Dock = System.Windows.Forms.DockStyle.Top;
+        lbTotalHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+        lbTotalHeader.Location = new System.Drawing.Point(0, 0);
+        lbTotalHeader.Name = "lbTotalHeader";
+        lbTotalHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+        lbTotalHeader.Size = new System.Drawing.Size(242, 26);
+        lbTotalHeader.TabIndex = 0;
+        lbTotalHeader.Text = "Tổng số vé";
+        lbTotalHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // pnlStatInUse
+        // 
         pnlStatInUse.BackColor = System.Drawing.Color.White;
         pnlStatInUse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         pnlStatInUse.Controls.Add(lbInUseValue);
         pnlStatInUse.Controls.Add(lbInUseHeader);
         pnlStatInUse.Dock = System.Windows.Forms.DockStyle.Fill;
+        pnlStatInUse.Location = new System.Drawing.Point(259, 3);
         pnlStatInUse.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
         pnlStatInUse.Name = "pnlStatInUse";
+        pnlStatInUse.Size = new System.Drawing.Size(244, 78);
         pnlStatInUse.TabIndex = 1;
-
-        lbInUseHeader.BackColor = System.Drawing.Color.FromArgb(160, 220, 205);
-        lbInUseHeader.Dock = System.Windows.Forms.DockStyle.Top;
-        lbInUseHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-        lbInUseHeader.Name = "lbInUseHeader";
-        lbInUseHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-        lbInUseHeader.Size = new System.Drawing.Size(100, 26);
-        lbInUseHeader.TabIndex = 0;
-        lbInUseHeader.Text = "Vé đang sử dụng";
-        lbInUseHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+        // 
+        // lbInUseValue
+        // 
         lbInUseValue.Dock = System.Windows.Forms.DockStyle.Fill;
         lbInUseValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-        lbInUseValue.ForeColor = System.Drawing.Color.FromArgb(70, 160, 90);
+        lbInUseValue.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)70)), ((int)((byte)160)), ((int)((byte)90)));
+        lbInUseValue.Location = new System.Drawing.Point(0, 26);
         lbInUseValue.Name = "lbInUseValue";
+        lbInUseValue.Size = new System.Drawing.Size(242, 50);
         lbInUseValue.TabIndex = 1;
         lbInUseValue.Text = "0";
         lbInUseValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+        // 
+        // lbInUseHeader
+        // 
+        lbInUseHeader.BackColor = System.Drawing.Color.FromArgb(((int)((byte)160)), ((int)((byte)220)), ((int)((byte)205)));
+        lbInUseHeader.Dock = System.Windows.Forms.DockStyle.Top;
+        lbInUseHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+        lbInUseHeader.Location = new System.Drawing.Point(0, 0);
+        lbInUseHeader.Name = "lbInUseHeader";
+        lbInUseHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+        lbInUseHeader.Size = new System.Drawing.Size(242, 26);
+        lbInUseHeader.TabIndex = 0;
+        lbInUseHeader.Text = "Vé đang sử dụng";
+        lbInUseHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // pnlStatMonthly
+        // 
         pnlStatMonthly.BackColor = System.Drawing.Color.White;
         pnlStatMonthly.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         pnlStatMonthly.Controls.Add(lbMonthlyValue);
         pnlStatMonthly.Controls.Add(lbMonthlyHeader);
         pnlStatMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
+        pnlStatMonthly.Location = new System.Drawing.Point(513, 3);
         pnlStatMonthly.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
         pnlStatMonthly.Name = "pnlStatMonthly";
+        pnlStatMonthly.Size = new System.Drawing.Size(244, 78);
         pnlStatMonthly.TabIndex = 2;
-
-        lbMonthlyHeader.BackColor = System.Drawing.Color.FromArgb(252, 205, 140);
-        lbMonthlyHeader.Dock = System.Windows.Forms.DockStyle.Top;
-        lbMonthlyHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-        lbMonthlyHeader.Name = "lbMonthlyHeader";
-        lbMonthlyHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-        lbMonthlyHeader.Size = new System.Drawing.Size(100, 26);
-        lbMonthlyHeader.TabIndex = 0;
-        lbMonthlyHeader.Text = "Vé tháng";
-        lbMonthlyHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+        // 
+        // lbMonthlyValue
+        // 
         lbMonthlyValue.Dock = System.Windows.Forms.DockStyle.Fill;
         lbMonthlyValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-        lbMonthlyValue.ForeColor = System.Drawing.Color.FromArgb(225, 150, 40);
+        lbMonthlyValue.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)225)), ((int)((byte)150)), ((int)((byte)40)));
+        lbMonthlyValue.Location = new System.Drawing.Point(0, 26);
         lbMonthlyValue.Name = "lbMonthlyValue";
+        lbMonthlyValue.Size = new System.Drawing.Size(242, 50);
         lbMonthlyValue.TabIndex = 1;
         lbMonthlyValue.Text = "0";
         lbMonthlyValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+        // 
+        // lbMonthlyHeader
+        // 
+        lbMonthlyHeader.BackColor = System.Drawing.Color.FromArgb(((int)((byte)252)), ((int)((byte)205)), ((int)((byte)140)));
+        lbMonthlyHeader.Dock = System.Windows.Forms.DockStyle.Top;
+        lbMonthlyHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+        lbMonthlyHeader.Location = new System.Drawing.Point(0, 0);
+        lbMonthlyHeader.Name = "lbMonthlyHeader";
+        lbMonthlyHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+        lbMonthlyHeader.Size = new System.Drawing.Size(242, 26);
+        lbMonthlyHeader.TabIndex = 0;
+        lbMonthlyHeader.Text = "Vé tháng";
+        lbMonthlyHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // pnlStatLocked
+        // 
         pnlStatLocked.BackColor = System.Drawing.Color.White;
         pnlStatLocked.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         pnlStatLocked.Controls.Add(lbLockedValue);
         pnlStatLocked.Controls.Add(lbLockedHeader);
         pnlStatLocked.Dock = System.Windows.Forms.DockStyle.Fill;
+        pnlStatLocked.Location = new System.Drawing.Point(767, 3);
         pnlStatLocked.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
         pnlStatLocked.Name = "pnlStatLocked";
+        pnlStatLocked.Size = new System.Drawing.Size(244, 78);
         pnlStatLocked.TabIndex = 3;
-
-        lbLockedHeader.BackColor = System.Drawing.Color.FromArgb(250, 170, 175);
-        lbLockedHeader.Dock = System.Windows.Forms.DockStyle.Top;
-        lbLockedHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-        lbLockedHeader.Name = "lbLockedHeader";
-        lbLockedHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-        lbLockedHeader.Size = new System.Drawing.Size(100, 26);
-        lbLockedHeader.TabIndex = 0;
-        lbLockedHeader.Text = "Vé bị khóa";
-        lbLockedHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+        // 
+        // lbLockedValue
+        // 
         lbLockedValue.Dock = System.Windows.Forms.DockStyle.Fill;
         lbLockedValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-        lbLockedValue.ForeColor = System.Drawing.Color.FromArgb(215, 90, 90);
+        lbLockedValue.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)215)), ((int)((byte)90)), ((int)((byte)90)));
+        lbLockedValue.Location = new System.Drawing.Point(0, 26);
         lbLockedValue.Name = "lbLockedValue";
+        lbLockedValue.Size = new System.Drawing.Size(242, 50);
         lbLockedValue.TabIndex = 1;
         lbLockedValue.Text = "0";
         lbLockedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        
-        // =====================================================
-        //  NỘI DUNG: DANH SÁCH VÉ (trái) + USER CONTROL (phải)
-        // =====================================================
-        
+        // 
+        // lbLockedHeader
+        // 
+        lbLockedHeader.BackColor = System.Drawing.Color.FromArgb(((int)((byte)250)), ((int)((byte)170)), ((int)((byte)175)));
+        lbLockedHeader.Dock = System.Windows.Forms.DockStyle.Top;
+        lbLockedHeader.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+        lbLockedHeader.Location = new System.Drawing.Point(0, 0);
+        lbLockedHeader.Name = "lbLockedHeader";
+        lbLockedHeader.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+        lbLockedHeader.Size = new System.Drawing.Size(242, 26);
+        lbLockedHeader.TabIndex = 0;
+        lbLockedHeader.Text = "Vé bị khóa";
+        lbLockedHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // tlpMain
+        // 
         tlpMain.ColumnCount = 2;
         tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
         tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36F));
@@ -220,60 +263,30 @@ partial class FormManageTicket
         tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
         tlpMain.Location = new System.Drawing.Point(0, 112);
         tlpMain.Name = "tlpMain";
-        tlpMain.Padding = new System.Windows.Forms.Padding(6);
         tlpMain.RowCount = 1;
         tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-        tlpMain.Size = new System.Drawing.Size(1100, 588);
+        tlpMain.Size = new System.Drawing.Size(1028, 588);
         tlpMain.TabIndex = 0;
-        
-        // ---------- Bên trái: Danh sách ----------
+        // 
+        // grbList
+        // 
         grbList.Controls.Add(dgvTickets);
         grbList.Controls.Add(pnlGridButtons);
         grbList.Controls.Add(pnlSearch);
         grbList.Dock = System.Windows.Forms.DockStyle.Fill;
         grbList.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-        grbList.Location = new System.Drawing.Point(9, 9);
+        grbList.Location = new System.Drawing.Point(3, 3);
         grbList.Name = "grbList";
         grbList.Padding = new System.Windows.Forms.Padding(8, 4, 8, 8);
-        grbList.Size = new System.Drawing.Size(678, 570);
+        grbList.Size = new System.Drawing.Size(651, 582);
         grbList.TabIndex = 0;
         grbList.TabStop = false;
         grbList.Text = "Danh sách vé";
-        
-        pnlSearch.Controls.Add(txtSearch);
-        pnlSearch.Controls.Add(cbFilter);
-        pnlSearch.Controls.Add(btSearch);
-        pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
-        pnlSearch.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-        pnlSearch.Location = new System.Drawing.Point(8, 22);
-        pnlSearch.Name = "pnlSearch";
-        pnlSearch.Size = new System.Drawing.Size(662, 44);
-        pnlSearch.TabIndex = 2;
-        
-        txtSearch.Location = new System.Drawing.Point(0, 10);
-        txtSearch.Name = "txtSearch";
-        txtSearch.PlaceholderText = "Biển số, mã vé";
-        txtSearch.Size = new System.Drawing.Size(220, 24);
-        txtSearch.TabIndex = 0;
-        
-        cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-        cbFilter.FormattingEnabled = true;
-        cbFilter.Location = new System.Drawing.Point(230, 10);
-        cbFilter.Name = "cbFilter";
-        cbFilter.Size = new System.Drawing.Size(150, 25);
-        cbFilter.TabIndex = 1;
-        
-        btSearch.Location = new System.Drawing.Point(390, 8);
-        btSearch.Name = "btSearch";
-        btSearch.Size = new System.Drawing.Size(90, 29);
-        btSearch.TabIndex = 2;
-        btSearch.Text = "Tìm kiếm";
-        btSearch.UseVisualStyleBackColor = true;
-        
+        // 
+        // dgvTickets
+        // 
         dgvTickets.AllowUserToAddRows = false;
         dgvTickets.AllowUserToDeleteRows = false;
-        dgvTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
-        dgvTickets.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         dgvTickets.BackgroundColor = System.Drawing.Color.White;
         dgvTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvTickets.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -284,18 +297,22 @@ partial class FormManageTicket
         dgvTickets.ReadOnly = true;
         dgvTickets.RowHeadersVisible = false;
         dgvTickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        dgvTickets.Size = new System.Drawing.Size(662, 448);
+        dgvTickets.Size = new System.Drawing.Size(635, 460);
         dgvTickets.TabIndex = 0;
-        
+        // 
+        // pnlGridButtons
+        // 
         pnlGridButtons.Controls.Add(btRegularMode);
         pnlGridButtons.Controls.Add(btMonthlyMode);
         pnlGridButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-        pnlGridButtons.Location = new System.Drawing.Point(8, 514);
+        pnlGridButtons.Location = new System.Drawing.Point(8, 526);
         pnlGridButtons.Name = "pnlGridButtons";
-        pnlGridButtons.Size = new System.Drawing.Size(662, 48);
+        pnlGridButtons.Size = new System.Drawing.Size(635, 48);
         pnlGridButtons.TabIndex = 1;
-        
-        btRegularMode.BackColor = System.Drawing.Color.FromArgb(25, 105, 170);
+        // 
+        // btRegularMode
+        // 
+        btRegularMode.BackColor = System.Drawing.Color.FromArgb(((int)((byte)25)), ((int)((byte)105)), ((int)((byte)170)));
         btRegularMode.FlatAppearance.BorderSize = 0;
         btRegularMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
         btRegularMode.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -306,8 +323,10 @@ partial class FormManageTicket
         btRegularMode.TabIndex = 0;
         btRegularMode.Text = "Vé thường";
         btRegularMode.UseVisualStyleBackColor = false;
-        
-        btMonthlyMode.BackColor = System.Drawing.Color.FromArgb(215, 222, 230);
+        // 
+        // btMonthlyMode
+        // 
+        btMonthlyMode.BackColor = System.Drawing.Color.FromArgb(((int)((byte)215)), ((int)((byte)222)), ((int)((byte)230)));
         btMonthlyMode.FlatAppearance.BorderSize = 0;
         btMonthlyMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
         btMonthlyMode.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -318,27 +337,63 @@ partial class FormManageTicket
         btMonthlyMode.TabIndex = 1;
         btMonthlyMode.Text = "Vé tháng";
         btMonthlyMode.UseVisualStyleBackColor = false;
-        
-        // ---------- Bên phải: Vùng chứa 2 User Control ----------
+        // 
+        // pnlSearch
+        // 
+        pnlSearch.Controls.Add(txtSearch);
+        pnlSearch.Controls.Add(cbFilter);
+        pnlSearch.Controls.Add(btSearch);
+        pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
+        pnlSearch.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+        pnlSearch.Location = new System.Drawing.Point(8, 22);
+        pnlSearch.Name = "pnlSearch";
+        pnlSearch.Size = new System.Drawing.Size(635, 44);
+        pnlSearch.TabIndex = 2;
+        // 
+        // txtSearch
+        // 
+        txtSearch.Location = new System.Drawing.Point(0, 10);
+        txtSearch.Name = "txtSearch";
+        txtSearch.PlaceholderText = "Biển số, mã vé";
+        txtSearch.Size = new System.Drawing.Size(220, 24);
+        txtSearch.TabIndex = 0;
+        // 
+        // cbFilter
+        // 
+        cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cbFilter.FormattingEnabled = true;
+        cbFilter.Location = new System.Drawing.Point(230, 10);
+        cbFilter.Name = "cbFilter";
+        cbFilter.Size = new System.Drawing.Size(150, 25);
+        cbFilter.TabIndex = 1;
+        // 
+        // btSearch
+        // 
+        btSearch.Location = new System.Drawing.Point(390, 8);
+        btSearch.Name = "btSearch";
+        btSearch.Size = new System.Drawing.Size(90, 29);
+        btSearch.TabIndex = 2;
+        btSearch.Text = "Tìm kiếm";
+        btSearch.UseVisualStyleBackColor = true;
+        // 
+        // pnlRightHost
+        // 
         pnlRightHost.Dock = System.Windows.Forms.DockStyle.Fill;
-        pnlRightHost.Location = new System.Drawing.Point(693, 9);
+        pnlRightHost.Location = new System.Drawing.Point(660, 3);
         pnlRightHost.Name = "pnlRightHost";
-        pnlRightHost.Size = new System.Drawing.Size(398, 570);
+        pnlRightHost.Size = new System.Drawing.Size(365, 582);
         pnlRightHost.TabIndex = 1;
-        
-        //
+        // 
         // FormManageTicket
-        //
+        // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        BackColor = System.Drawing.Color.FromArgb(243, 246, 250);
-        ClientSize = new System.Drawing.Size(1100, 700);
+        BackColor = System.Drawing.Color.FromArgb(((int)((byte)243)), ((int)((byte)246)), ((int)((byte)250)));
+        ClientSize = new System.Drawing.Size(1028, 700);
         Controls.Add(tlpMain);
         Controls.Add(grbStats);
         MinimumSize = new System.Drawing.Size(1000, 650);
-        Name = "FormManageTicket";
         Text = "Quản lý vé";
-        
         grbStats.ResumeLayout(false);
         tlpStats.ResumeLayout(false);
         pnlStatTotal.ResumeLayout(false);
@@ -351,7 +406,7 @@ partial class FormManageTicket
         pnlGridButtons.ResumeLayout(false);
         pnlSearch.ResumeLayout(false);
         pnlSearch.PerformLayout();
-        ResumeLayout(false); 
+        ResumeLayout(false);
     }
     
     private System.Windows.Forms.GroupBox grbStats;
