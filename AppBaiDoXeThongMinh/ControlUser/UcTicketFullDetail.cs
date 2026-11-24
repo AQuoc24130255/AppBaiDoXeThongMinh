@@ -62,7 +62,7 @@ public partial class UcTicketFullDetail : UserControl
             lblTotalAmount.ForeColor = Color.FromArgb(40, 120, 60);
             lblTotalAmount.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
 
-            lblPayMethod.Text = $"Hình thức TT: {(inv.PaymentMethod == "Cash" ? "Tiền mặt" : "Chuyển khoản / Thẻ")}";
+            lblPayMethod.Text = $"Hình thức TT: {(inv.PaymentMethod == PaymantMethodType.Cash ? "Tiền mặt" : "Chuyển khoản / Thẻ")}";
             lblPayDate.Text = $"Thời điểm TT: {inv.PaymentDate:dd/MM/yyyy HH:mm:ss}";
             lblCreator.Text = creator != null
                 ? $"Người lập: {creator.FullName} (ID: {creator.UserId})"
@@ -134,7 +134,7 @@ public partial class UcTicketFullDetail : UserControl
         // Nội dung chi tiết
         TimeSpan dur = _currentInvoice.CheckOutTime - _currentInvoice.CheckInTime;
         string vType = _currentTicket.Vehicle?.VehicleType == VehicleType.Car ? "Ô tô" : "Xe máy";
-        string payMethod = _currentInvoice.PaymentMethod == "Cash" ? "Tiền mặt" : "Chuyển khoản / Thẻ";
+        string payMethod = _currentInvoice.PaymentMethod == PaymantMethodType.Cash ? "Tiền mặt" : "Chuyển khoản / Thẻ";
         string staff = _currentCreator?.FullName ?? $"ID {_currentInvoice.CreatedBy}";
 
         DrawRow(g, "Mã hóa đơn:", _currentInvoice.InvoiceId, fontBold, fontNormal, left, ref y, lineHeight);

@@ -28,8 +28,8 @@ namespace AppBaiDoXeThongMinh.Views
         private void InitializeData()
         {
             cboVehicleType.DataSource = _db.PriceConfigs.ToList();
-            cboVehicleType.DisplayMember = "DisplayText";
-            cboVehicleType.ValueMember = "Id";
+            cboVehicleType.DisplayMember = "VehicleType";
+            cboVehicleType.ValueMember = "ConfigId";
 
             dgvParkedVehicles.AutoGenerateColumns = false;
             LoadParkedVehicles();
@@ -92,7 +92,7 @@ namespace AppBaiDoXeThongMinh.Views
             pnlInputStatus.BackColor = isReady ? Color.FromArgb(40, 167, 69) : Color.LightGray;
         }
 
-        private string NormalizePlate(string plate)
+        private string NormalizePlate(string? plate)
         {
             if (string.IsNullOrWhiteSpace(plate)) return string.Empty;
             return Regex.Replace(plate, @"[^a-zA-Z0-9]", "").ToUpper();
@@ -108,10 +108,13 @@ namespace AppBaiDoXeThongMinh.Views
                 MessageBox.Show("Vui lòng nhập đủ Mã thẻ và Biển số xe!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            
+            var vehicle = _db.Vehicles.FirstOrDefault(v => v.LicensePlate == licensePlate);
+            int vehicleId = vehicle?.VehicleId??-1;
+            
             bool isAlreadyParked = _db.Tickets.Any(t =>
                 t.Status == TicketStatus.Inparking &&
-                (t.TicketCode == cardCode || t.LicensePlate == licensePlate));
+                (t.TicketCode == cardCode || t.VehicleId == vehicleId));
 
             if (isAlreadyParked)
             {
@@ -124,7 +127,7 @@ namespace AppBaiDoXeThongMinh.Views
             var selectedPrice = cboVehicleType.SelectedItem as PriceConfig;
             if (selectedPrice == null) return;
 
-            var vehicle = _db.Vehicles.FirstOrDefault(v => v.LicensePlate == licensePlate);
+            
             if (vehicle == null)
             {
                 vehicle = new Vehicle
@@ -140,20 +143,22 @@ namespace AppBaiDoXeThongMinh.Views
                 m.LicensePlate == licensePlate && m.EndDate >= DateTime.Now && m.IsActive);
 
             var freeSlot = _db.ParkingSlots.FirstOrDefault(s =>
-                !s.IsOccupied && s.VehicleType == selectedPrice.VehicleType);
+                !s.IsOccupied && s.AllowedVehicleType == selectedPrice.VehicleType);
 
             if (freeSlot != null)
             {
                 freeSlot.IsOccupied = true;
+                freeSlot.CurrentVehicleID = vehicle.VehicleId;
             }
 
             var newTicket = new Ticket
             {   TicketCode = cardCode,
-                LicensePlate = licensePlate,
                 VehicleId = vehicle.VehicleId,
                 PriceConfigId = selectedPrice.ConfigId,
                 ParkingSlotId = freeSlot?.SlotId,
                 EntryTime = DateTime.Now,
+                Status = TicketStatus.Inparking,
+                IsMonthly = hasMonthlyPass
             };
 
             _db.Tickets.Add(newTicket);
@@ -177,22 +182,32 @@ namespace AppBaiDoXeThongMinh.Views
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 string key = keyword.Trim().ToUpper();
-                query = query.Where(t => t.TicketCode.Contains(key) || t.LicensePlate.Contains(key));
+                query = query.Where(t => t.TicketCode.Contains(key) || t.Vehicle.LicensePlate.Contains(key));
             }
 
             dgvParkedVehicles.DataSource = query.Select(t => new
             {
                 t.TicketId,
                 t.TicketCode,
+                t.Vehicle.LicensePlate,
+                VehicleType = t.Vehicle != null ? (VehicleType?)t.Vehicle.VehicleType : null,
+                t.EntryTime
+            })
+            .AsEnumerable()
+            .Select(t => new
+            {
+                t.TicketId,
+                t.TicketCode,
                 t.LicensePlate,
-                VehicleType = t.Vehicle != null ? t.Vehicle.VehicleType : "",
+                VehicleName = VehicleName(t.VehicleType),
                 CheckInTime = t.EntryTime.ToString("dd/MM/yyyy HH:mm")
-            }).ToList();
+            })
+            .ToList();
         }
 
         private void UpdateStatistics()
         {
-            int parkedCount = _db.Tickets.Count(t => t.Status == "InParking");
+            int parkedCount = _db.Tickets.Count(t => t.Status == TicketStatus.Inparking);
             decimal todayRevenue = _db.Invoices
                 .Where(i => i.PaymentDate.Date == DateTime.Today)
                 .Sum(i => (decimal?)i.TotalAmount) ?? 0m;
@@ -206,6 +221,7 @@ namespace AppBaiDoXeThongMinh.Views
             base.OnFormClosed(e);
         }
 
-        
+        private static string VehicleName(VehicleType? type) =>
+            type == VehicleType.Car ? "Ô tô" : type == VehicleType.Motorbike ? "Xe máy" : "";
     }
 }
