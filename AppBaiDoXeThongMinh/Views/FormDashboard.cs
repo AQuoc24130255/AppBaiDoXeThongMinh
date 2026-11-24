@@ -28,6 +28,7 @@ public partial class FormDashboard : Form
     private void SetupUi()
     {
         btRevenue.Click += (_, _) => RefreshDashboard();
+        btDetail.Click += BtDetail_Click;
         
         panelThongke.Paint += PanelThongke_Paint;
         panelThongke.Resize += (_, _) => panelThongke.Invalidate();

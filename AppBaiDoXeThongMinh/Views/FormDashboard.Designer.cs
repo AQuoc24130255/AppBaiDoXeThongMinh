@@ -31,6 +31,9 @@ partial class FormDashboard
     /// </summary>
     private void InitializeComponent()
     {
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         grbCurrentParking = new System.Windows.Forms.GroupBox();
         flowLayoutPanelCurrentParking = new System.Windows.Forms.FlowLayoutPanel();
         panelParked = new System.Windows.Forms.Panel();
@@ -58,11 +61,15 @@ partial class FormDashboard
         lbTotalSlots = new System.Windows.Forms.Label();
         lbSlots = new System.Windows.Forms.Label();
         grbRevenue = new System.Windows.Forms.GroupBox();
-        flowLayoutPanelSummary = new System.Windows.Forms.FlowLayoutPanel();
-        btRevenue = new System.Windows.Forms.Button();
-        grbSummary = new System.Windows.Forms.GroupBox();
-        lbTitleSummary = new System.Windows.Forms.Label();
         flowLayoutPanelFilter = new System.Windows.Forms.Panel();
+        grbFilter = new System.Windows.Forms.GroupBox();
+        dataGridViewFilter = new System.Windows.Forms.DataGridView();
+        Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        Shift = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        VehicleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        TranSactionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        Hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
         tableLayoutPanelFilter = new System.Windows.Forms.TableLayoutPanel();
         cbVehicleType = new System.Windows.Forms.ComboBox();
         lbShift = new System.Windows.Forms.Label();
@@ -72,20 +79,17 @@ partial class FormDashboard
         dtpEndDate = new System.Windows.Forms.DateTimePicker();
         lbVehicleType = new System.Windows.Forms.Label();
         cbShift = new System.Windows.Forms.ComboBox();
-        grbFilter = new System.Windows.Forms.GroupBox();
-        dataGridViewFilter = new System.Windows.Forms.DataGridView();
-        Hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        TranSactionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        VehicleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        Shift = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        lbTotalRevenue = new System.Windows.Forms.Label();
-        lbDayAmount = new System.Windows.Forms.Label();
-        lbNightAmount = new System.Windows.Forms.Label();
-        lbDayTotalAmount = new System.Windows.Forms.Label();
-        lbNightTotalAmount = new System.Windows.Forms.Label();
+        flowLayoutPanelSummary = new System.Windows.Forms.FlowLayoutPanel();
+        btRevenue = new System.Windows.Forms.Button();
+        grbSummary = new System.Windows.Forms.GroupBox();
         panelThongke = new System.Windows.Forms.Panel();
+        lbNightTotalAmount = new System.Windows.Forms.Label();
+        lbDayTotalAmount = new System.Windows.Forms.Label();
+        lbNightAmount = new System.Windows.Forms.Label();
+        lbDayAmount = new System.Windows.Forms.Label();
+        lbTotalRevenue = new System.Windows.Forms.Label();
+        lbTitleSummary = new System.Windows.Forms.Label();
+        btDetail = new System.Windows.Forms.Button();
         grbCurrentParking.SuspendLayout();
         flowLayoutPanelCurrentParking.SuspendLayout();
         panelParked.SuspendLayout();
@@ -94,12 +98,12 @@ partial class FormDashboard
         panelMonthly.SuspendLayout();
         panelSlots.SuspendLayout();
         grbRevenue.SuspendLayout();
-        flowLayoutPanelSummary.SuspendLayout();
-        grbSummary.SuspendLayout();
         flowLayoutPanelFilter.SuspendLayout();
-        tableLayoutPanelFilter.SuspendLayout();
         grbFilter.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridViewFilter).BeginInit();
+        tableLayoutPanelFilter.SuspendLayout();
+        flowLayoutPanelSummary.SuspendLayout();
+        grbSummary.SuspendLayout();
         SuspendLayout();
         // 
         // grbCurrentParking
@@ -379,67 +383,90 @@ partial class FormDashboard
         grbRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
         grbRevenue.Location = new System.Drawing.Point(0, 133);
         grbRevenue.Name = "grbRevenue";
-        grbRevenue.Size = new System.Drawing.Size(800, 317);
+        grbRevenue.Size = new System.Drawing.Size(800, 357);
         grbRevenue.TabIndex = 1;
         grbRevenue.TabStop = false;
         grbRevenue.Text = "Báo cáo doanh thu theo Ngày/Đêm";
-        // 
-        // flowLayoutPanelSummary
-        // 
-        flowLayoutPanelSummary.Controls.Add(btRevenue);
-        flowLayoutPanelSummary.Controls.Add(grbSummary);
-        flowLayoutPanelSummary.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-        flowLayoutPanelSummary.Location = new System.Drawing.Point(591, 3);
-        flowLayoutPanelSummary.Name = "flowLayoutPanelSummary";
-        flowLayoutPanelSummary.Size = new System.Drawing.Size(210, 292);
-        flowLayoutPanelSummary.Dock = System.Windows.Forms.DockStyle.Right;
-        flowLayoutPanelSummary.TabIndex = 0;
-        // 
-        // btRevenue
-        // 
-        btRevenue.Location = new System.Drawing.Point(3, 3);
-        btRevenue.Name = "btRevenue";
-        btRevenue.Size = new System.Drawing.Size(197, 23);
-        btRevenue.TabIndex = 0;
-        btRevenue.Text = "Thống Kê";
-        btRevenue.UseVisualStyleBackColor = true;
-        
-        // 
-        // grbSummary
-        // 
-        grbSummary.Controls.Add(panelThongke);
-        grbSummary.Controls.Add(lbNightTotalAmount);
-        grbSummary.Controls.Add(lbDayTotalAmount);
-        grbSummary.Controls.Add(lbNightAmount);
-        grbSummary.Controls.Add(lbDayAmount);
-        grbSummary.Controls.Add(lbTotalRevenue);
-        grbSummary.Controls.Add(lbTitleSummary);
-        grbSummary.Location = new System.Drawing.Point(3, 32);
-        grbSummary.Name = "grbSummary";
-        grbSummary.Size = new System.Drawing.Size(200, 257);
-        grbSummary.TabIndex = 1;
-        grbSummary.TabStop = false;
-        grbSummary.Text = "Tổng doanh thu";
-        // 
-        // lbTitleSummary
-        // 
-        lbTitleSummary.BackColor = System.Drawing.SystemColors.MenuHighlight;
-        lbTitleSummary.Location = new System.Drawing.Point(6, 19);
-        lbTitleSummary.Name = "lbTitleSummary";
-        lbTitleSummary.Size = new System.Drawing.Size(188, 23);
-        lbTitleSummary.TabIndex = 0;
-        lbTitleSummary.Text = "Doanh thu thu được";
-        lbTitleSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // flowLayoutPanelFilter
         // 
         flowLayoutPanelFilter.Controls.Add(grbFilter);
         flowLayoutPanelFilter.Controls.Add(tableLayoutPanelFilter);
         flowLayoutPanelFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-        flowLayoutPanelFilter.Location = new System.Drawing.Point(3, 3);
+        flowLayoutPanelFilter.Location = new System.Drawing.Point(3, 19);
         flowLayoutPanelFilter.Name = "flowLayoutPanelFilter";
-        flowLayoutPanelFilter.Size = new System.Drawing.Size(582, 292);
+        flowLayoutPanelFilter.Size = new System.Drawing.Size(584, 335);
         flowLayoutPanelFilter.TabIndex = 1;
+        // 
+        // grbFilter
+        // 
+        grbFilter.Controls.Add(dataGridViewFilter);
+        grbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+        grbFilter.Location = new System.Drawing.Point(0, 57);
+        grbFilter.Name = "grbFilter";
+        grbFilter.Size = new System.Drawing.Size(584, 278);
+        grbFilter.TabIndex = 1;
+        grbFilter.TabStop = false;
+        grbFilter.Text = "Chi tiết doanh thu";
+        // 
+        // dataGridViewFilter
+        // 
+        dataGridViewFilter.AllowUserToAddRows = false;
+        dataGridViewFilter.AllowUserToDeleteRows = false;
+        dataGridViewFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+        dataGridViewFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridViewFilter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Date, Shift, VehicleType, TranSactionCount, TotalAmount, Hours });
+        dataGridViewFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+        dataGridViewFilter.Location = new System.Drawing.Point(3, 19);
+        dataGridViewFilter.Name = "dataGridViewFilter";
+        dataGridViewFilter.ReadOnly = true;
+        dataGridViewFilter.RowHeadersVisible = false;
+        dataGridViewFilter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        dataGridViewFilter.Size = new System.Drawing.Size(578, 256);
+        dataGridViewFilter.TabIndex = 0;
+        dataGridViewFilter.Text = "dataGridView1";
+        // 
+        // Date
+        // 
+        Date.HeaderText = "Ngày";
+        Date.Name = "Date";
+        Date.ReadOnly = true;
+        // 
+        // Shift
+        // 
+        Shift.HeaderText = "Ca";
+        Shift.Name = "Shift";
+        Shift.ReadOnly = true;
+        // 
+        // VehicleType
+        // 
+        VehicleType.HeaderText = "Loại Xe";
+        VehicleType.Name = "VehicleType";
+        VehicleType.ReadOnly = true;
+        // 
+        // TranSactionCount
+        // 
+        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+        TranSactionCount.DefaultCellStyle = dataGridViewCellStyle1;
+        TranSactionCount.HeaderText = "Số Lần đỗ";
+        TranSactionCount.Name = "TranSactionCount";
+        TranSactionCount.ReadOnly = true;
+        // 
+        // TotalAmount
+        // 
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        TotalAmount.DefaultCellStyle = dataGridViewCellStyle2;
+        TotalAmount.HeaderText = "Tổng Tiền";
+        TotalAmount.Name = "TotalAmount";
+        TotalAmount.ReadOnly = true;
+        // 
+        // Hours
+        // 
+        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        Hours.DefaultCellStyle = dataGridViewCellStyle3;
+        Hours.HeaderText = "Số Giờ Đỗ";
+        Hours.Name = "Hours";
+        Hours.ReadOnly = true;
         // 
         // tableLayoutPanelFilter
         // 
@@ -456,29 +483,28 @@ partial class FormDashboard
         tableLayoutPanelFilter.Controls.Add(dtpEndDate, 1, 1);
         tableLayoutPanelFilter.Controls.Add(lbVehicleType, 3, 0);
         tableLayoutPanelFilter.Controls.Add(cbShift, 2, 1);
-        tableLayoutPanelFilter.Location = new System.Drawing.Point(3, 3);
+        tableLayoutPanelFilter.Dock = System.Windows.Forms.DockStyle.Top;
+        tableLayoutPanelFilter.Location = new System.Drawing.Point(0, 0);
         tableLayoutPanelFilter.Name = "tableLayoutPanelFilter";
         tableLayoutPanelFilter.RowCount = 2;
         tableLayoutPanelFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.295776F));
         tableLayoutPanelFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.704224F));
-        tableLayoutPanelFilter.Size = new System.Drawing.Size(579, 57);
+        tableLayoutPanelFilter.Size = new System.Drawing.Size(584, 57);
         tableLayoutPanelFilter.TabIndex = 0;
-        tableLayoutPanelFilter.Dock = System.Windows.Forms.DockStyle.Top;
         // 
         // cbVehicleType
         // 
+        cbVehicleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         cbVehicleType.FormattingEnabled = true;
         cbVehicleType.Items.AddRange(new object[] { "Tất Cả", "Xe Máy", "Xe Ô Tô" });
-        cbVehicleType.Location = new System.Drawing.Point(440, 31);
+        cbVehicleType.Location = new System.Drawing.Point(445, 31);
         cbVehicleType.Name = "cbVehicleType";
         cbVehicleType.Size = new System.Drawing.Size(136, 23);
         cbVehicleType.TabIndex = 6;
-        cbVehicleType.DropDownStyle = ComboBoxStyle.DropDownList;
-        cbVehicleType.SelectedIndex = 0;
         // 
         // lbShift
         // 
-        lbShift.Location = new System.Drawing.Point(291, 0);
+        lbShift.Location = new System.Drawing.Point(296, 0);
         lbShift.Name = "lbShift";
         lbShift.Size = new System.Drawing.Size(143, 23);
         lbShift.TabIndex = 3;
@@ -496,16 +522,16 @@ partial class FormDashboard
         // 
         // dtpStartDate
         // 
+        dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
         dtpStartDate.Location = new System.Drawing.Point(3, 31);
         dtpStartDate.Name = "dtpStartDate";
         dtpStartDate.Size = new System.Drawing.Size(130, 23);
         dtpStartDate.TabIndex = 1;
-        dtpStartDate.Format = DateTimePickerFormat.Short;
-        dtpStartDate.Value = DateTime.Today.AddDays(-6);
+        dtpStartDate.Value = new System.DateTime(2026, 11, 18, 0, 0, 0, 0);
         // 
         // lbEndDate
         // 
-        lbEndDate.Location = new System.Drawing.Point(139, 0);
+        lbEndDate.Location = new System.Drawing.Point(141, 0);
         lbEndDate.Name = "lbEndDate";
         lbEndDate.Size = new System.Drawing.Size(146, 23);
         lbEndDate.TabIndex = 0;
@@ -514,16 +540,16 @@ partial class FormDashboard
         // 
         // dtpEndDate
         // 
-        dtpEndDate.Location = new System.Drawing.Point(139, 31);
+        dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+        dtpEndDate.Location = new System.Drawing.Point(141, 31);
         dtpEndDate.Name = "dtpEndDate";
         dtpEndDate.Size = new System.Drawing.Size(146, 23);
         dtpEndDate.TabIndex = 2;
-        dtpEndDate.Format = DateTimePickerFormat.Short;
-        dtpEndDate.Value = DateTime.Today;
+        dtpEndDate.Value = new System.DateTime(2026, 11, 24, 0, 0, 0, 0);
         // 
         // lbVehicleType
         // 
-        lbVehicleType.Location = new System.Drawing.Point(440, 0);
+        lbVehicleType.Location = new System.Drawing.Point(445, 0);
         lbVehicleType.Name = "lbVehicleType";
         lbVehicleType.Size = new System.Drawing.Size(136, 23);
         lbVehicleType.TabIndex = 4;
@@ -532,75 +558,93 @@ partial class FormDashboard
         // 
         // cbShift
         // 
+        cbShift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         cbShift.FormattingEnabled = true;
         cbShift.Items.AddRange(new object[] { "Cả Ngày", "Sáng", "Tối" });
-        cbShift.Location = new System.Drawing.Point(291, 31);
+        cbShift.Location = new System.Drawing.Point(296, 31);
         cbShift.Name = "cbShift";
         cbShift.Size = new System.Drawing.Size(143, 23);
         cbShift.TabIndex = 5;
-        cbShift.DropDownStyle = ComboBoxStyle.DropDownList;
-        cbShift.SelectedIndex = 0;
         // 
-        // grbFilter
+        // flowLayoutPanelSummary
         // 
-        grbFilter.Controls.Add(dataGridViewFilter);
-        grbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-        grbFilter.Location = new System.Drawing.Point(3, 66);
-        grbFilter.Name = "grbFilter";
-        grbFilter.Size = new System.Drawing.Size(579, 223);
-        grbFilter.TabIndex = 1;
-        grbFilter.TabStop = false;
-        grbFilter.Text = "Chi tiết doanh thu";
+        flowLayoutPanelSummary.Controls.Add(btRevenue);
+        flowLayoutPanelSummary.Controls.Add(grbSummary);
+        flowLayoutPanelSummary.Dock = System.Windows.Forms.DockStyle.Right;
+        flowLayoutPanelSummary.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+        flowLayoutPanelSummary.Location = new System.Drawing.Point(587, 19);
+        flowLayoutPanelSummary.Name = "flowLayoutPanelSummary";
+        flowLayoutPanelSummary.Size = new System.Drawing.Size(210, 335);
+        flowLayoutPanelSummary.TabIndex = 0;
         // 
-        // dataGridViewFilter
+        // btRevenue
         // 
-        dataGridViewFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridViewFilter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Date, Shift, VehicleType, TranSactionCount, TotalAmount, Hours });
-        dataGridViewFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-        dataGridViewFilter.Location = new System.Drawing.Point(3, 19);
-        dataGridViewFilter.Name = "dataGridViewFilter";
-        dataGridViewFilter.Size = new System.Drawing.Size(573, 201);
-        dataGridViewFilter.TabIndex = 0;
-        dataGridViewFilter.Text = "dataGridView1";
-        dataGridViewFilter.ReadOnly = true;
-        dataGridViewFilter.AllowUserToAddRows = false;
-        dataGridViewFilter.AllowUserToDeleteRows = false;
-        dataGridViewFilter.RowHeadersVisible = false;
-        dataGridViewFilter.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dataGridViewFilter.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        btRevenue.Location = new System.Drawing.Point(3, 3);
+        btRevenue.Name = "btRevenue";
+        btRevenue.Size = new System.Drawing.Size(197, 23);
+        btRevenue.TabIndex = 0;
+        btRevenue.Text = "Thống Kê";
+        btRevenue.UseVisualStyleBackColor = true;
         // 
-        // Hours
+        // grbSummary
         // 
-        Hours.HeaderText = "Số Giờ Đỗ";
-        Hours.Name = "Hours";
-        Hours.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        grbSummary.Controls.Add(btDetail);
+        grbSummary.Controls.Add(panelThongke);
+        grbSummary.Controls.Add(lbNightTotalAmount);
+        grbSummary.Controls.Add(lbDayTotalAmount);
+        grbSummary.Controls.Add(lbNightAmount);
+        grbSummary.Controls.Add(lbDayAmount);
+        grbSummary.Controls.Add(lbTotalRevenue);
+        grbSummary.Controls.Add(lbTitleSummary);
+        grbSummary.Location = new System.Drawing.Point(3, 32);
+        grbSummary.Name = "grbSummary";
+        grbSummary.Size = new System.Drawing.Size(200, 294);
+        grbSummary.TabIndex = 1;
+        grbSummary.TabStop = false;
+        grbSummary.Text = "Tổng doanh thu";
         // 
-        // TotalAmount
+        // panelThongke
         // 
-        TotalAmount.HeaderText = "Tổng Tiền";
-        TotalAmount.Name = "TotalAmount";
-        TotalAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        panelThongke.Location = new System.Drawing.Point(18, 135);
+        panelThongke.Name = "panelThongke";
+        panelThongke.Size = new System.Drawing.Size(151, 100);
+        panelThongke.TabIndex = 7;
         // 
-        // TranSactionCount
+        // lbNightTotalAmount
         // 
-        TranSactionCount.HeaderText = "Số Lần đỗ";
-        TranSactionCount.Name = "TranSactionCount";
-        TranSactionCount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        lbNightTotalAmount.Location = new System.Drawing.Point(62, 109);
+        lbNightTotalAmount.Name = "lbNightTotalAmount";
+        lbNightTotalAmount.Size = new System.Drawing.Size(132, 23);
+        lbNightTotalAmount.TabIndex = 5;
+        lbNightTotalAmount.Text = "0 VND";
+        lbNightTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // VehicleType
+        // lbDayTotalAmount
         // 
-        VehicleType.HeaderText = "Loại Xe";
-        VehicleType.Name = "VehicleType";
+        lbDayTotalAmount.Location = new System.Drawing.Point(62, 86);
+        lbDayTotalAmount.Name = "lbDayTotalAmount";
+        lbDayTotalAmount.Size = new System.Drawing.Size(132, 23);
+        lbDayTotalAmount.TabIndex = 4;
+        lbDayTotalAmount.Text = "0 VND";
+        lbDayTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // Shift
+        // lbNightAmount
         // 
-        Shift.HeaderText = "Ca";
-        Shift.Name = "Shift";
+        lbNightAmount.Location = new System.Drawing.Point(6, 109);
+        lbNightAmount.Name = "lbNightAmount";
+        lbNightAmount.Size = new System.Drawing.Size(56, 23);
+        lbNightAmount.TabIndex = 3;
+        lbNightAmount.Text = "Ca Tối";
+        lbNightAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // Date
+        // lbDayAmount
         // 
-        Date.HeaderText = "Ngày";
-        Date.Name = "Date";
+        lbDayAmount.Location = new System.Drawing.Point(6, 86);
+        lbDayAmount.Name = "lbDayAmount";
+        lbDayAmount.Size = new System.Drawing.Size(56, 23);
+        lbDayAmount.TabIndex = 2;
+        lbDayAmount.Text = "Ca Sáng";
+        lbDayAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // lbTotalRevenue
         // 
@@ -612,56 +656,31 @@ partial class FormDashboard
         lbTotalRevenue.Text = "0 VND";
         lbTotalRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // lbDayAmount
+        // lbTitleSummary
         // 
-        lbDayAmount.Location = new System.Drawing.Point(6, 86);
-        lbDayAmount.Name = "lbDayAmount";
-        lbDayAmount.Size = new System.Drawing.Size(56, 23);
-        lbDayAmount.TabIndex = 2;
-        lbDayAmount.Text = "Ca Sáng";
-        lbDayAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbTitleSummary.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbTitleSummary.Location = new System.Drawing.Point(6, 19);
+        lbTitleSummary.Name = "lbTitleSummary";
+        lbTitleSummary.Size = new System.Drawing.Size(188, 23);
+        lbTitleSummary.TabIndex = 0;
+        lbTitleSummary.Text = "Doanh thu thu được";
+        lbTitleSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // lbNightAmount
+        // btDetail
         // 
-        lbNightAmount.Location = new System.Drawing.Point(6, 109);
-        lbNightAmount.Name = "lbNightAmount";
-        lbNightAmount.Size = new System.Drawing.Size(56, 23);
-        lbNightAmount.TabIndex = 3;
-        lbNightAmount.Text = "Ca Tối";
-        lbNightAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // lbDayTotalAmount
-        // 
-        lbDayTotalAmount.Location = new System.Drawing.Point(149, 86);
-        lbDayTotalAmount.Name = "lbDayTotalAmount";
-        lbDayTotalAmount.Size = new System.Drawing.Size(42, 23);
-        lbDayTotalAmount.TabIndex = 4;
-        lbDayTotalAmount.Text = "0 VND";
-        lbDayTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        lbDayTotalAmount.SetBounds(62, 86, 132, 23);
-        // 
-        // lbNightTotalAmount
-        // 
-        lbNightTotalAmount.Location = new System.Drawing.Point(146, 109);
-        lbNightTotalAmount.Name = "lbNightTotalAmount";
-        lbNightTotalAmount.Size = new System.Drawing.Size(48, 23);
-        lbNightTotalAmount.TabIndex = 5;
-        lbNightTotalAmount.Text = "0 VND";
-        lbNightTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        lbNightTotalAmount.SetBounds(62, 109, 132, 23);
-        // 
-        // panelThongke
-        // 
-        panelThongke.Location = new System.Drawing.Point(18, 135);
-        panelThongke.Name = "panelThongke";
-        panelThongke.Size = new System.Drawing.Size(151, 100);
-        panelThongke.TabIndex = 7;
+        btDetail.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        btDetail.Location = new System.Drawing.Point(0, 241);
+        btDetail.Name = "btDetail";
+        btDetail.Size = new System.Drawing.Size(197, 47);
+        btDetail.TabIndex = 8;
+        btDetail.Text = "Chi Tiết";
+        btDetail.UseVisualStyleBackColor = true;
         // 
         // FormDashboard
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        ClientSize = new System.Drawing.Size(800, 490);
         Controls.Add(grbRevenue);
         Controls.Add(grbCurrentParking);
         Text = "FormDashboard";
@@ -673,14 +692,16 @@ partial class FormDashboard
         panelMonthly.ResumeLayout(false);
         panelSlots.ResumeLayout(false);
         grbRevenue.ResumeLayout(false);
-        flowLayoutPanelSummary.ResumeLayout(false);
-        grbSummary.ResumeLayout(false);
         flowLayoutPanelFilter.ResumeLayout(false);
-        tableLayoutPanelFilter.ResumeLayout(false);
         grbFilter.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)dataGridViewFilter).EndInit();
+        tableLayoutPanelFilter.ResumeLayout(false);
+        flowLayoutPanelSummary.ResumeLayout(false);
+        grbSummary.ResumeLayout(false);
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button btDetail;
 
     private System.Windows.Forms.Panel panelThongke;
 
