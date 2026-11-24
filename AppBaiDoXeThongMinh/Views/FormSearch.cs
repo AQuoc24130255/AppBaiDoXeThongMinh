@@ -377,7 +377,7 @@ public partial class FormSearch : Form
 
             // Lập hóa đơn + đóng vé + trả chỗ đỗ trong cùng một lần lưu
             var invoice = new Invoice(ticket.TicketId, ticket.Vehicle?.LicensePlate ?? "", ticket.EntryTime, now,
-                total, "Cash", now, userId, true, ticket.IsMonthly, shift.ShiftId);
+                total, PaymantMethodType.Cash, now, userId, true, ticket.IsMonthly, shift.ShiftId);
             db.Invoices.Add(invoice);
 
             ticket.Status = TicketStatus.CheckedOut;

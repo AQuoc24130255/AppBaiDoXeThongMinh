@@ -16,5 +16,4 @@ public class ParkingSlot
     public VehicleType AllowedVehicleType { get; set; }
     // id xe dang do, khong neu trong
     public int? CurrentVehicleID { get; set; }
-    public VehicleType VehicleType { get; set; }
 }

@@ -216,7 +216,6 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(265, 30);
             txtSearch.TabIndex = 2;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnLoadLostCard
             // 

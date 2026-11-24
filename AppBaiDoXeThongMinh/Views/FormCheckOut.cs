@@ -93,6 +93,7 @@ namespace AppBaiDoXeThongMinh.Views
             if (string.IsNullOrEmpty(cardCode)) return;
 
             var ticket = _db.Tickets
+                .Include(t => t.Vehicle)
                 .Include(t => t.PriceConfig)
                 .Include(t => t.ParkingSlot)
                 .FirstOrDefault(t => t.TicketCode == cardCode && t.Status == TicketStatus.Inparking);
@@ -117,6 +118,7 @@ namespace AppBaiDoXeThongMinh.Views
 
             int ticketId = Convert.ToInt32(dgvParkedVehicles.CurrentRow.Cells["colId"].Value);
             var ticket = _db.Tickets
+                .Include(t => t.Vehicle)
                 .Include(t => t.PriceConfig)
                 .Include(t => t.ParkingSlot)
                 .FirstOrDefault(t => t.TicketId == ticketId);
@@ -133,7 +135,7 @@ namespace AppBaiDoXeThongMinh.Views
             _isLostCardMode = isLostCard;
 
             txtCardCodeOut.Text = ticket.TicketCode;
-            txtLicensePlateRecorded.Text = ticket.LicensePlate;
+            txtLicensePlateRecorded.Text = ticket.Vehicle?.LicensePlate??"";
             txtLicensePlateOut.Clear();
 
             decimal fee = CalculateParkingFee(ticket, isLostCard);
@@ -150,7 +152,7 @@ namespace AppBaiDoXeThongMinh.Views
             txtLicensePlateOut.Focus();
         }
 
-        private string NormalizePlate(string plate)
+        private string NormalizePlate(string? plate)
         {
             if (string.IsNullOrWhiteSpace(plate)) return string.Empty;
             return Regex.Replace(plate, @"[^a-zA-Z0-9]", "").ToUpper();
@@ -160,7 +162,7 @@ namespace AppBaiDoXeThongMinh.Views
         {
             if (_activeTicket == null) return false;
 
-            string recordedPlate = NormalizePlate(_activeTicket.LicensePlate);
+            string recordedPlate = NormalizePlate(_activeTicket.Vehicle?.LicensePlate);
             string enteredPlate = NormalizePlate(txtLicensePlateOut.Text);
 
             if (string.IsNullOrEmpty(enteredPlate))
@@ -205,7 +207,7 @@ namespace AppBaiDoXeThongMinh.Views
             if (!VerifyLicensePlate())
             {
                 var confirm = MessageBox.Show(
-                    $"Biển số nhập vào [{txtLicensePlateOut.Text}] KHÔNG KHỚP với lúc vào [{_activeTicket.LicensePlate}].\nXác nhận cho xe xuất bến?",
+                    $"Biển số nhập vào [{txtLicensePlateOut.Text}] KHÔNG KHỚP với lúc vào [{_activeTicket.Vehicle?.LicensePlate}].\nXác nhận cho xe xuất bến?",
                     "Cảnh báo lệch biển số",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning);
@@ -232,10 +234,18 @@ namespace AppBaiDoXeThongMinh.Views
             var invoice = new Invoice
             {
                 TicketId = _activeTicket.TicketId,
+                LicensePlate = _activeTicket.Vehicle.LicensePlate,
+                CheckInTime = _activeTicket.EntryTime,
+                CheckOutTime = checkOutTime,
+                PaymentMethod = PaymantMethodType.Cash,
+                CreatedBy = _currentUserId,
                 ShiftId = _currentShiftId,
                 TotalAmount = totalAmount,
-                PaymentDate = checkOutTime
+                PaymentDate = checkOutTime,
+                IsMonthlyFree = _activeTicket.IsMonthly
             };
+            _activeTicket.TotalAmount = totalAmount;
+            _activeTicket.InvoiceId = invoice.InvoiceId;
             _db.Invoices.Add(invoice);
             _db.SaveChanges();
 
@@ -261,29 +271,39 @@ namespace AppBaiDoXeThongMinh.Views
         private void LoadParkedVehicles(string keyword = "")
         {
             var query = _db.Tickets
-                .Where(t => t.Status == "InParking")
-                .OrderByDescending(t => t.CheckInTime)
+                .Where(t => t.Status == TicketStatus.Inparking)
+                .OrderByDescending(t => t.EntryTime)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 string key = keyword.Trim().ToUpper();
-                query = query.Where(t => t.CardCode.Contains(key) || t.LicensePlate.Contains(key));
+                query = query.Where(t => t.TicketCode.Contains(key) || t.Vehicle.LicensePlate.Contains(key));
             }
 
             dgvParkedVehicles.DataSource = query.Select(t => new
             {
-                t.Id,
-                t.CardCode,
+                t.TicketId,
+                t.TicketCode,
+                t.Vehicle.LicensePlate,
+                VehicleType = t.Vehicle != null ? (VehicleType?)t.Vehicle.VehicleType : null,
+                t.EntryTime
+            })
+            .AsEnumerable()
+            .Select(t => new
+            {
+                t.TicketId,
+                t.TicketCode,
                 t.LicensePlate,
-                VehicleType = t.Vehicle != null ? t.Vehicle.VehicleType : "",
-                CheckInTime = t.CheckInTime.ToString("dd/MM/yyyy HH:mm")
-            }).ToList();
+                VehicleName = VehicleName(t.VehicleType),
+                CheckInTime = t.EntryTime.ToString("dd/MM/yyyy HH:mm")
+            })
+            .ToList();
         }
 
         private void UpdateStatistics()
         {
-            int parkedCount = _db.Tickets.Count(t => t.Status == "InParking");
+            int parkedCount = _db.Tickets.Count(t => t.Status == TicketStatus.Inparking);
             decimal todayRevenue = _db.Invoices
                 .Where(i => i.PaymentDate.Date == DateTime.Today)
                 .Sum(i => (decimal?)i.TotalAmount) ?? 0m;
@@ -296,7 +316,8 @@ namespace AppBaiDoXeThongMinh.Views
             _db.Dispose();
             base.OnFormClosed(e);
         }
-
+        private static string VehicleName(VehicleType? type) =>
+            type == VehicleType.Car ? "Ô tô" : type == VehicleType.Motorbike ? "Xe máy" : "";
         
     }
 }

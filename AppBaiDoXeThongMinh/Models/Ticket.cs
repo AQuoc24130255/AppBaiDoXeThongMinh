@@ -45,5 +45,5 @@ public class Ticket
 
     // Liên kết đến vị trí đỗ xe 
     public virtual ParkingSlot ParkingSlot { get; set; }
-    public string LicensePlate { get; set; }
+
 }

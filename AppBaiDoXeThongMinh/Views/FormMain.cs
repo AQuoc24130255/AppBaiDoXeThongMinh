@@ -104,7 +104,7 @@ public partial class FormMain : Form
         };
         sidebar.Controls.Add(menu);
         
-
+        AddMenuButton(menu, "Cá Nhân", () => OpenChildForm(new FormProfile(_currentUser), "CÁ NHÂN"));
         if (_currentUser.Role == Role.Admin)
         {
             AddMenuButton(menu,"Quản lý tài khoản", () =>
@@ -118,7 +118,6 @@ public partial class FormMain : Form
         }
         else
         {
-            AddMenuButton(menu, "Tổng quan", () => OpenChildForm(new FormDashboard(), "TỔNG QUAN"));
             AddMenuButton(menu, "Xe vào bãi", () => OpenChildForm(new FormCheckIn(), "TIẾP NHẬN XE VÀO"));
             AddMenuButton(menu, "Xe ra bãi", () => OpenChildForm(new FormCheckOut(), "XỬ LÝ XE RA"));
             AddMenuButton(menu, "Tra cứu", () => OpenChildForm(new FormSearch(_currentUser), "TRA CỨU THÔNG TIN"));
