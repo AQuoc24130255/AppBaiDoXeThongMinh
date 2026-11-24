@@ -51,6 +51,5 @@ public class Ticket
     // Liên kết đến vị trí đỗ xe
     public virtual ParkingSlot? ParkingSlot { get; set; }
 
-    // Biển số xe lưu trên vé
-    public string LicensePlate { get; set; } = string.Empty;
+    
 }
