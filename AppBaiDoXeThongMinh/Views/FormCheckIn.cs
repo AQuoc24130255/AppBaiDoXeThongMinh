@@ -139,8 +139,11 @@ namespace AppBaiDoXeThongMinh.Views
                 _db.SaveChanges();
             }
 
-            bool hasMonthlyPass = _db.MonthlySubscribers.Any(m =>
-                m.LicensePlate == licensePlate && m.EndDate >= DateTime.Now && m.IsActive);
+            string normalizedPlate = NormalizePlate(licensePlate);
+            bool hasMonthlyPass = _db.MonthlySubscribers
+                .Where(m => m.IsActive && m.EndDate >= DateTime.Today)
+                .AsEnumerable()
+                .Any(m => NormalizePlate(m.LicensePlate) == normalizedPlate);
 
             var freeSlot = _db.ParkingSlots.FirstOrDefault(s =>
                 !s.IsOccupied && s.AllowedVehicleType == selectedPrice.VehicleType);
@@ -166,6 +169,10 @@ namespace AppBaiDoXeThongMinh.Views
 
             LoadParkedVehicles(txtSearch.Text);
             UpdateStatistics();
+            if (hasMonthlyPass)
+            {
+                lblStats.Text += $"  |  [VÉ THÁNG: {licensePlate}]";
+            }
 
             txtCardCodeIn.Clear();
             txtLicensePlateIn.Clear();
