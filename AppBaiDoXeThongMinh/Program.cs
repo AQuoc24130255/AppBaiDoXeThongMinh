@@ -14,7 +14,7 @@ static class Program
     {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
+        /*ApplicationConfiguration.Initialize();
 
         User u;
         
@@ -23,9 +23,17 @@ static class Program
             db.Database.EnsureCreated();
             u = db.Users.FirstOrDefault();
         }
-
         
         Application.Run(new FormLogin());
-        //Application.Run(new FormSearch());
+    
+        Application.Run(new FormProfile());
+        //Application.Run(new FormSearch());*/
+        ApplicationConfiguration.Initialize();
+
+        using var db = new AppDbContext();
+        var guardUser = db.Users.First(u => u.UserName == "guard1");
+
+        Application.Run(new FormProfile(guardUser));
+
     }
 }

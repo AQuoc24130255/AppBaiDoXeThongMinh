@@ -15,16 +15,17 @@ namespace AppBaiDoXeThongMinh.Views
         private readonly int _currentUserId;
         private User? _currentUser;
         private Shift? _activeShift;
+        private readonly CheckBox _chkShowPassword = new();
 
-        // Constructor nhận trực tiếp đối tượng User từ FormMain (Khuyên dùng)
         public FormProfile(User loggedInUser) : this(loggedInUser.UserId)
         {
         }
 
-        // Constructor nhận UserId
         public FormProfile(int currentUserId = 1)
         {
             InitializeComponent();
+            SetupShowPasswordControl();
+
             _db = new AppDbContext();
             _currentUserId = currentUserId;
 
@@ -34,6 +35,30 @@ namespace AppBaiDoXeThongMinh.Views
             tmrClock.Interval = 1000;
             tmrClock.Start();
             lblClock.Text = DateTime.Now.ToString("HH:mm:ss - dd/MM/yyyy");
+        }
+
+        private void SetupShowPasswordControl()
+        {
+            txtOldPassword.UseSystemPasswordChar = true;
+            txtNewPassword.UseSystemPasswordChar = true;
+
+            _chkShowPassword.Text = "Hiển thị mật khẩu";
+            _chkShowPassword.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+            _chkShowPassword.ForeColor = Color.FromArgb(55, 65, 81);
+            _chkShowPassword.AutoSize = true;
+            _chkShowPassword.Location = new Point(575, 99);
+
+            // Dịch nút Cập nhật mật khẩu xuống dưới ô tích để không bị đè
+            btnChangePassword.Location = new Point(575, 127);
+
+            grpUserInfo.Controls.Add(_chkShowPassword);
+
+            _chkShowPassword.CheckedChanged += (s, e) =>
+            {
+                bool isHidden = !_chkShowPassword.Checked;
+                txtOldPassword.UseSystemPasswordChar = isHidden;
+                txtNewPassword.UseSystemPasswordChar = isHidden;
+            };
         }
 
         private void RegisterEvents()
@@ -116,7 +141,6 @@ namespace AppBaiDoXeThongMinh.Views
                 return;
             }
 
-            // Băm mật khẩu cũ nhập vào và đối chiếu với PasswordHash trong database
             string oldPassHash = HashPassword(oldPass);
             if (!string.Equals(_currentUser.PasswordHash, oldPassHash, StringComparison.OrdinalIgnoreCase))
             {
@@ -136,12 +160,13 @@ namespace AppBaiDoXeThongMinh.Views
 
             try
             {
-                // Lưu mật khẩu mới dưới dạng SHA-256 Hex
                 _currentUser.PasswordHash = HashPassword(newPass);
                 _db.SaveChanges();
 
                 txtOldPassword.Clear();
                 txtNewPassword.Clear();
+                _chkShowPassword.Checked = false;
+
                 MessageBox.Show("Cập nhật mật khẩu thành công! Vui lòng dùng mật khẩu mới cho lần đăng nhập sau.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -153,7 +178,7 @@ namespace AppBaiDoXeThongMinh.Views
         private void RefreshShiftState()
         {
             _activeShift = _db.Shifts
-                .Where(s => s.UserId == _currentUserId && s.EndDate == null)
+                .Where(s => s.UserId == _currentUserId && s.EndDate == DateTime.MinValue)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefault();
 
@@ -183,7 +208,7 @@ namespace AppBaiDoXeThongMinh.Views
                 {
                     UserId = _currentUserId,
                     StartDate = DateTime.Now,
-                    EndDate = null
+                    EndDate = DateTime.MinValue
                 };
 
                 _db.Shifts.Add(newShift);
@@ -242,11 +267,13 @@ namespace AppBaiDoXeThongMinh.Views
                 };
             }).ToList();
         }
+        
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             _db.Dispose();
             base.OnFormClosed(e);
         }
+        
     }
 }
