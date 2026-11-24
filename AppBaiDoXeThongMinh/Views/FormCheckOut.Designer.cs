@@ -57,7 +57,7 @@
             pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             pnlHeader.Location = new System.Drawing.Point(0, 0);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new System.Drawing.Size(884, 42);
+            pnlHeader.Size = new System.Drawing.Size(891, 42);
             pnlHeader.TabIndex = 14;
             // 
             // lblStats
@@ -76,7 +76,7 @@
             lblClock.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
             lblClock.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
             lblClock.ForeColor = System.Drawing.Color.Gold;
-            lblClock.Location = new System.Drawing.Point(650, 11);
+            lblClock.Location = new System.Drawing.Point(657, 11);
             lblClock.Name = "lblClock";
             lblClock.Size = new System.Drawing.Size(220, 20);
             lblClock.TabIndex = 1;
@@ -254,7 +254,6 @@
             colId.MinimumWidth = 6;
             colId.Name = "colId";
             colId.ReadOnly = true;
-            colId.Visible = true;
             // 
             // colCardCode
             // 
@@ -290,7 +289,7 @@
             // 
             // FormCheckOut
             // 
-            ClientSize = new System.Drawing.Size(884, 636);
+            ClientSize = new System.Drawing.Size(891, 647);
             Controls.Add(dgvParkedVehicles);
             Controls.Add(btnLoadLostCard);
             Controls.Add(txtSearch);
@@ -340,5 +339,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colVehicleType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckInTime;
         private System.Windows.Forms.Timer tmrClock;
+       
     }
 }
