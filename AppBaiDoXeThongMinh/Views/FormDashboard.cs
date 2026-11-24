@@ -222,7 +222,20 @@ public partial class FormDashboard : Form
     
     private void BtDetail_Click(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        VType? vehicleFilter = cbVehicleType.SelectedIndex switch
+        {
+            1 => VType.Motorbike,
+            2 => VType.Car,
+            _ => null
+        };
+
+        using var form = new FormRevenueChart(
+            dtpStartDate.Value.Date,
+            dtpEndDate.Value.Date,
+            cbShift.SelectedIndex,
+            vehicleFilter);
+
+        form.ShowDialog(this);
     }
     
     // ham ho tro
