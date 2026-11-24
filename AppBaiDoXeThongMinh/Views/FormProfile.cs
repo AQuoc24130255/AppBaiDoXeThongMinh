@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using AppBaiDoXeThongMinh.database;
 using AppBaiDoXeThongMinh.Models;
@@ -11,14 +13,20 @@ namespace AppBaiDoXeThongMinh.Views
     {
         private readonly AppDbContext _db;
         private readonly int _currentUserId;
-        private User _currentUser;
-        private Shift _activeShift;
+        private User? _currentUser;
+        private Shift? _activeShift;
 
-        public FormProfile(User currentUser)
+        // Constructor nhận trực tiếp đối tượng User từ FormMain (Khuyên dùng)
+        public FormProfile(User loggedInUser) : this(loggedInUser.UserId)
+        {
+        }
+
+        // Constructor nhận UserId
+        public FormProfile(int currentUserId = 1)
         {
             InitializeComponent();
             _db = new AppDbContext();
-            _currentUserId = currentUser.UserId;
+            _currentUserId = currentUserId;
 
             LoadUserProfile();
             RegisterEvents();
@@ -35,9 +43,14 @@ namespace AppBaiDoXeThongMinh.Views
             btnChangePassword.Click += (s, e) => HandleChangePassword();
         }
 
+        private static string HashPassword(string rawPassword)
+        {
+            return Convert.ToHexString(
+                SHA256.HashData(Encoding.UTF8.GetBytes(rawPassword)));
+        }
+
         private void LoadUserProfile()
         {
-            // Tìm user đang đăng nhập (nếu khóa chính của bạn là Id thay vì UserId thì đổi u.UserId thành u.Id)
             _currentUser = _db.Users.FirstOrDefault(u => u.UserId == _currentUserId);
 
             if (_currentUser == null)
@@ -49,7 +62,6 @@ namespace AppBaiDoXeThongMinh.Views
             lblFullName.Text = _currentUser.FullName;
             lblUsername.Text = _currentUser.UserName;
 
-            // Chuyển Role sang chuỗi để tương thích cả kiểu string lẫn enum (Admin / Guard / Staff / BaoVe)
             string roleStr = _currentUser.Role.ToString();
             bool isGuard = roleStr.Equals("Guard", StringComparison.OrdinalIgnoreCase) ||
                            roleStr.Equals("Staff", StringComparison.OrdinalIgnoreCase) ||
@@ -61,9 +73,9 @@ namespace AppBaiDoXeThongMinh.Views
                 lblRoleBadge.Text = "BẢO VỆ";
                 lblRoleBadge.BackColor = Color.FromArgb(40, 167, 69);
 
-                // Hiển thị khu vực chấm công
                 pnlAttendance.Visible = true;
-                this.ClientSize = new Size(820, 600);
+                this.AutoScroll = true;
+                this.AutoScrollMinSize = new Size(800, 610);
 
                 RefreshShiftState();
                 LoadShiftHistory();
@@ -74,15 +86,72 @@ namespace AppBaiDoXeThongMinh.Views
                 lblRoleBadge.Text = "ADMIN";
                 lblRoleBadge.BackColor = Color.FromArgb(0, 102, 204);
 
-                // Ẩn khu vực chấm công và thu gọn form cho Admin
                 pnlAttendance.Visible = false;
+                this.AutoScroll = false;
                 this.ClientSize = new Size(820, 275);
+            }
+        }
+
+        private void HandleChangePassword()
+        {
+            if (_currentUser == null)
+            {
+                MessageBox.Show("Không xác định được tài khoản đang đăng nhập!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string oldPass = txtOldPassword.Text;
+            string newPass = txtNewPassword.Text;
+
+            if (string.IsNullOrWhiteSpace(oldPass) || string.IsNullOrWhiteSpace(newPass))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu cũ và mật khẩu mới!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (newPass.Length < 4)
+            {
+                MessageBox.Show("Mật khẩu mới phải có ít nhất 4 ký tự!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNewPassword.Focus();
+                return;
+            }
+
+            // Băm mật khẩu cũ nhập vào và đối chiếu với PasswordHash trong database
+            string oldPassHash = HashPassword(oldPass);
+            if (!string.Equals(_currentUser.PasswordHash, oldPassHash, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Mật khẩu cũ không chính xác!", "Lỗi xác thực", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtOldPassword.SelectAll();
+                txtOldPassword.Focus();
+                return;
+            }
+
+            if (oldPass == newPass)
+            {
+                MessageBox.Show("Mật khẩu mới phải khác mật khẩu cũ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNewPassword.SelectAll();
+                txtNewPassword.Focus();
+                return;
+            }
+
+            try
+            {
+                // Lưu mật khẩu mới dưới dạng SHA-256 Hex
+                _currentUser.PasswordHash = HashPassword(newPass);
+                _db.SaveChanges();
+
+                txtOldPassword.Clear();
+                txtNewPassword.Clear();
+                MessageBox.Show("Cập nhật mật khẩu thành công! Vui lòng dùng mật khẩu mới cho lần đăng nhập sau.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể lưu mật khẩu mới.\nChi tiết: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void RefreshShiftState()
         {
-            // Kiểm tra ca trực chưa kết thúc (EndTime == null) của bảo vệ này
             _activeShift = _db.Shifts
                 .Where(s => s.UserId == _currentUserId && s.EndDate == null)
                 .OrderByDescending(s => s.StartDate)
@@ -98,7 +167,7 @@ namespace AppBaiDoXeThongMinh.Views
             }
             else
             {
-                lblShiftStatus.Text = $"Đang trong ca trực (Bắt đầu lúc: {_activeShift.StartDate:HH:mm - dd/MM/yyyy})";
+                lblShiftStatus.Text = $"Đang trong ca trực (Bắt đầu: {_activeShift.StartDate:HH:mm - dd/MM/yyyy})";
                 lblShiftStatus.ForeColor = Color.FromArgb(204, 41, 54);
 
                 btnAttendance.Text = "CHẤM CÔNG TAN CA";
@@ -110,7 +179,6 @@ namespace AppBaiDoXeThongMinh.Views
         {
             if (_activeShift == null)
             {
-                // Bắt đầu ca trực mới
                 var newShift = new Shift
                 {
                     UserId = _currentUserId,
@@ -125,7 +193,6 @@ namespace AppBaiDoXeThongMinh.Views
             }
             else
             {
-                // Kết thúc ca trực hiện tại
                 var confirm = MessageBox.Show(
                     "Xác nhận kết thúc ca trực và chấm công tan ca?",
                     "Xác nhận tan ca",
@@ -174,34 +241,6 @@ namespace AppBaiDoXeThongMinh.Views
                     Duration = durationText
                 };
             }).ToList();
-        }
-
-        private void HandleChangePassword()
-        {
-            if (_currentUser == null) return;
-
-            string oldPass = txtOldPassword.Text.Trim();
-            string newPass = txtNewPassword.Text.Trim();
-
-            if (string.IsNullOrEmpty(oldPass) || string.IsNullOrEmpty(newPass))
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu cũ và mật khẩu mới!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (_currentUser.PasswordHash != oldPass)
-            {
-                MessageBox.Show("Mật khẩu cũ không chính xác!", "Lỗi xác thực", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtOldPassword.Focus();
-                return;
-            }
-
-            _currentUser.PasswordHash = newPass;
-            _db.SaveChanges();
-
-            txtOldPassword.Clear();
-            txtNewPassword.Clear();
-            MessageBox.Show("Đổi mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
