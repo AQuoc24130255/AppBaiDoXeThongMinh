@@ -225,19 +225,17 @@ namespace AppBaiDoXeThongMinh.Views
             
             if (!VerifyLicensePlate()) 
             { 
-                var confirm = MessageBox.Show(
-            $"Biển số nhập vào [{txtLicensePlateOut.Text}] KHÔNG KHỚP với lúc vào [{_activeTicket.Vehicle?.LicensePlate}].\nXác nhận cho xe xuất bến?",
-            "Cảnh báo lệch biển số",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning);
-                
-                if (confirm != DialogResult.Yes) 
-                { 
-                    txtLicensePlateOut.SelectAll(); 
-                    txtLicensePlateOut.Focus(); 
-                    return; 
-                } 
-            }
+                MessageBox.Show(
+                    $"Biển số nhập vào [{txtLicensePlateOut.Text}] KHÔNG KHỚP với lúc vào [{_activeTicket.Vehicle?.LicensePlate}].\nKhông được phép mở barrier cho xe ra!",
+                    "Từ chối xuất bến",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                txtLicensePlateOut.SelectAll();
+                txtLicensePlateOut.Focus();
+                return;
+            } 
+            
             
             if (_currentShiftId == -1) 
             { 
