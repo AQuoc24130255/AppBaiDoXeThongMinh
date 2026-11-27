@@ -81,8 +81,8 @@ namespace AppBaiDoXeThongMinh.Views
             };
 
             btnCheckOut.Click += (s, e) => ExecuteCheckOut();
-            btnLoadLostCard.Click += (s, e) => LoadLostCardFromGrid();
-            dgvParkedVehicles.CellDoubleClick += (s, e) => { if (e.RowIndex >= 0) LoadLostCardFromGrid(); };
+            btnLoadLostCard.Click += (s, e) => LoadTicketFromGrid(isLostCard: true);
+            dgvParkedVehicles.CellDoubleClick += (s, e) => { if (e.RowIndex >= 0) LoadTicketFromGrid(isLostCard: false); };
             txtSearch.TextChanged += (s, e) => LoadParkedVehicles(txtSearch.Text);
         }
 
@@ -95,7 +95,7 @@ namespace AppBaiDoXeThongMinh.Views
             }
             if (keyData == Keys.F5)
             {
-                LoadLostCardFromGrid();
+                LoadTicketFromGrid(isLostCard: true);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -121,8 +121,8 @@ namespace AppBaiDoXeThongMinh.Views
 
             BindTicketToUI(ticket, isLostCard: false);
         }
-
-        private void LoadLostCardFromGrid()
+        
+        private void LoadTicketFromGrid(bool isLostCard)
         {
             if (dgvParkedVehicles.CurrentRow == null)
             {
@@ -145,7 +145,7 @@ namespace AppBaiDoXeThongMinh.Views
 
             if (ticket != null)
             {
-                BindTicketToUI(ticket, isLostCard: true);
+                BindTicketToUI(ticket, isLostCard: isLostCard);
             }
         }
 
@@ -155,13 +155,28 @@ namespace AppBaiDoXeThongMinh.Views
             _isLostCardMode = isLostCard;
 
             txtCardCodeOut.Text = ticket.TicketCode;
-            txtLicensePlateRecorded.Text = ticket.Vehicle?.LicensePlate??"";
+            txtLicensePlateRecorded.Text = ticket.Vehicle?.LicensePlate ?? "";
             txtLicensePlateOut.Clear();
 
             decimal fee = CalculateParkingFee(ticket, isLostCard);
-            lblFee.Text = ticket.IsMonthly
-                ? "0 VNĐ (VÉ THÁNG)"
-                : string.Format(_viCulture, "{0:N0} VNĐ", fee);
+            
+            if (ticket.IsMonthly && !isLostCard)
+            {
+                lblFee.Text = "0 VNĐ (VÉ THÁNG)";
+            }
+            else if (isLostCard)
+            {
+                lblFee.Text = string.Format(_viCulture, "{0:N0} VNĐ ", fee);
+            }
+            else
+            {
+                lblFee.Text = string.Format(_viCulture, "{0:N0} VNĐ", fee);
+            }
+
+            bool needPayment = fee > 0;
+            _rdoCash.Enabled = needPayment;
+            _rdoTransfer.Enabled = needPayment;
+            if (!needPayment) _rdoCash.Checked = true;
 
             lblMatchStatus.Text = isLostCard
                 ? "CHẾ ĐỘ MẤT THẺ – GÕ BIỂN SỐ ĐỂ XÁC MINH!"
@@ -248,15 +263,8 @@ namespace AppBaiDoXeThongMinh.Views
             
             if (_paymentMethod == "Chuyển khoản" && totalAmount > 0) 
             { 
-                var confirmTransfer = MessageBox.Show(
-                    $"Xác nhận khách đã CHUYỂN KHOẢN đủ số tiền {totalAmount:N0} VNĐ?", 
-                    "Xác nhận thanh toán chuyển khoản", 
-                    MessageBoxButtons.YesNo, 
-                    MessageBoxIcon.Question);
-                
-                if (confirmTransfer != DialogResult.Yes) 
+                if (!ShowTransferQrDialog(totalAmount, _activeTicket.TicketCode))
                     return;
-                
             }
             
             _activeTicket.ExitTime = checkOutTime; 
@@ -319,6 +327,9 @@ namespace AppBaiDoXeThongMinh.Views
             lblMatchStatus.BackColor = Color.LightGray;
             lblMatchStatus.ForeColor = Color.Black;
             _rdoCash.Checked = true;
+            _rdoCash.Enabled = true;
+            _rdoTransfer.Enabled = true;
+            _rdoCash.Checked = true;
         }
 
         private void LoadParkedVehicles(string keyword = "")
@@ -371,7 +382,7 @@ namespace AppBaiDoXeThongMinh.Views
         }
         private void SetupPaymentMethodButtons()
         {
-            // Nút Tiền mặt (mặc định chọn)
+            // Nút Tiền mặt 
             _rdoCash.Appearance = Appearance.Button;
             _rdoCash.Text = "Tiền mặt";
             _rdoCash.TextAlign = ContentAlignment.MiddleCenter;
