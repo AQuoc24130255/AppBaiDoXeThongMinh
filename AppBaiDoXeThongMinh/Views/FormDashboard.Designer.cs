@@ -35,7 +35,7 @@ partial class FormDashboard
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         grbCurrentParking = new System.Windows.Forms.GroupBox();
-        flowLayoutPanelCurrentParking = new System.Windows.Forms.FlowLayoutPanel();
+        tlpCards = new System.Windows.Forms.TableLayoutPanel();
         panelParked = new System.Windows.Forms.Panel();
         lbCarParked = new System.Windows.Forms.Label();
         lbMotobikeParked = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@ partial class FormDashboard
         lbTitleSummary = new System.Windows.Forms.Label();
         btDetail = new System.Windows.Forms.Button();
         grbCurrentParking.SuspendLayout();
-        flowLayoutPanelCurrentParking.SuspendLayout();
+        tlpCards.SuspendLayout();
         panelParked.SuspendLayout();
         panelOccupancy.SuspendLayout();
         panelToday.SuspendLayout();
@@ -108,9 +108,12 @@ partial class FormDashboard
         // 
         // grbCurrentParking
         // 
-        grbCurrentParking.BackColor = System.Drawing.SystemColors.ActiveCaption;
+        grbCurrentParking.BackColor = this.BackColor;
+        grbCurrentParking.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        grbCurrentParking.Height = 145;
+        grbCurrentParking.Padding = new Padding(8, 4, 8, 8);
         grbCurrentParking.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-        grbCurrentParking.Controls.Add(flowLayoutPanelCurrentParking);
+        grbCurrentParking.Controls.Add(tlpCards);
         grbCurrentParking.Dock = System.Windows.Forms.DockStyle.Top;
         grbCurrentParking.Location = new System.Drawing.Point(0, 0);
         grbCurrentParking.Name = "grbCurrentParking";
@@ -119,27 +122,35 @@ partial class FormDashboard
         grbCurrentParking.TabStop = false;
         grbCurrentParking.Text = "Tình trạng bãi xe hiện tại";
         // 
-        // flowLayoutPanelCurrentParking
+        // tlpCards
         // 
-        flowLayoutPanelCurrentParking.Controls.Add(panelParked);
-        flowLayoutPanelCurrentParking.Controls.Add(panelOccupancy);
-        flowLayoutPanelCurrentParking.Controls.Add(panelToday);
-        flowLayoutPanelCurrentParking.Controls.Add(panelMonthly);
-        flowLayoutPanelCurrentParking.Controls.Add(panelSlots);
-        flowLayoutPanelCurrentParking.Location = new System.Drawing.Point(25, 17);
-        flowLayoutPanelCurrentParking.Name = "flowLayoutPanelCurrentParking";
-        flowLayoutPanelCurrentParking.Size = new System.Drawing.Size(741, 110);
-        flowLayoutPanelCurrentParking.TabIndex = 3;
+        tlpCards.Dock = DockStyle.Fill;
+        tlpCards.ColumnCount = 5;
+        tlpCards.RowCount = 1;
+        tlpCards.BackColor = this.BackColor;
+        tlpCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tlpCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tlpCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tlpCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tlpCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tlpCards.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tlpCards.Controls.Add(panelParked, 0, 0);
+        tlpCards.Controls.Add(panelOccupancy, 1, 0);
+        tlpCards.Controls.Add(panelToday, 2, 0);
+        tlpCards.Controls.Add(panelMonthly, 3, 0);
+        tlpCards.Controls.Add(panelSlots, 4, 0);
         // 
         // panelParked
         // 
-        panelParked.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panelParked.Dock = DockStyle.Fill;
+        panelParked.Margin = new Padding(4);
+        panelParked.BackColor = Color.White;
+        panelParked.BorderStyle = BorderStyle.FixedSingle;
         panelParked.Controls.Add(lbCarParked);
         panelParked.Controls.Add(lbMotobikeParked);
         panelParked.Controls.Add(lbtotalParked);
         panelParked.Controls.Add(lbParked);
         panelParked.Location = new System.Drawing.Point(0, 3);
-        panelParked.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
         panelParked.Name = "panelParked";
         panelParked.Size = new System.Drawing.Size(140, 105);
         panelParked.TabIndex = 8;
@@ -152,6 +163,9 @@ partial class FormDashboard
         lbCarParked.TabIndex = 3;
         lbCarParked.Text = "Xe Ô Tô: 0";
         lbCarParked.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbCarParked.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbCarParked.ForeColor = Color.FromArgb(75, 85, 99);
+        lbCarParked.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbMotobikeParked
         // 
@@ -161,10 +175,14 @@ partial class FormDashboard
         lbMotobikeParked.TabIndex = 2;
         lbMotobikeParked.Text = "Xe Máy: 0";
         lbMotobikeParked.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbMotobikeParked.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbMotobikeParked.ForeColor = Color.FromArgb(75, 85, 99);
+        lbMotobikeParked.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbtotalParked
         // 
-        lbtotalParked.Font = new System.Drawing.Font("Segoe UI", 14F);
+        lbtotalParked.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
+        lbtotalParked.ForeColor = Color.FromArgb(25, 105, 170);
         lbtotalParked.Location = new System.Drawing.Point(0, 23);
         lbtotalParked.Name = "lbtotalParked";
         lbtotalParked.Size = new System.Drawing.Size(140, 36);
@@ -174,7 +192,12 @@ partial class FormDashboard
         // 
         // lbParked
         // 
-        lbParked.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbParked.Dock = DockStyle.Top;
+        lbParked.Height = 26;
+        lbParked.BackColor = Color.FromArgb(173, 216, 250);
+        lbParked.ForeColor = Color.FromArgb(30, 41, 59);
+        lbParked.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        lbParked.Padding = new Padding(8, 0, 0, 0);
         lbParked.Location = new System.Drawing.Point(0, 0);
         lbParked.Name = "lbParked";
         lbParked.Size = new System.Drawing.Size(140, 23);
@@ -184,12 +207,14 @@ partial class FormDashboard
         // 
         // panelOccupancy
         // 
-        panelOccupancy.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panelOccupancy.Dock = DockStyle.Fill;
+        panelOccupancy.Margin = new Padding(4);
+        panelOccupancy.BackColor = Color.White;
+        panelOccupancy.BorderStyle = BorderStyle.FixedSingle;
         panelOccupancy.Controls.Add(lbSlotOccupancy);
         panelOccupancy.Controls.Add(lbTotalOccupancy);
         panelOccupancy.Controls.Add(lbOccupancy);
         panelOccupancy.Location = new System.Drawing.Point(150, 3);
-        panelOccupancy.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
         panelOccupancy.Name = "panelOccupancy";
         panelOccupancy.Size = new System.Drawing.Size(140, 105);
         panelOccupancy.TabIndex = 5;
@@ -201,10 +226,14 @@ partial class FormDashboard
         lbSlotOccupancy.Size = new System.Drawing.Size(140, 46);
         lbSlotOccupancy.TabIndex = 3;
         lbSlotOccupancy.Text = "Số Chỗ Trống: 0";
+        lbSlotOccupancy.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbSlotOccupancy.ForeColor = Color.FromArgb(75, 85, 99);
+        lbSlotOccupancy.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbTotalOccupancy
         // 
-        lbTotalOccupancy.Font = new System.Drawing.Font("Segoe UI", 14F);
+        lbTotalOccupancy.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
+        lbTotalOccupancy.ForeColor = Color.FromArgb(40, 150, 90);
         lbTotalOccupancy.Location = new System.Drawing.Point(0, 23);
         lbTotalOccupancy.Name = "lbTotalOccupancy";
         lbTotalOccupancy.Size = new System.Drawing.Size(140, 36);
@@ -214,7 +243,12 @@ partial class FormDashboard
         // 
         // lbOccupancy
         // 
-        lbOccupancy.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbOccupancy.Dock = DockStyle.Top;
+        lbOccupancy.Height = 26;
+        lbOccupancy.BackColor = Color.FromArgb(160, 220, 205);
+        lbOccupancy.ForeColor = Color.FromArgb(30, 41, 59);
+        lbOccupancy.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        lbOccupancy.Padding = new Padding(8, 0, 0, 0);
         lbOccupancy.Location = new System.Drawing.Point(0, 0);
         lbOccupancy.Name = "lbOccupancy";
         lbOccupancy.Size = new System.Drawing.Size(140, 23);
@@ -224,13 +258,15 @@ partial class FormDashboard
         // 
         // panelToday
         // 
-        panelToday.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panelToday.Dock = DockStyle.Fill;
+        panelToday.Margin = new Padding(4);
+        panelToday.BackColor = Color.White;
+        panelToday.BorderStyle = BorderStyle.FixedSingle;
         panelToday.Controls.Add(lbCarToday);
         panelToday.Controls.Add(lbMotobikeToday);
         panelToday.Controls.Add(lbTotalToday);
         panelToday.Controls.Add(lbToday);
         panelToday.Location = new System.Drawing.Point(300, 3);
-        panelToday.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
         panelToday.Name = "panelToday";
         panelToday.Size = new System.Drawing.Size(140, 105);
         panelToday.TabIndex = 6;
@@ -243,6 +279,9 @@ partial class FormDashboard
         lbCarToday.TabIndex = 3;
         lbCarToday.Text = "Xe Ô Tô: 0";
         lbCarToday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbCarToday.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbCarToday.ForeColor = Color.FromArgb(75, 85, 99);
+        lbCarToday.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbMotobikeToday
         // 
@@ -252,10 +291,14 @@ partial class FormDashboard
         lbMotobikeToday.TabIndex = 2;
         lbMotobikeToday.Text = "Xe Máy: 0";
         lbMotobikeToday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbMotobikeToday.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbMotobikeToday.ForeColor = Color.FromArgb(75, 85, 99);
+        lbMotobikeToday.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbTotalToday
         // 
-        lbTotalToday.Font = new System.Drawing.Font("Segoe UI", 14F);
+        lbTotalToday.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
+        lbTotalToday.ForeColor = Color.FromArgb(215, 135, 30);
         lbTotalToday.Location = new System.Drawing.Point(0, 23);
         lbTotalToday.Name = "lbTotalToday";
         lbTotalToday.Size = new System.Drawing.Size(140, 36);
@@ -265,7 +308,12 @@ partial class FormDashboard
         // 
         // lbToday
         // 
-        lbToday.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbToday.Dock = DockStyle.Top;
+        lbToday.Height = 26;
+        lbToday.BackColor = Color.FromArgb(252, 205, 140);
+        lbToday.ForeColor = Color.FromArgb(30, 41, 59);
+        lbToday.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        lbToday.Padding = new Padding(8, 0, 0, 0);
         lbToday.Location = new System.Drawing.Point(0, 0);
         lbToday.Name = "lbToday";
         lbToday.Size = new System.Drawing.Size(140, 23);
@@ -275,13 +323,15 @@ partial class FormDashboard
         // 
         // panelMonthly
         // 
-        panelMonthly.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panelMonthly.Dock = DockStyle.Fill;
+        panelMonthly.Margin = new Padding(4);
+        panelMonthly.BackColor = Color.White;
+        panelMonthly.BorderStyle = BorderStyle.FixedSingle;
         panelMonthly.Controls.Add(lbCarMonthly);
         panelMonthly.Controls.Add(lbMotobikeMonthly);
         panelMonthly.Controls.Add(lbTotalMonthly);
         panelMonthly.Controls.Add(lbMonthly);
         panelMonthly.Location = new System.Drawing.Point(450, 3);
-        panelMonthly.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
         panelMonthly.Name = "panelMonthly";
         panelMonthly.Size = new System.Drawing.Size(140, 105);
         panelMonthly.TabIndex = 9;
@@ -294,6 +344,9 @@ partial class FormDashboard
         lbCarMonthly.TabIndex = 3;
         lbCarMonthly.Text = "Xe Ô Tô: 0";
         lbCarMonthly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbCarMonthly.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbCarMonthly.ForeColor = Color.FromArgb(75, 85, 99);
+        lbCarMonthly.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbMotobikeMonthly
         // 
@@ -303,10 +356,14 @@ partial class FormDashboard
         lbMotobikeMonthly.TabIndex = 2;
         lbMotobikeMonthly.Text = "Xe Máy: 0";
         lbMotobikeMonthly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbMotobikeMonthly.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbMotobikeMonthly.ForeColor = Color.FromArgb(75, 85, 99);
+        lbMotobikeMonthly.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbTotalMonthly
         // 
-        lbTotalMonthly.Font = new System.Drawing.Font("Segoe UI", 14F);
+        lbTotalMonthly.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
+        lbTotalMonthly.ForeColor = Color.FromArgb(105, 75, 185);
         lbTotalMonthly.Location = new System.Drawing.Point(0, 23);
         lbTotalMonthly.Name = "lbTotalMonthly";
         lbTotalMonthly.Size = new System.Drawing.Size(140, 36);
@@ -316,7 +373,12 @@ partial class FormDashboard
         // 
         // lbMonthly
         // 
-        lbMonthly.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbMonthly.Dock = DockStyle.Top;
+        lbMonthly.Height = 26;
+        lbMonthly.BackColor = Color.FromArgb(205, 195, 245);
+        lbMonthly.ForeColor = Color.FromArgb(30, 41, 59);
+        lbMonthly.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        lbMonthly.Padding = new Padding(8, 0, 0, 0);
         lbMonthly.Location = new System.Drawing.Point(0, 0);
         lbMonthly.Name = "lbMonthly";
         lbMonthly.Size = new System.Drawing.Size(140, 23);
@@ -326,13 +388,15 @@ partial class FormDashboard
         // 
         // panelSlots
         // 
-        panelSlots.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        panelSlots.Dock = DockStyle.Fill;
+        panelSlots.Margin = new Padding(4);
+        panelSlots.BackColor = Color.White;
+        panelSlots.BorderStyle = BorderStyle.FixedSingle;
         panelSlots.Controls.Add(lbCarSlots);
         panelSlots.Controls.Add(lbMotobikeSlots);
         panelSlots.Controls.Add(lbTotalSlots);
         panelSlots.Controls.Add(lbSlots);
         panelSlots.Location = new System.Drawing.Point(600, 3);
-        panelSlots.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
         panelSlots.Name = "panelSlots";
         panelSlots.Size = new System.Drawing.Size(140, 105);
         panelSlots.TabIndex = 2;
@@ -345,6 +409,9 @@ partial class FormDashboard
         lbCarSlots.TabIndex = 3;
         lbCarSlots.Text = "Xe Ô Tô: 0";
         lbCarSlots.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbCarSlots.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbCarSlots.ForeColor = Color.FromArgb(75, 85, 99);
+        lbCarSlots.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbMotobikeSlots
         // 
@@ -354,10 +421,14 @@ partial class FormDashboard
         lbMotobikeSlots.TabIndex = 2;
         lbMotobikeSlots.Text = "Xe Máy: 0";
         lbMotobikeSlots.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbMotobikeSlots.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+        lbMotobikeSlots.ForeColor = Color.FromArgb(75, 85, 99);
+        lbMotobikeSlots.Padding = new Padding(8, 0, 0, 0);
         // 
         // lbTotalSlots
         // 
-        lbTotalSlots.Font = new System.Drawing.Font("Segoe UI", 14F);
+        lbTotalSlots.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
+        lbTotalSlots.ForeColor = Color.FromArgb(55, 75, 95);
         lbTotalSlots.Location = new System.Drawing.Point(0, 23);
         lbTotalSlots.Name = "lbTotalSlots";
         lbTotalSlots.Size = new System.Drawing.Size(140, 36);
@@ -367,7 +438,12 @@ partial class FormDashboard
         // 
         // lbSlots
         // 
-        lbSlots.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbSlots.Dock = DockStyle.Top;
+        lbSlots.Height = 26;
+        lbSlots.BackColor = Color.FromArgb(215, 225, 235);
+        lbSlots.ForeColor = Color.FromArgb(30, 41, 59);
+        lbSlots.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        lbSlots.Padding = new Padding(8, 0, 0, 0);
         lbSlots.Location = new System.Drawing.Point(0, 0);
         lbSlots.Name = "lbSlots";
         lbSlots.Size = new System.Drawing.Size(140, 23);
@@ -377,7 +453,9 @@ partial class FormDashboard
         // 
         // grbRevenue
         // 
-        grbRevenue.BackColor = System.Drawing.SystemColors.ActiveCaption;
+        grbRevenue.BackColor = this.BackColor;
+        grbRevenue.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        grbRevenue.Padding = new Padding(8, 6, 8, 8);
         grbRevenue.Controls.Add(flowLayoutPanelFilter);
         grbRevenue.Controls.Add(flowLayoutPanelSummary);
         grbRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -408,9 +486,16 @@ partial class FormDashboard
         grbFilter.TabIndex = 1;
         grbFilter.TabStop = false;
         grbFilter.Text = "Chi tiết doanh thu";
+        grbFilter.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        grbFilter.Padding = new Padding(8, 4, 8, 8);
         // 
         // dataGridViewFilter
         // 
+        dataGridViewFilter.BackgroundColor = Color.White;
+        dataGridViewFilter.BorderStyle = BorderStyle.None;
+        dataGridViewFilter.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+        dataGridViewFilter.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        dataGridViewFilter.RowTemplate.Height = 32;
         dataGridViewFilter.AllowUserToAddRows = false;
         dataGridViewFilter.AllowUserToDeleteRows = false;
         dataGridViewFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -576,6 +661,8 @@ partial class FormDashboard
         flowLayoutPanelSummary.Name = "flowLayoutPanelSummary";
         flowLayoutPanelSummary.Size = new System.Drawing.Size(210, 335);
         flowLayoutPanelSummary.TabIndex = 0;
+        flowLayoutPanelSummary.Width = 230;
+        flowLayoutPanelSummary.Padding = new Padding(6, 0, 0, 0);
         // 
         // btRevenue
         // 
@@ -585,6 +672,14 @@ partial class FormDashboard
         btRevenue.TabIndex = 0;
         btRevenue.Text = "Thống Kê";
         btRevenue.UseVisualStyleBackColor = true;
+        btRevenue.Width = 216;
+        btRevenue.Height = 36;
+        btRevenue.BackColor = Color.FromArgb(25, 105, 170);
+        btRevenue.ForeColor = Color.White;
+        btRevenue.FlatStyle = FlatStyle.Flat;
+        btRevenue.FlatAppearance.BorderSize = 0;
+        btRevenue.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btRevenue.Cursor = Cursors.Hand;
         // 
         // grbSummary
         // 
@@ -602,6 +697,8 @@ partial class FormDashboard
         grbSummary.TabIndex = 1;
         grbSummary.TabStop = false;
         grbSummary.Text = "Tổng doanh thu";
+        grbSummary.Width = 216;
+        grbSummary.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         // 
         // panelThongke
         // 
@@ -618,6 +715,7 @@ partial class FormDashboard
         lbNightTotalAmount.TabIndex = 5;
         lbNightTotalAmount.Text = "0 VND";
         lbNightTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        lbNightTotalAmount.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         // 
         // lbDayTotalAmount
         // 
@@ -627,6 +725,7 @@ partial class FormDashboard
         lbDayTotalAmount.TabIndex = 4;
         lbDayTotalAmount.Text = "0 VND";
         lbDayTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        lbDayTotalAmount.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         // 
         // lbNightAmount
         // 
@@ -636,6 +735,7 @@ partial class FormDashboard
         lbNightAmount.TabIndex = 3;
         lbNightAmount.Text = "Ca Tối";
         lbNightAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbNightAmount.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
         // 
         // lbDayAmount
         // 
@@ -645,10 +745,13 @@ partial class FormDashboard
         lbDayAmount.TabIndex = 2;
         lbDayAmount.Text = "Ca Sáng";
         lbDayAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        lbDayAmount.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
         // 
         // lbTotalRevenue
         // 
-        lbTotalRevenue.Font = new System.Drawing.Font("Segoe UI Black", 12F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
+        lbTotalRevenue.Width = 204;
+        lbTotalRevenue.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+        lbTotalRevenue.ForeColor = Color.FromArgb(25, 105, 170);
         lbTotalRevenue.Location = new System.Drawing.Point(6, 53);
         lbTotalRevenue.Name = "lbTotalRevenue";
         lbTotalRevenue.Size = new System.Drawing.Size(185, 23);
@@ -658,23 +761,36 @@ partial class FormDashboard
         // 
         // lbTitleSummary
         // 
-        lbTitleSummary.BackColor = System.Drawing.SystemColors.MenuHighlight;
+        lbTitleSummary.BackColor = Color.FromArgb(173, 216, 250);
         lbTitleSummary.Location = new System.Drawing.Point(6, 19);
         lbTitleSummary.Name = "lbTitleSummary";
         lbTitleSummary.Size = new System.Drawing.Size(188, 23);
         lbTitleSummary.TabIndex = 0;
         lbTitleSummary.Text = "Doanh thu thu được";
         lbTitleSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        lbTitleSummary.Width = 204;
+        lbTitleSummary.ForeColor = Color.FromArgb(30, 41, 59);
+        lbTitleSummary.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+
         // 
         // btDetail
         // 
-        btDetail.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        btDetail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btDetail.Location = new System.Drawing.Point(0, 241);
         btDetail.Name = "btDetail";
         btDetail.Size = new System.Drawing.Size(197, 47);
         btDetail.TabIndex = 8;
         btDetail.Text = "Chi Tiết";
         btDetail.UseVisualStyleBackColor = true;
+        btDetail.Left = 8;
+        btDetail.Width = 200;
+        btDetail.Height = 38;
+        btDetail.BackColor = Color.FromArgb(40, 150, 90);
+        btDetail.ForeColor = Color.White;
+        btDetail.FlatStyle = FlatStyle.Flat;
+        btDetail.FlatAppearance.BorderSize = 0;
+        btDetail.Cursor = Cursors.Hand;
+
         // 
         // FormDashboard
         // 
@@ -684,8 +800,11 @@ partial class FormDashboard
         Controls.Add(grbRevenue);
         Controls.Add(grbCurrentParking);
         Text = "FormDashboard";
+        BackColor = Color.FromArgb(243, 246, 250);
+        Padding = new Padding(8);
+        Font = new Font("Segoe UI", 9.5F);
         grbCurrentParking.ResumeLayout(false);
-        flowLayoutPanelCurrentParking.ResumeLayout(false);
+        tlpCards.ResumeLayout(false);
         panelParked.ResumeLayout(false);
         panelOccupancy.ResumeLayout(false);
         panelToday.ResumeLayout(false);
@@ -752,7 +871,7 @@ partial class FormDashboard
 
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSummary;
 
-    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCurrentParking;
+    private System.Windows.Forms.TableLayoutPanel tlpCards;
 
     private System.Windows.Forms.GroupBox grbRevenue;
 

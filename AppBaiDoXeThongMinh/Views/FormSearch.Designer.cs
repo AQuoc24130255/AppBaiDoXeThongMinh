@@ -73,12 +73,15 @@ partial class FormSearch
         // 
         // lbtitle
         // 
-        lbtitle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        lbtitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        lbtitle.ForeColor = Color.FromArgb(25, 65, 105);
         lbtitle.Location = new System.Drawing.Point(12, 11);
         lbtitle.Name = "lbtitle";
         lbtitle.Size = new System.Drawing.Size(200, 23);
         lbtitle.TabIndex = 4;
         lbtitle.Text = "Tìm Kiếm Vé Xe";
+        lbtitle.Dock = DockStyle.Top;
+        lbtitle.Height = 32;
         // 
         // flowLayoutPanelFilter
         // 
@@ -93,6 +96,9 @@ partial class FormSearch
         flowLayoutPanelFilter.Name = "flowLayoutPanelFilter";
         flowLayoutPanelFilter.Size = new System.Drawing.Size(755, 39);
         flowLayoutPanelFilter.TabIndex = 6;
+        flowLayoutPanelFilter.Dock = DockStyle.Top;
+        flowLayoutPanelFilter.Height = 45;
+        flowLayoutPanelFilter.Padding = new Padding(5, 6, 5, 6);
         // 
         // textBoxSearch
         // 
@@ -113,6 +119,7 @@ partial class FormSearch
         btSearch.TabIndex = 1;
         btSearch.Text = "Tìm Kiếm";
         btSearch.UseVisualStyleBackColor = true;
+        btSearch.Width = 85;
         // 
         // lbDateSearch
         // 
@@ -165,8 +172,8 @@ partial class FormSearch
         // tableLayoutPanelSummary
         // 
         tableLayoutPanelSummary.ColumnCount = 2;
-        tableLayoutPanelSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-        tableLayoutPanelSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+        tableLayoutPanelSummary.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        tableLayoutPanelSummary.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 260F));
         tableLayoutPanelSummary.Controls.Add(dataGridViewSummary, 0, 0);
         tableLayoutPanelSummary.Controls.Add(flowLayoutPanelDetail, 1, 0);
         tableLayoutPanelSummary.Location = new System.Drawing.Point(12, 82);
@@ -175,6 +182,8 @@ partial class FormSearch
         tableLayoutPanelSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
         tableLayoutPanelSummary.Size = new System.Drawing.Size(755, 356);
         tableLayoutPanelSummary.TabIndex = 7;
+        tableLayoutPanelSummary.Dock = DockStyle.Fill;
+        tableLayoutPanelSummary.Padding = new Padding(0, 10, 0, 0);
         // 
         // dataGridViewSummary
         // 
@@ -253,6 +262,7 @@ partial class FormSearch
         flowLayoutPanelDetail.Name = "flowLayoutPanelDetail";
         flowLayoutPanelDetail.Size = new System.Drawing.Size(221, 350);
         flowLayoutPanelDetail.TabIndex = 1;
+        flowLayoutPanelDetail.WrapContents = false;
         // 
         // grbDetail
         // 
@@ -271,6 +281,7 @@ partial class FormSearch
         grbDetail.TabIndex = 2;
         grbDetail.TabStop = false;
         grbDetail.Text = "Thông Tin Vé Xe";
+        grbDetail.Width = 248;
         // 
         // lbFeeInfo
         // 
@@ -354,6 +365,7 @@ partial class FormSearch
         flowLayoutPanel3.Name = "flowLayoutPanel3";
         flowLayoutPanel3.Size = new System.Drawing.Size(219, 45);
         flowLayoutPanel3.TabIndex = 1;
+        flowLayoutPanel3.Width = 248;
         // 
         // buttonLockTicket
         // 
@@ -365,6 +377,7 @@ partial class FormSearch
         buttonLockTicket.TabIndex = 0;
         buttonLockTicket.Text = "Khóa Thẻ";
         buttonLockTicket.UseVisualStyleBackColor = true;
+        buttonLockTicket.Width = 118;
         // 
         // buttonCalculate
         // 
@@ -375,12 +388,13 @@ partial class FormSearch
         buttonCalculate.TabIndex = 1;
         buttonCalculate.Text = "Thanh Toán";
         buttonCalculate.UseVisualStyleBackColor = true;
+        buttonCalculate.Width = 118;
         // 
         // FormSearch
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        BackColor = System.Drawing.SystemColors.Control;
+        BackColor = Color.FromArgb(243, 246, 250);
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(tableLayoutPanelSummary);
         Controls.Add(flowLayoutPanelFilter);
@@ -388,6 +402,7 @@ partial class FormSearch
         Cursor = System.Windows.Forms.Cursors.Default;
         Location = new System.Drawing.Point(15, 15);
         Text = "Form Search";
+        Padding = new Padding(12);
         flowLayoutPanelFilter.ResumeLayout(false);
         flowLayoutPanelFilter.PerformLayout();
         tableLayoutPanelSummary.ResumeLayout(false);
