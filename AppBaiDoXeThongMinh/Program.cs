@@ -35,8 +35,8 @@ static class Program
 
         /*Application.Run(new FormProfile(guardUser));
         Application.Run(new FormCheckIn());*/
-        Application.Run(new FormCheckOut(guardUser.UserId));
-
+        //Application.Run(new FormCheckOut(guardUser.UserId));
+        Application.Run(new FormLogin());
 
     }
 }

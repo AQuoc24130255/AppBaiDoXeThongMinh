@@ -23,7 +23,7 @@ public partial class FormMain : Form
         BuildMenu();
         RegisterEvents();
 
-        Shown += (_, _) => OpenChildForm(new FormDashboard(), "TỔNG QUAN");
+        Shown += (_, _) => OpenChildForm(new FormProfile(_currentUser), "THÔNG TIN CÁ NHÂN");
     }
 
     private void LoadUserInformation()
@@ -66,7 +66,7 @@ public partial class FormMain : Form
                 OpenChildForm(new FormEditSlot(), "QUẢN LÝ CHỖ ĐỖ"));
             AddMenuButton("Quản lý vé tháng", "▤", () =>
                 OpenChildForm(new FormManageTicket(), "QUẢN LÝ VÉ THÁNG"));
-            AddMenuButton("Quản lý giá", "▤", () =>
+            AddMenuButton("Quản lý giá", "$", () =>
                 OpenChildForm(new FormManagePriceConfig(), "QUẢN LÝ GIÁ"));
             AddMenuButton("Thống kê doanh thu", "▥", () =>
                 OpenChildForm(new FormDashboard(), "THỐNG KÊ DOANH THU"));
@@ -123,7 +123,7 @@ public partial class FormMain : Form
                 "Quản lý tài khoản" => "♙",
                 "Quản lý chỗ đỗ" or "Theo dõi chỗ đỗ" => "▦",
                 "Quản lý vé tháng" => "▤",
-                "Quản lý giá" => "▤",
+                "Quản lý giá" => "$",
                 "Thống kê doanh thu" => "▥",
                 "Xe vào bãi" => "↓",
                 "Xe ra bãi" => "↑",

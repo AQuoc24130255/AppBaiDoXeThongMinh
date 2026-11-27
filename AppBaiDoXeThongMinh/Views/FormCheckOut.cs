@@ -224,8 +224,9 @@ namespace AppBaiDoXeThongMinh.Views
 
         private decimal CalculateParkingFee(Ticket ticket, bool isLostCard)
         {
-            if (ticket.IsMonthly) return 0m;
-            decimal basePrice = ticket.PriceConfig?.DayPrice ?? 5000m;
+            decimal basePrice = ticket.IsMonthly
+                ? 0m
+                : Invoice.CalculateParkingFee(ticket.EntryTime, DateTime.Now, ticket.PriceConfig);
             decimal lostCardFee = isLostCard ? (ticket.PriceConfig?.LostTicketFee ?? 0m) : 0m;
             return basePrice + lostCardFee;
         }
