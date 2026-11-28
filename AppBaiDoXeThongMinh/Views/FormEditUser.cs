@@ -23,10 +23,7 @@ public partial class FormEditUser : Form
     {
         _currentUser = user;
     }
-
-    // ------------------------------------------------------------
-    //  Thiết lập ban đầu
-    // ------------------------------------------------------------
+    
     private void SetupUi()
     {
         AcceptButton = btAdd;
@@ -43,10 +40,7 @@ public partial class FormEditUser : Form
         btLock.Click += BtLock_Click;
         btRefresh.Click += (_, _) => LoadUsers();
     }
-
-    // ------------------------------------------------------------
-    //  Danh sách người dùng
-    // ------------------------------------------------------------
+    
     private void LoadUsers(int? selectUserId = null)
     {
         try
@@ -81,10 +75,7 @@ public partial class FormEditUser : Form
             ShowError("Không thể tải danh sách người dùng", ex);
         }
     }
-
-    // ------------------------------------------------------------
-    //  Thêm người dùng
-    // ------------------------------------------------------------
+    
     private void BtAdd_Click(object? sender, EventArgs e)
     {
         string userName = txtUserName.Text.Trim();
@@ -92,7 +83,6 @@ public partial class FormEditUser : Form
         string password = txtPassword.Text;
         string confirm = txtConfirm.Text;
 
-        // --- Kiểm tra dữ liệu nhập ---
         if (userName.Length < 3 || userName.Any(char.IsWhiteSpace))
         {
             Warn("Tên đăng nhập phải từ 3 ký tự và không chứa khoảng trắng.", txtUserName);
@@ -118,7 +108,6 @@ public partial class FormEditUser : Form
         {
             using var db = new AppDbContext();
 
-            // Không phân biệt hoa/thường để tránh tạo 2 tài khoản dễ nhầm (vd: "an" và "An")
             string lowered = userName.ToLower();
             if (db.Users.Any(u => u.UserName.ToLower() == lowered))
             {
@@ -150,9 +139,6 @@ public partial class FormEditUser : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Xóa người dùng
-    // ------------------------------------------------------------
     private void BtDelete_Click(object? sender, EventArgs e)
     {
         if (dgvUsers.CurrentRow?.Tag is not int id)
@@ -188,7 +174,7 @@ public partial class FormEditUser : Form
                 return;
             }
 
-            // Người dùng đã có ca trực / hóa đơn thì không xóa hẳn (để giữ lịch sử, tránh lỗi khóa ngoại)
+            // Người dùng đã có ca trực / hóa đơn thì không xóa hẳn
             bool hasHistory = db.Shifts.Any(s => s.UserId == id) || db.Invoices.Any(i => i.CreatedBy == id);
             if (hasHistory)
             {
@@ -230,9 +216,6 @@ public partial class FormEditUser : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Khóa người dùng
-    // ------------------------------------------------------------
     private void BtLock_Click(object? sender, EventArgs e)
     {
         if (dgvUsers.CurrentRow?.Tag is not int id)
@@ -259,7 +242,7 @@ public partial class FormEditUser : Form
                 return;
             }
 
-            // Nếu đang hoạt động -> sắp khóa: kiểm tra không được khóa Admin cuối cùng
+            // không được khóa Admin cuối cùng
             if (user.IsActive && user.Role == Role.Admin &&
                 !db.Users.Any(u => u.UserId != id && u.Role == Role.Admin && u.IsActive))
             {
@@ -287,10 +270,7 @@ public partial class FormEditUser : Form
             ShowError("Không thể cập nhật trạng thái tài khoản", ex);
         }
     }
-    
-    // ------------------------------------------------------------
-    //  Hàm hỗ trợ
-    // ------------------------------------------------------------
+
     private void ClearForm()
     {
         txtUserName.Clear();

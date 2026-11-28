@@ -14,10 +14,7 @@ public partial class FormEditSlot : Form
         SetupUi();
         Load += (_, _) => LoadSlots();
     }
-
-    // ------------------------------------------------------------
-    //  Thiết lập ban đầu
-    // ------------------------------------------------------------
+    
     private void SetupUi()
     {
         AcceptButton = btAdd;
@@ -28,16 +25,13 @@ public partial class FormEditSlot : Form
         btRefresh.Click += (_, _) => LoadSlots();
     }
 
-    // ------------------------------------------------------------
-    //  Danh sách chỗ đỗ
-    // ------------------------------------------------------------
     private void LoadSlots(int? selectSlotId = null)
     {
         try
         {
             using var db = new AppDbContext();
 
-            // Kết hợp bảng ParkingSlots với Vehicles để lấy biển số xe đang đỗ (nếu có)
+            // lấy biển số xe đang đỗ (nếu có)
             var slots = (from s in db.ParkingSlots.AsNoTracking()
                          join v in db.Vehicles.AsNoTracking() on s.CurrentVehicleID equals v.VehicleId into vGroup
                          from vehicle in vGroup.DefaultIfEmpty()
@@ -65,8 +59,7 @@ public partial class FormEditSlot : Form
 
                 var row = dgvSlots.Rows[index];
                 row.Tag = s.SlotId;
-
-                // Tô màu nhẹ các ô đã có xe đỗ để dễ quan sát
+                
                 if (s.IsOccupied)
                 {
                     row.DefaultCellStyle.BackColor = Color.FromArgb(255, 245, 245);
@@ -85,16 +78,12 @@ public partial class FormEditSlot : Form
             ShowError("Không thể tải danh sách chỗ đỗ", ex);
         }
     }
-
-    // ------------------------------------------------------------
-    //  Thêm chỗ đỗ mới
-    // ------------------------------------------------------------
+    
     private void BtAdd_Click(object? sender, EventArgs e)
     {
         string slotName = txtSlotName.Text.Trim();
         string zone = txtZone.Text.Trim();
-
-        // --- Kiểm tra dữ liệu nhập ---
+        
         if (slotName.Length == 0)
         {
             Warn("Vui lòng nhập tên chỗ đỗ.", txtSlotName);
@@ -119,8 +108,7 @@ public partial class FormEditSlot : Form
         try
         {
             using var db = new AppDbContext();
-
-            // Kiểm tra trùng tên chỗ đỗ trong cùng một khu vực (không phân biệt hoa/thường)
+            
             string loweredSlot = slotName.ToLower();
             string loweredZone = zone.ToLower();
 
@@ -159,9 +147,6 @@ public partial class FormEditSlot : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Xóa chỗ đỗ
-    // ------------------------------------------------------------
     private void BtDelete_Click(object? sender, EventArgs e)
     {
         if (dgvSlots.CurrentRow?.Tag is not int id)
@@ -210,9 +195,6 @@ public partial class FormEditSlot : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Hàm hỗ trợ
-    // ------------------------------------------------------------
     private void ClearForm()
     {
         txtSlotName.Clear();

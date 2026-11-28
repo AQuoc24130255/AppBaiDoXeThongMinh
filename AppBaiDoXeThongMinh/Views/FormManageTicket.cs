@@ -22,29 +22,21 @@ public partial class FormManageTicket : Form
         Load += (_, _) => SwitchMode(false);
     }
 
-    // ------------------------------------------------------------
-    //  Thiết lập ban đầu & Chuyển chế độ
-    // ------------------------------------------------------------
     private void SetupUi()
     {
-        // Gắn 2 User Control vào panel bên phải
         pnlRightHost.Controls.Add(_ucRegular);
         pnlRightHost.Controls.Add(_ucMonthly);
 
-        // Sự kiện từ User Control Vé thường
         _ucRegular.LockClicked += BtLock_Click;
         _ucRegular.Deletelicked += BtDelete_Click;
         _ucRegular.RefreshClicked += (_, _) => RefreshAll();
 
-        // Sự kiện từ User Control Vé tháng
         _ucMonthly.TicketAdded += (_, _) => RefreshAll();
         _ucMonthly.RefreshClicked += (_, _) => RefreshAll();
 
-        // Sự kiện 2 nút chuyển chế độ dưới dgvTickets
         btRegularMode.Click += (_, _) => SwitchMode(false);
         btMonthlyMode.Click += (_, _) => SwitchMode(true);
 
-        // Tìm kiếm & lọc
         btSearch.Click += (_, _) => LoadCurrentList();
         cbFilter.SelectedIndexChanged += (_, _) =>
         {
@@ -66,14 +58,12 @@ public partial class FormManageTicket : Form
         {
             _isMonthlyMode = isMonthly;
 
-            // Đổi màu nút nhận biết chế độ đang chọn
             btRegularMode.BackColor = !isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
             btRegularMode.ForeColor = !isMonthly ? Color.White : Color.Black;
 
             btMonthlyMode.BackColor = isMonthly ? Color.FromArgb(25, 105, 170) : Color.FromArgb(215, 222, 230);
             btMonthlyMode.ForeColor = isMonthly ? Color.White : Color.Black;
 
-            // Cập nhật bộ lọc tìm kiếm theo chế độ
             cbFilter.Items.Clear();
             if (!isMonthly)
             {
@@ -89,11 +79,9 @@ public partial class FormManageTicket : Form
 
             cbFilter.SelectedIndex = 0;
 
-            // Chuyển hiển thị User Control bên phải
             _ucRegular.Visible = !isMonthly;
             _ucMonthly.Visible = isMonthly;
 
-            // Cấu hình cột DataGridView
             ConfigureGridColumns(isMonthly);
 
             LoadStats();
@@ -154,11 +142,7 @@ public partial class FormManageTicket : Form
         else
             LoadTickets(selectId);
     }
-
-
-    // ------------------------------------------------------------
-    //  Thống kê
-    // ------------------------------------------------------------
+    
     private void LoadStats()
     {
         try
@@ -175,9 +159,6 @@ public partial class FormManageTicket : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Danh sách vé thường (Tickets)
-    // ------------------------------------------------------------
     private void LoadTickets(int? selectTicketId = null)
     {
         try
@@ -237,9 +218,6 @@ public partial class FormManageTicket : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Danh sách vé tháng (MonthlySubscribers)
-    // ------------------------------------------------------------
     private void LoadMonthlySubscribers()
     {
         try
@@ -297,10 +275,7 @@ public partial class FormManageTicket : Form
     
     private int? GetSelectedTicketId() =>
         !_isMonthlyMode && dgvTickets.CurrentRow?.Tag is int id ? id : null;
-    
-    // ------------------------------------------------------------
-//  Khóa vé (chế độ Vé thường)
-// ------------------------------------------------------------
+
     private void BtLock_Click(object? sender, EventArgs e)
     {
         int? id = GetSelectedTicketId();
@@ -340,10 +315,7 @@ public partial class FormManageTicket : Form
             ShowError("Không thể khóa vé", ex);
         }
     }
-    
-    // ------------------------------------------------------------
-    //  Xóa vé (chế độ Vé thường)
-    // ------------------------------------------------------------
+
     private void BtDelete_Click(object? sender, EventArgs e)
     {
         int? id = GetSelectedTicketId();
@@ -397,10 +369,7 @@ public partial class FormManageTicket : Form
             ShowError("Không thể xóa vé", ex);
         }
     }
-    
-    // ------------------------------------------------------------
-    //  Hàm hỗ trợ
-    // ------------------------------------------------------------
+
     private static string NormalizePlate(string? plate) =>
         new string((plate ?? "").Where(char.IsLetterOrDigit).ToArray()).ToUpperInvariant();
     

@@ -383,7 +383,6 @@ namespace AppBaiDoXeThongMinh.Views
         }
         private void SetupPaymentMethodButtons()
         {
-            // Nút Tiền mặt 
             _rdoCash.Appearance = Appearance.Button;
             _rdoCash.Text = "Tiền mặt";
             _rdoCash.TextAlign = ContentAlignment.MiddleCenter;
@@ -394,7 +393,6 @@ namespace AppBaiDoXeThongMinh.Views
             _rdoCash.Cursor = Cursors.Hand;
             _rdoCash.Checked = true;
 
-            // Nút Chuyển khoản
             _rdoTransfer.Appearance = Appearance.Button;
             _rdoTransfer.Text = "Chuyển khoản";
             _rdoTransfer.TextAlign = ContentAlignment.MiddleCenter;

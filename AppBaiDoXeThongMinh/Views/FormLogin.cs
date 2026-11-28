@@ -12,17 +12,14 @@ public partial class FormLogin : Form
     {
         InitializeComponent();
 
-        // Sự kiện nút đăng nhập
         btnLogin.Click += BtnLogin_Click;
 
-        // Sự kiện hiện/ẩn mật khẩu
         chkShowPassword.CheckedChanged += (_, _) =>
         {
             txtPassword.UseSystemPasswordChar =
                 !chkShowPassword.Checked;
         };
 
-        // Nhấn Enter ở ô tài khoản thì chuyển xuống mật khẩu
         txtUsername.KeyDown += (_, e) =>
         {
             if (e.KeyCode == Keys.Enter)
@@ -32,7 +29,6 @@ public partial class FormLogin : Form
             }
         };
 
-        // Nhấn Enter ở ô mật khẩu thì đăng nhập
         txtPassword.KeyDown += (_, e) =>
         {
             if (e.KeyCode == Keys.Enter)
@@ -55,7 +51,6 @@ public partial class FormLogin : Form
         string username = txtUsername.Text.Trim();
         string password = txtPassword.Text;
 
-        // Kiểm tra dữ liệu nhập
         if (string.IsNullOrWhiteSpace(username) ||
             string.IsNullOrWhiteSpace(password))
         {
@@ -70,7 +65,6 @@ public partial class FormLogin : Form
         {
             using var db = new AppDbContext();
 
-            // Tìm tài khoản
             var user = db.Users.SingleOrDefault(
                 u => u.UserName == username);
 
@@ -81,7 +75,6 @@ public partial class FormLogin : Form
                 return;
             }
 
-            // Kiểm tra tài khoản hoạt động
             if (!user.IsActive)
             {
                 lblMessage.Text =
@@ -106,7 +99,6 @@ public partial class FormLogin : Form
                 return;
             }
 
-            // Đăng nhập thành công
             Hide();
 
             using (var mainForm =
@@ -115,7 +107,6 @@ public partial class FormLogin : Form
                 mainForm.ShowDialog(this);
             }
 
-            // Khi đóng Main, quay lại Login
             txtPassword.Clear();
             Show();
             txtUsername.Focus();

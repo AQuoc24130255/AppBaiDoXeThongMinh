@@ -34,8 +34,7 @@ public partial class FormSearch : Form
         _ucFullDetail.Visible = false;
         Controls.Add(_ucFullDetail);
         _ucFullDetail.CloseRequested += (_, _) => _ucFullDetail.Visible = false;
-        
-        // Su kien
+
         btSearch.Click += (_, _) =>
         {
             SearchTickets();
@@ -47,10 +46,7 @@ public partial class FormSearch : Form
 
         ClearDetails();
     }
-    
-    // ------------------------------------------------------------
-    //  Tìm kiếm
-    // ------------------------------------------------------------
+
     private void SearchTickets()
     {
         try
@@ -59,7 +55,6 @@ public partial class FormSearch : Form
 
             var query = db.Tickets.AsNoTracking().Include(t => t.Vehicle).AsQueryable();
 
-            // Lọc theo ngày vào bãi (nếu có tick)
             if (dateTimePickerSearch.Checked)
             {
                 DateTime day = dateTimePickerSearch.Value.Date;
@@ -74,8 +69,6 @@ public partial class FormSearch : Form
 
             var list = query.OrderByDescending(t => t.EntryTime).ToList();
 
-            // Lọc từ khóa trong bộ nhớ: bỏ khoảng trắng, '-' và '.' khi so biển số
-            // để "29A-123 45" vẫn khớp "29A-123.45"
             string keyword = textBoxSearch.Text.Trim();
             if (keyword.Length > 0)
             {
@@ -112,9 +105,6 @@ public partial class FormSearch : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Hiển thị chi tiết vé
-    // ------------------------------------------------------------
     private void DataGridViewSummary_CellContentClick(object? sender, DataGridViewCellEventArgs e)
     {
         if (e.RowIndex < 0 || e.ColumnIndex != Action.Index) return;
@@ -252,8 +242,7 @@ public partial class FormSearch : Form
         buttonLockTicket.Enabled = false;
         buttonCalculate.Enabled = false;
     }
-
-    /// <summary>Phí tạm tính tại thời điểm hiện tại (gồm phí mất vé nếu thẻ đã khóa).</summary>
+    
     private static decimal EstimateFee(Ticket t)
     {
         if (t.PriceConfig == null) return 0;
@@ -262,9 +251,6 @@ public partial class FormSearch : Form
         return parking + lost;
     }
 
-    // ------------------------------------------------------------
-    //  Khóa thẻ bị mất
-    // ------------------------------------------------------------
     private void BtLockCard_Click(object? sender, EventArgs e)
     {
         int? id = GetSelectedTicketId();
@@ -306,9 +292,6 @@ public partial class FormSearch : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Tính phí & cho xe ra (mở barie)
-    // ------------------------------------------------------------
     private void BtCalculate_Click(object? sender, EventArgs e)
     {
         int? id = GetSelectedTicketId();
@@ -345,7 +328,6 @@ public partial class FormSearch : Form
                 return;
             }
 
-            // Ca trực: ưu tiên ca đang diễn ra của người dùng, rồi ca gần nhất của họ, cuối cùng là ca bất kỳ
             DateTime now = DateTime.Now;
             int userId = _currentUser.UserId;
             var shift = db.Shifts.Where(s => s.UserId == userId && s.StartDate <= now && s.EndDate >= now).FirstOrDefault()
@@ -375,7 +357,6 @@ public partial class FormSearch : Form
                 "Tính phí", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer != DialogResult.Yes) return;
 
-            // Lập hóa đơn + đóng vé + trả chỗ đỗ trong cùng một lần lưu
             var invoice = new Invoice(ticket.TicketId, ticket.Vehicle?.LicensePlate ?? "", ticket.EntryTime, now,
                 total, PaymantMethodType.Cash, now, userId, true, ticket.IsMonthly, shift.ShiftId);
             db.Invoices.Add(invoice);
@@ -410,10 +391,6 @@ public partial class FormSearch : Form
         }
     }
 
-    // ------------------------------------------------------------
-    //  Hàm hỗ trợ
-    // ------------------------------------------------------------
-    /// <summary>Chọn lại dòng của vé sau khi nạp lại bảng.</summary>
     private void SelectTicket(int ticketId)
     {
         foreach (DataGridViewRow row in dataGridViewSummary.Rows)

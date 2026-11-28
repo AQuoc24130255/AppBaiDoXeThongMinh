@@ -27,9 +27,6 @@
       <Compile Update="Views\FormSearch.cs">
         <SubType>Form</SubType>
       </Compile>
-      <Compile Update="Views\TestDatabase.cs">
-        <SubType>Form</SubType>
-      </Compile>
       <Compile Update="Views\FormEditUser.cs">
         <SubType>Form</SubType>
       </Compile>

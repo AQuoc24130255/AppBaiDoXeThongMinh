@@ -73,8 +73,7 @@ public partial class FormDashboard : Form
             lbTotalSlots.Text = totalSlots.ToString("N0");
             lbMotobikeSlots.Text = $"Xe Máy: {slots.Count(s => s.AllowedVehicleType == VType.Motorbike)}";
             lbCarSlots.Text = $"Xe Ô Tô: {slots.Count(s => s.AllowedVehicleType == VType.Car)}";
-
-            // xe vào bãi hôm nay
+            
             var todayVehicles = db.Tickets
                 .Where(t => t.EntryTime >= today && t.EntryTime < tomorrow)
                 .Select(t => t.Vehicle.VehicleType)
@@ -84,7 +83,6 @@ public partial class FormDashboard : Form
             lbMotobikeToday.Text = $"Xe Máy: {todayVehicles.Count(v => v == VType.Motorbike)}";
             lbCarToday.Text = $"Xe Ô Tô: {todayVehicles.Count(v => v == VType.Car)}";
 
-            // xe tháng có hieu lực
             var subscribers = db.MonthlySubscribers
                 .Where(s => s.IsActive && s.EndDate >= today)
                 .Select(s => s.VehicleType)
@@ -116,14 +114,12 @@ public partial class FormDashboard : Form
         try
         {
             using var db = new AppDbContext();
-
-            // Khung giờ đêm lấy từ cấu hình giá (mặc định 18:00 -> 06:00)
+            
             var cfg = db.PriceConfigs.AsNoTracking().FirstOrDefault();
             TimeSpan nightStart = cfg?.NightStart ?? new TimeSpan(18, 0, 0);
             TimeSpan nightEnd = cfg?.NightEnd ?? new TimeSpan(6, 0, 0);
 
-            // Hóa đơn + loại xe (Invoice -> Ticket -> Vehicle).
-            // SQLite không SUM được decimal phía server nên lấy về rồi tính trong bộ nhớ.
+            // Hóa đơn + loại xe
             var raw = (from i in db.Invoices
                        join t in db.Tickets on i.TicketId equals t.TicketId
                        where i.IsPaid && i.PaymentDate >= fromDate && i.PaymentDate < toDate
@@ -143,15 +139,13 @@ public partial class FormDashboard : Form
                     x.TotalAmount,
                     Math.Max(0, (x.CheckOutTime - x.CheckInTime).TotalHours)))
                 .ToList();
-
-            // Bộ lọc ca và loại xe
+            
             if (cbShift.SelectedIndex == 1) items = items.Where(x => !x.IsNight).ToList();
             else if (cbShift.SelectedIndex == 2) items = items.Where(x => x.IsNight).ToList();
 
             if (cbVehicleType.SelectedIndex == 1) items = items.Where(x => x.Type == VType.Motorbike).ToList();
             else if (cbVehicleType.SelectedIndex == 2) items = items.Where(x => x.Type == VType.Car).ToList();
 
-            // Lưới chi tiết: nhóm theo Ngày + Ca + Loại xe
             dataGridViewFilter.Rows.Clear();
             var groups = items
                 .GroupBy(x => new { x.Day, x.IsNight, x.Type })
@@ -160,15 +154,14 @@ public partial class FormDashboard : Form
             foreach (var g in groups)
             {
                 dataGridViewFilter.Rows.Add(
-                    g.Key.Day.ToString("dd/MM/yyyy"),       // Date
-                    g.Key.IsNight ? "Tối" : "Sáng",         // Shift
-                    g.Key.Type == VType.Car ? "Xe Ô Tô" : "Xe Máy", // VehicleType
-                    g.Count(),                              // TranSactionCount
-                    $"{g.Sum(x => x.Amount):N0}",           // TotalAmount
-                    $"{g.Sum(x => x.Hours):0.#}");          // Hours
+                    g.Key.Day.ToString("dd/MM/yyyy"),
+                    g.Key.IsNight ? "Tối" : "Sáng",
+                    g.Key.Type == VType.Car ? "Xe Ô Tô" : "Xe Máy",
+                    g.Count(),
+                    $"{g.Sum(x => x.Amount):N0}",
+                    $"{g.Sum(x => x.Hours):0.#}");
             }
 
-            // Khung tóm tắt
             lbTotalRevenue.Text = $"{items.Sum(x => x.Amount):N0} VND";
             lbDayTotalAmount.Text = $"{items.Where(x => !x.IsNight).Sum(x => x.Amount):N0} VND";
             lbNightTotalAmount.Text = $"{items.Where(x => x.IsNight).Sum(x => x.Amount):N0} VND";
@@ -210,8 +203,7 @@ public partial class FormDashboard : Form
             g.FillPie(motoBrush, rect, -90, motoAngle);
             g.FillPie(carBrush, rect, -90 + motoAngle, 360 - motoAngle);
         }
-
-        // Chú thích bên phải biểu đồ
+        
         int lx = rect.Right + 8;
         int ly = panelThongke.Height / 2 - 20;
         g.FillRectangle(motoBrush, lx, ly + 3, 10, 10);
@@ -238,12 +230,11 @@ public partial class FormDashboard : Form
         form.ShowDialog(this);
     }
     
-    // ham ho tro
     private static bool IsNightTime(TimeSpan time, TimeSpan nightStart, TimeSpan nightEnd)
     {
         if (nightStart <= nightEnd)
             return time >= nightStart && time < nightEnd;
-        return time >= nightStart || time < nightEnd;   // khung vắt qua nửa đêm
+        return time >= nightStart || time < nightEnd;
     }
 
     private static void ShowError(string message, Exception ex)

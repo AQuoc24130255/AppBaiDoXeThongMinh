@@ -153,8 +153,7 @@ public partial class FormMain : Form
         child.BringToFront();
         child.Show();
     }
-
-    // Màn hình theo dõi chỉ được tạo trực tiếp trong FormMain.cs, không cần tạo Form mới.
+    
     private void ShowParkingOverview()
     {
         CloseCurrentChildForm();

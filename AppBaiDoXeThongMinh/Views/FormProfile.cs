@@ -47,8 +47,7 @@ namespace AppBaiDoXeThongMinh.Views
             _chkShowPassword.ForeColor = Color.FromArgb(55, 65, 81);
             _chkShowPassword.AutoSize = true;
             _chkShowPassword.Location = new Point(575, 99);
-
-            // Dịch nút Cập nhật mật khẩu xuống dưới ô tích để không bị đè
+            
             btnChangePassword.Location = new Point(575, 127);
 
             grpUserInfo.Controls.Add(_chkShowPassword);
