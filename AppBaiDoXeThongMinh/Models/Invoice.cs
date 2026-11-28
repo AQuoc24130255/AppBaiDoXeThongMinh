@@ -67,14 +67,14 @@ public class Invoice
 
 
     #region --- QUẢN LÝ HÓA ĐƠN ---
-    /// tính tiền gửi xe theo thời gian
+    // tính tiền gửi xe theo thời gian
     public static decimal CalculateParkingFee(DateTime checkInTime, DateTime checkOutTime, PriceConfig config)
     {
         if (checkOutTime <= checkInTime || config == null) return 0;
         
         // cấu hình thơ gian của 1 block
-        int blockMinutes = config.TimeUnit > 0 ? config.TimeUnit : 60;
-        TimeSpan block = TimeSpan.FromMinutes(blockMinutes);
+        int blockHour = config.TimeUnit > 0 ? config.TimeUnit : 1;
+        TimeSpan block = TimeSpan.FromHours(blockHour);
 
         decimal total = 0;
         DateTime current = checkInTime;
@@ -100,7 +100,7 @@ public class Invoice
 
     private static readonly List<Invoice> Invoices = new();
 
-    /// tọa và lưu hóa đơn
+    // tọa và lưu hóa đơn
     public static Invoice CreateAndSaveInvoice(int ticketId, string licensePlate, DateTime checkIn,
         DateTime checkOut, decimal amount, PaymantMethodType paymentMethod, int createdBy, bool isPaid, bool isMonthlyFree, int shiftId)
     {
@@ -110,18 +110,18 @@ public class Invoice
     }
     
 
-    /// tra cứu hóa đơn theo mã
+    // tra cứu hóa đơn theo mã
     public Invoice? GetById(string invoiceId)
     {
         return  Invoices.FirstOrDefault(i => i.InvoiceId.Equals(invoiceId, StringComparison.OrdinalIgnoreCase));
     }
 
-    /// lấy danh sách hóa đơn theo khoảng thời gian 
+    // lấy danh sách hóa đơn theo khoảng thời gian 
     public List<Invoice> GetByDateRange(DateTime formDate, DateTime toDate)
     {
         return Invoices.Where(i => i.PaymentDate >= formDate && i.PaymentDate <= toDate).ToList();
     }
-    /// lấy toàn bộ hóa đơn
+    // lấy toàn bộ hóa đơn
     public List<Invoice> GetAllInvoices() => Invoices;
     #endregion
 

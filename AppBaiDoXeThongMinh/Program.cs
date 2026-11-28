@@ -16,9 +16,6 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
 
-        //using var db = new AppDbContext();
-        //var guardUser = db.Users.First(u => u.UserName == "guard1");
-        //Application.Run(new FormCheckOut(guardUser.UserId));
         Application.Run(new FormLogin());
 
     }

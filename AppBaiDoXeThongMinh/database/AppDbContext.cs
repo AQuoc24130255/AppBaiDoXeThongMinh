@@ -21,11 +21,6 @@ public class AppDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (optionsBuilder.IsConfigured) return;
-        
-        // File DB nằm cạnh file .exe, trong thư mục "database"
-        // var folder = Path.Combine(AppContext.BaseDirectory, "database");
-        // Directory.CreateDirectory(folder);
-        // var dbPath = Path.Combine(folder, "BAIDOXETHONGMINH.db");
 
         var projectDir = Path.GetFullPath(
             Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
@@ -157,7 +152,6 @@ public class AppDbContext : DbContext
                 .HasForeignKey(x => x.ShiftId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
-        
-        // ---------------- Dữ liệu mẫu -----------
+
     }
 }

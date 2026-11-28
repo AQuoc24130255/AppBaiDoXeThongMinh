@@ -164,7 +164,7 @@ partial class FormManagePriceConfig
         // colTimeUnit
         //
         colTimeUnit.FillWeight = 65F;
-        colTimeUnit.HeaderText = "Block (phút)";
+        colTimeUnit.HeaderText = "Block (giờ)";
         colTimeUnit.Name = "colTimeUnit";
         colTimeUnit.ReadOnly = true;
         colTimeUnit.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -340,7 +340,7 @@ partial class FormManagePriceConfig
         lbTimeUnit.Name = "lbTimeUnit";
         lbTimeUnit.Size = new System.Drawing.Size(190, 20);
         lbTimeUnit.TabIndex = 9;
-        lbTimeUnit.Text = "Block tính phí (phút)";
+        lbTimeUnit.Text = "Block tính phí (giờ)";
         //
         // nudTimeUnit
         //
